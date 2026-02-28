@@ -1,23 +1,26 @@
-# TÍTULO DO PROJETO
+# WeDo
 
-`CURSO`
+`Análise e desenvolvimento de Sistemas`
 
-`DISCIPLINA`
+`Desenvolvimento de uma Aplicação Interativa`
 
-`SEMESTRE`
+`2° Semestre`
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Caio Timoteo dos Santos
+* Carla Rodrigues Castelo
+* Diego Parreiras Andrade
+* Evellyn Maia da Conceicão
+* João Paulo Ângelo de Oliveira
+* Nicolas Pereira Mendoza
+
 
 ## Orientador
 
-* Nome completo do professor
+* Bernardo Jeunon de Alencar
 
 ## Instruções de Instalação, Execução e Acesso
 

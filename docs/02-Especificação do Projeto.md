@@ -53,16 +53,37 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| A aplicação deve permitir que o usuário avalie uma agência de intercâmbio com base na sua experiência| ALTA | 
-|RF-002| A aplicação deve permitir que o usuário inclua comentários ao fazer uma avaliação de uma agência de intercâmbio    | ALTA |
-|RF-003| A aplicação deve permitir que o usuário consulte todas as agências de intercâmbio cadastradas ordenando-as com base em suas notas | ALTA |
+|RF-001| A aplicação deve permitir o cadastro de usuários (Nome, E-mail, Senha e Skill).| ALTA | 
+|RF-002| A aplicação deve permitir validar o login do usuário cadastrado.    | ALTA |
+|RF-003| A aplicação deve permitir a edição dos dados do perfil e skill principal. | ALTA |
+|RF-004| A aplicação deve permitir a busca de outros usuários por nome para amizade. | MÉDIA |
+|RF-005| A aplicação deve permitir enviar e aceitar solicitações de amizade. | ALTA |
+|RF-006| A aplicação deve permitir a exclusão de um amigo da lista de contatos.| MÉDIA |
+|RF-007| A aplicação deve permitir o registro de uma atividade contendo categoria, descrição, data e XP gerado automaticamente.| ALTA |
+|RF-008| A aplicação deve permitir o upload de uma foto como prova da atividade.| ALTA |
+|RF-009| A aplicação deve permitir marcar amigos em uma atividade comum (Tagging).| ALTA |
+|RF-010| A aplicação deve distribuir automaticamente o XP da atividade para todos os usuários marcados.| ALTA |
+|RF-011| A aplicação deve permitir exibir uma listagem (Feed) das atividades dos amigos.| MÉDIA |
+|RF-012| A aplicação deve permitir que o usuário visualize o histórico de suas atividades registradas.| ALTA |
+|RF-013| A aplicação deve permitir gerar um Ranking Global ordenado pelo XP total.| ALTA |
+|RF-014| A aplicação deve permitir filtrar o ranking por Categorias específicas.| MÉDIA |
+|RF-015| A aplicação deve permitir exibir um Dashboard com o total de XP por categoria do usuário.| MÉDIA |
+|RF-016| A aplicação deve permitir que o usuário exclua ou edite atividades previamente registradas.| ALTA |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
 |RNF-001| A aplicação deve ser responsiva | MÉDIA | 
-|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  ALTA | 
+|RNF-003| O back-end deve ser desenvolvido em C# com .NET Core. |  ALTA | 
+|RNF-004| Os dados devem ser persistidos em SQL Server ou MySQL. |  ALTA | 
+|RNF-005| As senhas devem ser criptografadas. |  ALTA | 
+|RNF-006|O sistema deve manter integridade referencial entre as entidades do banco de dados. |  ALTA | 
+|RNF-007| O sistema deve retornar mensagens claras em caso de falha de conexão. |  ALTA | 
+|RNF-008|O sistema deve utilizar o Entity Framework Core como ferramenta de mapeamento objeto-relacional (ORM).|ALTA| 
+|RNF-009| A aplicação deve restringir o acesso às funcionalidades apenas para usuários autenticados. |  ALTA | 
+|RNF-010| A aplicação deve validar os dados inseridos pelo usuário antes de salvar no banco de dados. |  ALTA | 
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 

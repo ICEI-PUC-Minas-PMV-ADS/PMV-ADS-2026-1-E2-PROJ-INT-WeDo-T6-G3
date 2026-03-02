@@ -3,11 +3,19 @@
 Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
+O cenário contemporâneo de gestão de produtividade pessoal e desenvolvimento de hábitos enfrenta barreiras críticas que impedem a constância de estudantes e jovens profissionais. Os principais problemas identificados são:
 
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+- Isolamento na Autogestão: Métodos tradicionais de organização (estudos, saúde e finanças) carecem de uma camada social, o que resulta em altas taxas de abandono. A ausência de um ambiente compartilhado torna o progresso individual invisível e, consequentemente, desestimulante a longo prazo.
+
+- Fragilidade da Autodeclaração: Existe uma lacuna na validação de metas atingidas. Sem mecanismos de "prova real" ou feedback externo, o registro de atividades torna-se puramente subjetivo, dificultando a percepção de evolução real e favorecendo a procrastinação.
+
+- Distorção por Comparação Assimétrica: A exposição constante a padrões de sucesso inalcançáveis em redes sociais gera um sentimento de insuficiência. Isso faz com que pequenas conquistas diárias sejam desvalorizadas frente a resultados imediatos e, muitas vezes, descontextualizados da realidade do usuário.
+
+- Concorrência com Ciclos de Gratificação Instantânea: A facilidade de acesso ao entretenimento passivo e à "dopamina barata" (como vídeos curtos) torna tarefas de esforço prolongado — essenciais para a formação acadêmica e profissional — excessivamente tediosas e difíceis de sustentar voluntariamente.
+
+- Desequilíbrio na Gestão Financeira e Bem-Estar: Observa-se uma dificuldade crônica na manutenção do equilíbrio fiscal, variando entre o consumo impulsivo em eventos sociais — que compromete o planejamento financeiro — e a privação extrema de lazer, que resulta em desgaste mental e isolamento social por ausência de momentos de descompressão.
+
 
 > **Links Úteis**:
 > - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)

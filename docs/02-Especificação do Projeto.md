@@ -10,6 +10,66 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 Identifique, em torno de, 5 personas. Para cada persona, lembre-se de descrever suas angústicas, frustrações e expectativas de vida relacionadas ao problema. Além disso, defina uma "aparência" para a persona. Para isso, você poderá utilizar sites como [https://this-person-does-not-exist.com/pt#google_vignette](https://this-person-does-not-exist.com/pt) ou https://thispersondoesnotexist.com/ 
 
+### Persona 1,Lucas Ferreira
+
+| | | |
+|---|---|---|
+| ![Lucas Ferreira]() | **Lucas Ferreira** _"Quero evoluir, mas fico me comparando com quem está em outro nível."_ | **Idade:** 21 anos **Profissão:** Estudante de ADS + Estagiário **Localização:** São Paulo, SP **Formação:** Graduação em Análise e Desenvolvimento de Sistemas **Objetivo:** Manter consistência nos estudos e mensurar sua evolução técnica |
+
+| Descrição | Dores | Expectativas |
+|---|---|---|
+| Lucas tem uma rotina intensa entre aulas, estágio e projetos pessoais. Apaixonado por programação, consome muito conteúdo técnico no YouTube e Discord. Apesar do esforço, tem dificuldade em perceber seu próprio progresso e tende a se comparar com perfis de devs nas redes sociais, o que frequentemente o desmotiva. | Sente que estuda muito, mas não consegue mensurar sua evolução de forma concreta. Já tentou Notion, Trello e planilhas, mas abandona em poucas semanas. A comparação com influenciadores tech o faz sentir permanentemente "para trás", desvalorizando suas conquistas reais do dia a dia. | Registrar sessões de estudo e acompanhar o XP acumulado ao longo do tempo. Competir em um ranking de estudos com amigos do curso,não com estranhos da internet. Usar a foto como prova de que concluiu uma tarefa e ter visibilidade sobre sua própria evolução por categoria. |
+
+---
+
+### Persona 2,Beatriz Souza
+
+| | | |
+|---|---|---|
+| ![Beatriz Souza]() | **Beatriz Souza** _"Fico animada no começo, mas sem alguém pra me cobrar, desisto."_ | **Idade:** 23 anos **Profissão:** Estudante de Nutrição + Estagiária **Localização:** Belo Horizonte, MG **Formação:** Graduação em Nutrição **Objetivo:** Manter hábitos saudáveis com consistência junto às amigas |
+
+| Descrição | Dores | Expectativas |
+|---|---|---|
+| Beatriz tenta conciliar faculdade, estágio e academia. Tem um grupo de amigas que também busca manter uma rotina saudável, mas a comunicação fica dispersa em grupos de WhatsApp. Quando a motivação de uma cai, o grupo todo tende a parar junto, sem nenhum mecanismo de retomada. | Sente falta de accountability real,ninguém "segura" o grupo quando a motivação cai. Não tem como saber se as amigas estão mantendo os hábitos, e seu esforço individual acaba sendo invisível para quem ela se importa. Ferramentas individuais não resolvem um problema coletivo. | Acompanhar o feed de atividades das amigas em tempo real. Marcar as colegas quando forem juntas à academia e dividir o XP da conquista. Ter um registro visual (foto) das atividades do grupo e sentir que seu esforço é reconhecido pelo círculo social mais próximo. |
+
+---
+
+### Persona 3,Rafael Mendes
+
+| | | |
+|---|---|---|
+| ![Rafael Mendes]() | **Rafael Mendes** _"Gasto demais no fim de semana e me arrependo,mas também não quero parar de sair."_ | **Idade:** 26 anos **Profissão:** Analista Júnior em Logística **Localização:** Curitiba, PR **Formação:** Tecnólogo em Gestão Empresarial **Objetivo:** Equilibrar vida social ativa com responsabilidade financeira |
+
+| Descrição | Dores | Expectativas |
+|---|---|---|
+| Rafael tem uma vida social ativa e valoriza os momentos de lazer com os amigos. Porém, os gastos nos fins de semana comprometem frequentemente seu planejamento mensal. Já tentou aplicativos financeiros tradicionais, mas os abandona rapidamente por sentir que eles só mostram o que ele errou, sem nenhum estímulo positivo. | Aplicativos financeiros são entediantes e punitivos: apenas evidenciam os erros sem oferecer recompensa por acertos. Não há incentivo para registrar conquistas financeiras, como ter ficado dentro do orçamento. Sente que os amigos também lidam mal com finanças, mas o tema é tabu no grupo. | Ganhar XP ao registrar que ficou dentro do orçamento em um fim de semana. Ver que os amigos também tentam equilibrar lazer e responsabilidade, normalizando a conversa sobre finanças. Competir de forma leve e sem julgamento em um ranking da categoria financeira. |
+
+---
+
+### Persona 4,Camila Torres
+
+| | | |
+|---|---|---|
+| ![Camila Torres]() | **Camila Torres** _"Quero crescer em tudo ao mesmo tempo e acabo não evoluindo em nada."_ | **Idade:** 24 anos **Profissão:** Freelancer de Design Gráfico **Localização:** Recife, PE **Formação:** Graduação em Design + Pós-graduação EAD **Objetivo:** Ter uma visão integrada e equilibrada de todas as áreas da vida |
+
+| Descrição | Dores | Expectativas |
+|---|---|---|
+| Camila tem total autonomia sobre seu tempo como freelancer, o que é uma liberdade e um desafio. Sem estrutura externa, alterna entre dias ultra produtivos e dias completamente parados. Usa diversas ferramentas digitais no trabalho (Figma, Adobe Suite), mas nenhuma integra sua vida pessoal, profissional e de saúde de forma social e gamificada. | Sente que evolui em áreas isoladas, mas não tem uma visão do conjunto de sua vida. Trabalha sozinha e sente falta de um grupo que compartilhe o mesmo ritmo de crescimento. Não tem métricas para avaliar se está equilibrando estudos, trabalho e saúde ao longo do tempo. | Usar o Dashboard por categoria para enxergar onde está investindo mais energia e onde está negligenciando. Conectar-se com outros freelancers e estudantes EAD em situação parecida. Ter a "teia de vida" como espelho visual do seu equilíbrio individual comparado ao do grupo. |
+
+---
+
+### Persona 5,André Lima
+
+| | | |
+|---|---|---|
+| ![André Lima]() | **André Lima** _"Treino todo dia, mas ninguém sabe disso,e isso me desmotiva."_ | **Idade:** 20 anos **Profissão:** Estudante de Educação Física **Localização:** Porto Alegre, RS **Formação:** Graduação em Educação Física (em andamento) **Objetivo:** Manter consistência nos treinos e inspirar pessoas próximas pelo exemplo |
+
+| Descrição | Dores | Expectativas |
+|---|---|---|
+| André é altamente disciplinado com seus treinos e frequentemente serve de referência entre os amigos em assuntos de saúde e atividade física. Porém, sente que seu esforço diário passa despercebido. Usa o Instagram eventualmente para registrar progresso, mas o ambiente da rede social valoriza aparência, não constância. | Seu esforço cotidiano é invisível para o círculo social. As redes sociais tradicionais valorizam resultado estético e não consistência. Sente dificuldade em motivar os amigos a adotarem hábitos saudáveis, pois não há uma plataforma compartilhada que torne o progresso de todos visível e comparável. | Registrar treinos com fotos como prova de presença e receber reconhecimento do grupo por consistência. Marcar amigos que treinaram juntos e distribuir o XP coletivamente. Usar o ranking de saúde para motivar o círculo de amigos de forma leve e colaborativa, sem o peso julgador das redes sociais convencionais. |
+
+---
+
 Utilize também como referência o exemplo abaixo:
 
 <img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/IntApplicationProject-Template/blob/main/docs/img/AnaClara1.png" alt="Persona1"/>

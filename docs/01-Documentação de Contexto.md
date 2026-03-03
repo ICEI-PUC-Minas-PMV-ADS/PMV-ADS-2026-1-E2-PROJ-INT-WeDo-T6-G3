@@ -4,18 +4,15 @@ Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o pr
 
 ## Problema
 
-O cenário contemporâneo de gestão de produtividade pessoal e desenvolvimento de hábitos enfrenta barreiras críticas que impedem a constância de estudantes e jovens profissionais. Os principais problemas identificados são:
+O cenário contemporâneo, caracterizado pela aceleração da informação e pela volatilidade das rotinas, tem gerado um estado de desorientação sistemática em jovens adultos e estudantes. Os problemas fundamentais identificados para este projeto são:
 
-- Isolamento na Autogestão: Métodos tradicionais de organização (estudos, saúde e finanças) carecem de uma camada social, o que resulta em altas taxas de abandono. A ausência de um ambiente compartilhado torna o progresso individual invisível e, consequentemente, desestimulante a longo prazo.
+Fragmentação da Atenção e Gestão de Prioridades: Devido ao excesso de demandas diárias, o indivíduo frequentemente se encontra em um estado de "paralisia por análise", onde a incapacidade de distinguir urgências de metas de longo prazo resulta em rotinas desorganizadas e na sensação constante de estar perdido em meio a múltiplas obrigações.
 
-- Fragilidade da Autodeclaração: Existe uma lacuna na validação de metas atingidas. Sem mecanismos de "prova real" ou feedback externo, o registro de atividades torna-se puramente subjetivo, dificultando a percepção de evolução real e favorecendo a procrastinação.
+Invisibilidade de Conquistas e Sonhos: A velocidade com que novos compromissos surgem faz com que marcos pessoais e sonhos realizados sejam rapidamente esquecidos ou desvalorizados. Sem um registro histórico e visual das metas alcançadas, o indivíduo perde a percepção de evolução pessoal, gerando um ciclo de insatisfação crônica.
 
-- Distorção por Comparação Assimétrica: A exposição constante a padrões de sucesso inalcançáveis em redes sociais gera um sentimento de insuficiência. Isso faz com que pequenas conquistas diárias sejam desvalorizadas frente a resultados imediatos e, muitas vezes, descontextualizados da realidade do usuário.
+Distorção por Comparação Digital: A exposição contínua a estilos de vida idealizados em redes sociais cria uma métrica de sucesso irreal. Essa comparação assimétrica faz com que o usuário ignore seu próprio progresso real — como a manutenção de uma meta de saúde ou a gestão de pequenas economias — por considerá-los insuficientes diante das vidas editadas de terceiros.
 
-- Concorrência com Ciclos de Gratificação Instantânea: A facilidade de acesso ao entretenimento passivo e à "dopamina barata" (como vídeos curtos) torna tarefas de esforço prolongado — essenciais para a formação acadêmica e profissional — excessivamente tediosas e difíceis de sustentar voluntariamente.
-
-- Desequilíbrio na Gestão Financeira e Bem-Estar: Observa-se uma dificuldade crônica na manutenção do equilíbrio fiscal, variando entre o consumo impulsivo em eventos sociais — que compromete o planejamento financeiro — e a privação extrema de lazer, que resulta em desgaste mental e isolamento social por ausência de momentos de descompressão.
-
+Dificuldade de Convergência Multidisciplinar: Existe uma lacuna na centralização de metas que abrangem diferentes áreas da vida (saúde, finanças e produtividade). A falta de uma visão consolidada que permita, por exemplo, visualizar simultaneamente uma meta de emagrecimento, um planejamento de reserva financeira e as tarefas operacionais do dia a dia, impede o desenvolvimento de uma rotina equilibrada e sustentável.
 
 > **Links Úteis**:
 > - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)

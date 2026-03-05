@@ -36,14 +36,21 @@ Desenvolver um software voltado para a organização de tarefas diárias e o mon
 
 ## Justificativa
 
-Explique de forma clara a relevância da aplicação escolhida, justificando os objetivos específicos e os aspectos do software que serão aprofundados, e quantifique o impacto do problema com dados concretos (números, percentuais, indicadores) obtidos por bases oficiais ou outras fontes confiáveis, sempre citadas no padrão ABNT (no formato [Numérico] ou (AUTOR, ANO)).
+O avanço das tecnologias digitais e o aumento da conectividade têm transformado profundamente a forma como as pessoas organizam suas rotinas, estudam e trabalham. Apesar dos benefícios trazidos pela tecnologia, o excesso de informações também tem contribuído para dificuldades na organização pessoal, na definição de prioridades e na gestão do tempo. Esse cenário afeta especialmente jovens adultos e estudantes, que frequentemente precisam conciliar estudos, trabalho, vida pessoal e desenvolvimento individual.
 
-**Relacione o problema aos Objetivos de Desenvolvimento Sustentável (ODS), indicando quais ODS e subobjetivos são atendidos e descrevendo como o projeto contribui para cada um deles, garantindo coerência entre o impacto mensurado e as metas selecionadas.**
+Dados recentes indicam que o uso de dispositivos digitais é extremamente elevado. No Brasil, a população passa em média mais de 9 horas por dia conectada à internet, sendo cerca de 3 horas e 37 minutos dedicados apenas às redes sociais [1]. Esse alto nível de exposição digital contribui para distrações frequentes e dificuldades de concentração em tarefas do dia a dia. Em ambientes educacionais, por exemplo, cerca de 80% dos estudantes brasileiros afirmam se distrair durante as aulas devido ao uso de celulares [2]. Esses dados demonstram que a presença constante da tecnologia, quando não acompanhada de ferramentas adequadas de organização, pode prejudicar a produtividade e o desempenho acadêmico.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Além disso, o uso excessivo de dispositivos e redes sociais pode gerar um fenômeno de comparação constante entre indivíduos, no qual as pessoas passam a medir seu próprio progresso com base na vida de outras pessoas. Essa dinâmica pode reduzir a percepção de conquistas pessoais e gerar insatisfação, mesmo quando o indivíduo está evoluindo em áreas importantes da vida, como saúde, finanças ou desenvolvimento profissional.
 
-## Público-Alvo
+Nesse contexto, torna-se relevante o desenvolvimento de ferramentas digitais que auxiliem no planejamento e na organização pessoal. A proposta deste projeto busca desenvolver um software que permita ao usuário registrar tarefas, acompanhar metas e visualizar seu progresso ao longo do tempo, integrando diferentes aspectos da vida cotidiana — como produtividade, saúde e financeiro, em uma única plataforma. Ao oferecer uma visão mais clara das atividades e objetivos do usuário, a ferramenta pode contribuir para melhorar a gestão do tempo e fortalecer a percepção de progresso pessoal.
+
+Além da relevância prática, o projeto também contribui para objetivos mais amplos relacionados ao desenvolvimento social. A proposta está alinhada com alguns dos Objetivos de Desenvolvimento Sustentável (ODS) definidos pela Organização das Nações Unidas.
+
+- O projeto contribui para o ODS 3 – Saúde e Bem-Estar, especialmente para o objetivo de promover o bem-estar e a saúde mental, uma vez que ferramentas de organização e planejamento podem reduzir estresse, ansiedade e sensação de sobrecarga causadas por rotinas desorganizadas.
+- Também se relaciona com o ODS 4 – Educação de Qualidade, ao auxiliar estudantes na organização de estudos, no acompanhamento de metas acadêmicas e no desenvolvimento de hábitos de produtividade que favorecem o aprendizado ao longo da vida.
+- Além disso, o projeto contribui para o ODS 8 – Trabalho Decente e Crescimento Econômico, pois o desenvolvimento de ferramentas que auxiliem na gestão do tempo e na produtividade pode apoiar indivíduos a desempenharem suas atividades profissionais de forma mais eficiente e equilibrada.
+
+Assim, o desenvolvimento do software se justifica pela necessidade de ferramentas que auxiliem na organização da rotina em um ambiente digital cada vez mais complexo, além de contribuir para melhorar a produtividade, o bem-estar e o desenvolvimento pessoal dos usuários.
 
 ## Público-Alvo
 

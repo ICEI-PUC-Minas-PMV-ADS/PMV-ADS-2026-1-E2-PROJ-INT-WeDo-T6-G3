@@ -21,12 +21,12 @@ Dificuldade de Convergência Multidisciplinar: Existe uma lacuna na centralizaç
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+Este projeto propõe a criação de uma ferramenta para a organização de tarefas diárias e o monitoramento de metas pessoais, para que os usuários possam melhorar seu desempenho no dia a dia, gerenciando melhor seu tempo e concluindo o que precisa ser feito em suas vidas agitadas. Na sociedade atual, com tantas distrações do trabalho e da família, as pessoas têm dificuldade em definir prioridades e se manter organizadas. Portanto, a solução proposta neste projeto é uma ferramenta online que ajudará os usuários a organizar suas vidas e acompanhar suas metas por meio de um único aplicativo, auxiliando no gerenciamento do tempo, dos eventos diários e na conquista de objetivos.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+O aplicativo permitirá que os usuários registrem compromissos, organizem tarefas e acompanhem o progresso de metas estabelecidas. Com isso, será possível visualizar o desenvolvimento ao longo do tempo e reconhecer pequenas conquistas que muitas vezes passam despercebidas devido ao surgimento constante de novas atividades.
+
+Outro objetivo do projeto é integrar diferentes aspectos da organização pessoal, como produtividade, saúde e planejamento financeiro, em uma única plataforma. Essa fusão pode ajudar o usuário a ter uma visão mais completa de sua rotina e a tomar decisões mais conscientes sobre suas prioridades. Dessa forma, o software busca funcionar como uma ferramenta de apoio ao planejamento pessoal, contribuindo para a construção de uma rotina mais equilibrada, organizada e produtiva.
+
 
 ## Justificativa
 
@@ -41,7 +41,7 @@ Explique de forma clara a relevância da aplicação escolhida, justificando os 
 
 ## Público-Alvo
 
-O LifeSync: Social Evolution é direcionado a **estudantes universitários e jovens profissionais** com idade entre 18 e 30 anos, que já possuem familiaridade com tecnologia e aplicativos móveis, especialmente aqueles que consomem plataformas com elementos sociais e gamificados, como Instagram, Duolingo ou jogos com sistemas de progressão.
+O WeDo é direcionado a **estudantes universitários e jovens profissionais** com idade entre 18 e 30 anos, que já possuem familiaridade com tecnologia e aplicativos móveis, especialmente aqueles que consomem plataformas com elementos sociais e gamificados, como Instagram, Duolingo ou jogos com sistemas de progressão.
 
 O público pode ser segmentado em dois perfis principais:
 

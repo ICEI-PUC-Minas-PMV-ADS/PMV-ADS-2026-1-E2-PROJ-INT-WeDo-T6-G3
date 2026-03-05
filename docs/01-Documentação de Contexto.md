@@ -21,11 +21,17 @@ Dificuldade de Convergência Multidisciplinar: Existe uma lacuna na centralizaç
 
 ## Objetivos
 
-Este projeto propõe a criação de uma ferramenta para a organização de tarefas diárias e o monitoramento de metas pessoais, para que os usuários possam melhorar seu desempenho no dia a dia, gerenciando melhor seu tempo e concluindo o que precisa ser feito em suas vidas agitadas. Na sociedade atual, com tantas distrações do trabalho e da família, as pessoas têm dificuldade em definir prioridades e se manter organizadas. Portanto, a solução proposta neste projeto é uma ferramenta online que ajudará os usuários a organizar suas vidas e acompanhar suas metas por meio de um único aplicativo, auxiliando no gerenciamento do tempo, dos eventos diários e na conquista de objetivos.
+### Objetivo Geral
 
-O aplicativo permitirá que os usuários registrem compromissos, organizem tarefas e acompanhem o progresso de metas estabelecidas. Com isso, será possível visualizar o desenvolvimento ao longo do tempo e reconhecer pequenas conquistas que muitas vezes passam despercebidas devido ao surgimento constante de novas atividades.
+Desenvolver um software voltado para a organização de tarefas diárias e o monitoramento de metas pessoais, com o objetivo de ajudar os usuários a melhorar seu desempenho no dia a dia. A ferramenta auxiliará no gerenciamento do tempo, na organização de compromissos e na definição de prioridades, facilitando a realização das atividades mesmo diante das diversas responsabilidades do cotidiano.
 
-Outro objetivo do projeto é integrar diferentes aspectos da organização pessoal, como produtividade, saúde e planejamento financeiro, em uma única plataforma. Essa fusão pode ajudar o usuário a ter uma visão mais completa de sua rotina e a tomar decisões mais conscientes sobre suas prioridades. Dessa forma, o software busca funcionar como uma ferramenta de apoio ao planejamento pessoal, contribuindo para a construção de uma rotina mais equilibrada, organizada e produtiva.
+### Objetivos Específicos
+
+- Desenvolver uma ferramenta que permita aos usuários registrar compromissos, organizar tarefas e acompanhar suas atividades de forma simples e prática.  
+- Criar um sistema de acompanhamento de metas pessoais que possibilite visualizar o desenvolvimento ao longo do tempo, permitindo que o usuário identifique seu progresso e reconheça pequenas conquistas que muitas vezes passam despercebidas.  
+- Integrar diferentes aspectos da organização pessoal, como produtividade, saúde e planejamento financeiro, em uma única plataforma, proporcionando uma visão mais completa da rotina do usuário.  
+- Auxiliar no gerenciamento do tempo e na organização dos eventos diários, contribuindo para que os usuários consigam definir melhor suas prioridades.  
+- Contribuir para a construção de uma rotina mais equilibrada, organizada e produtiva por meio de uma ferramenta digital que funcione como apoio ao planejamento pessoal.
 
 
 ## Justificativa

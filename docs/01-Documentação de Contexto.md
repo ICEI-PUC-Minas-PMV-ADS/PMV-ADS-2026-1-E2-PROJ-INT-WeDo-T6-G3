@@ -54,7 +54,7 @@ Assim, o desenvolvimento do software se justifica pela necessidade de ferramenta
 
 # Público-Alvo
 
-O LifeSync é voltado para qualquer pessoa que enfrente dificuldades em organizar sua rotina, acompanhar o próprio progresso e manter consistência na realização de metas pessoais. Embora o perfil mais recorrente entre os usuários esperados seja o de estudantes universitários e jovens profissionais, a aplicação foi concebida para atender a um público mais amplo — qualquer indivíduo que deseje centralizar o acompanhamento de diferentes áreas da vida, como saúde, estudos e finanças, em uma única plataforma.
+O WeDo é voltado para qualquer pessoa que enfrente dificuldades em organizar sua rotina, acompanhar o próprio progresso e manter consistência na realização de metas pessoais. Embora o perfil mais recorrente entre os usuários esperados seja o de estudantes universitários e jovens profissionais, a aplicação foi concebida para atender a um público mais amplo — qualquer indivíduo que deseje centralizar o acompanhamento de diferentes áreas da vida, como saúde, estudos e finanças, em uma única plataforma.
 
 De forma geral, o público-alvo pode ser caracterizado por dois perfis principais, sem que isso exclua outros:
 

@@ -12,7 +12,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | | | |
 |---|---|---|
-| ![Lucas Ferreira](./img/lucas.jpg) | **Lucas Ferreira** <br> _"Estudo muito, mas no fim do mês não sei o que realmente aprendi."_ | **Idade:** 21 anos <br> **Profissão:** Estudante de ADS + Estagiário <br> **Localização:** São Paulo, SP <br> **Formação:** Graduação em Análise e Desenvolvimento de Sistemas <br> **Objetivo:** Acompanhar sua evolução técnica e manter consistência nos estudos |
+| ![Lucas Ferreira](./img/lucas.jpeg) | **Lucas Ferreira** <br> _"Estudo muito, mas no fim do mês não sei o que realmente aprendi."_ | **Idade:** 21 anos <br> **Profissão:** Estudante de ADS + Estagiário <br> **Localização:** São Paulo, SP <br> **Formação:** Graduação em Análise e Desenvolvimento de Sistemas <br> **Objetivo:** Acompanhar sua evolução técnica e manter consistência nos estudos |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
@@ -24,7 +24,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | | | |
 |---|---|---|
-| ![Beatriz Souza](./img/beatriz.jpg) | **Beatriz Souza** <br> _"Começo animada, mas sem ver resultado, desisto antes de criar o hábito."_ | **Idade:** 23 anos <br> **Profissão:** Estudante de Nutrição + Estagiária <br> **Localização:** Belo Horizonte, MG <br> **Formação:** Graduação em Nutrição <br> **Objetivo:** Manter hábitos saudáveis com consistência e visualizar sua evolução |
+| ![Beatriz Souza](./img/beatriz.jpeg) | **Beatriz Souza** <br> _"Começo animada, mas sem ver resultado, desisto antes de criar o hábito."_ | **Idade:** 23 anos <br> **Profissão:** Estudante de Nutrição + Estagiária <br> **Localização:** Belo Horizonte, MG <br> **Formação:** Graduação em Nutrição <br> **Objetivo:** Manter hábitos saudáveis com consistência e visualizar sua evolução |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
@@ -36,7 +36,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | | | |
 |---|---|---|
-| ![Rafael Mendes](./img/rafael.jpg) | **Rafael Mendes** <br> _"Sei que preciso me organizar financeiramente, mas nunca sei por onde começar."_ | **Idade:** 26 anos <br> **Profissão:** Analista Júnior em Logística <br> **Localização:** Curitiba, PR <br> **Formação:** Tecnólogo em Gestão Empresarial <br> **Objetivo:** Controlar melhor seus gastos e criar metas financeiras alcançáveis |
+| ![Rafael Mendes](./img/rafael.jpeg) | **Rafael Mendes** <br> _"Sei que preciso me organizar financeiramente, mas nunca sei por onde começar."_ | **Idade:** 26 anos <br> **Profissão:** Analista Júnior em Logística <br> **Localização:** Curitiba, PR <br> **Formação:** Tecnólogo em Gestão Empresarial <br> **Objetivo:** Controlar melhor seus gastos e criar metas financeiras alcançáveis |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
@@ -48,7 +48,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | | | |
 |---|---|---|
-| ![Camila Torres](./img/camila.jpg) | **Camila Torres** <br> _"Quero crescer em tudo ao mesmo tempo e acabo não enxergando progresso em nada."_ | **Idade:** 24 anos <br> **Profissão:** Freelancer de Design Gráfico <br> **Localização:** Recife, PE <br> **Formação:** Graduação em Design + Pós-graduação EAD <br> **Objetivo:** Ter uma visão integrada e equilibrada de todas as áreas da sua vida |
+| ![Camila Torres](./img/camila.jpeg) | **Camila Torres** <br> _"Quero crescer em tudo ao mesmo tempo e acabo não enxergando progresso em nada."_ | **Idade:** 24 anos <br> **Profissão:** Freelancer de Design Gráfico <br> **Localização:** Recife, PE <br> **Formação:** Graduação em Design + Pós-graduação EAD <br> **Objetivo:** Ter uma visão integrada e equilibrada de todas as áreas da sua vida |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
@@ -60,29 +60,47 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | | | |
 |---|---|---|
-| ![André Lima](./img/andre.jpg) | **André Lima** <br> _"Treino todo dia, mas sem registro, parece que o esforço some."_ | **Idade:** 20 anos <br> **Profissão:** Estudante de Educação Física <br> **Localização:** Porto Alegre, RS <br> **Formação:** Graduação em Educação Física (em andamento) <br> **Objetivo:** Documentar sua consistência nos treinos e acompanhar sua evolução física |
+| ![André Lima](./img/andre.jpeg) | **André Lima** <br> _"Treino todo dia, mas sem registro, parece que o esforço some."_ | **Idade:** 20 anos <br> **Profissão:** Estudante de Educação Física <br> **Localização:** Porto Alegre, RS <br> **Formação:** Graduação em Educação Física (em andamento) <br> **Objetivo:** Documentar sua consistência nos treinos e acompanhar sua evolução física |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
 | André é altamente disciplinado com seus treinos, mas não tem o hábito de registrá-los de forma estruturada. Sem um histórico organizado, perde a percepção da sua própria consistência ao longo do tempo e não consegue identificar padrões — como períodos de queda de desempenho ou de maior evolução. O esforço existe, mas é invisível até para ele mesmo. | A ausência de um registro estruturado faz com que seu progresso seja percebido apenas de forma subjetiva. Sem dados históricos, é difícil identificar o que está funcionando e ajustar sua rotina de treinos com base em evidências concretas. Sente que o esforço diário se perde sem deixar rastro. | Registrar treinos com descrição, categoria e foto como prova concreta do que realizou. Acompanhar no dashboard a frequência e evolução dos seus treinos ao longo das semanas. Ter um histórico que evidencie sua consistência e permita identificar padrões na sua rotina de atividades físicas. |
 
-## Histórias de Usuários
+# Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+### Autenticação e Perfil
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Ana Clara  | Uma forma de identificar se uma agência é realmente confiável           | Me sentir mais segura ao contratar seus serviços               |
-|Ana Clara       | Ter um mecanismo eficiente e rápido de comunicação                 | Que eu possa sanar todas as minhas dúvidas rapidamente |
+| EU COMO... `PERSONA` | QUERO/PRECISO... `FUNCIONALIDADE` | PARA... `MOTIVO/VALOR` |
+|---|---|---|
+| Lucas Ferreira | Criar minha conta informando nome, e-mail, senha e minha área de foco principal | Ter um perfil personalizado que reflita minha principal área de desenvolvimento |
+| Lucas Ferreira | Fazer login com meu e-mail e senha | Acessar minhas metas e histórico de atividades de forma segura |
+| Camila Torres | Editar meu perfil e atualizar minha área de foco | Manter meus dados atualizados conforme meus objetivos evoluem ao longo do tempo |
 
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
+### Registro e Gestão de Atividades
 
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+| EU COMO... `PERSONA` | QUERO/PRECISO... `FUNCIONALIDADE` | PARA... `MOTIVO/VALOR` |
+|---|---|---|
+| André Lima | Registrar uma atividade informando categoria, descrição e data | Documentar meus treinos de forma estruturada e construir um histórico confiável |
+| Beatriz Souza | Anexar uma foto ao registrar uma atividade | Ter uma prova concreta do que realizei e reforçar minha percepção de progresso |
+| Lucas Ferreira | Editar ou excluir uma atividade registrada incorretamente | Manter meu histórico de conquistas preciso e confiável |
+| Camila Torres | Categorizar cada atividade registrada entre saúde, estudos e finanças | Organizar meu progresso por área e ter uma visão clara de onde estou me dedicando |
+
+### Histórico e Acompanhamento
+
+| EU COMO... `PERSONA` | QUERO/PRECISO... `FUNCIONALIDADE` | PARA... `MOTIVO/VALOR` |
+|---|---|---|
+| Beatriz Souza | Acessar o histórico completo das minhas atividades registradas | Revisar minha trajetória e reconhecer conquistas que poderiam passar despercebidas |
+| André Lima | Visualizar minhas atividades organizadas por data | Identificar padrões na minha rotina e períodos de maior ou menor consistência |
+| Rafael Mendes | Registrar metas financeiras e acompanhar seu andamento | Ter controle sobre meu planejamento financeiro de forma estruturada e positiva |
+
+### Dashboard e Relatórios
+
+| EU COMO... `PERSONA` | QUERO/PRECISO... `FUNCIONALIDADE` | PARA... `MOTIVO/VALOR` |
+|---|---|---|
+| Camila Torres | Visualizar um dashboard com minhas atividades distribuídas por categoria | Enxergar de forma clara quais áreas da vida estou equilibrando ou negligenciando |
+| Rafael Mendes | Ver um resumo do meu desempenho na categoria finanças | Acompanhar minha evolução financeira e perceber conquistas que antes eram invisíveis |
+| Lucas Ferreira | Acompanhar o total de atividades registradas por categoria ao longo do tempo | Ter evidências concretas do meu progresso e manter a motivação para continuar |
+| André Lima | Visualizar a frequência dos meus treinos registrados no dashboard | Confirmar minha consistência com dados reais e ajustar minha rotina quando necessário |
 
 ## Requisitos
 

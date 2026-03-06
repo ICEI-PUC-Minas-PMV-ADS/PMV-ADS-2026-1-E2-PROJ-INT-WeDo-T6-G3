@@ -8,7 +8,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 # Personas
 
-### Persona 1 — Lucas Ferreira
+### Persona 1 - Lucas Ferreira
 
 | | | |
 |---|---|---|
@@ -16,11 +16,11 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Lucas tem uma rotina intensa entre aulas, estágio e projetos pessoais. Apaixonado por programação, consome muito conteúdo técnico, mas tem dificuldade em transformar esse esforço em metas claras e mensuráveis. Já tentou Notion, Trello e planilhas para se organizar, mas abandona tudo em poucas semanas por não enxergar progresso concreto. | Não consegue mensurar sua própria evolução ao longo do tempo. As ferramentas que já tentou são genéricas e não oferecem uma visão integrada do seu desenvolvimento. Sem registro histórico, suas conquistas diárias passam despercebidas, gerando a sensação constante de que não está evoluindo. | Registrar suas sessões de estudo com descrição e categoria. Acompanhar no dashboard quanto tempo e esforço dedicou a cada área ao longo do tempo. Ter um histórico verificável das suas atividades que comprove — inclusive para si mesmo — que está evoluindo de forma consistente. |
+| Lucas tem uma rotina intensa entre aulas, estágio e projetos pessoais. Apaixonado por programação, consome muito conteúdo técnico, mas tem dificuldade em transformar esse esforço em metas claras e mensuráveis. Já tentou Notion, Trello e planilhas para se organizar, mas abandona tudo em poucas semanas por não enxergar progresso concreto. | Não consegue mensurar sua própria evolução ao longo do tempo. As ferramentas que já tentou são genéricas e não oferecem uma visão integrada do seu desenvolvimento. Sem registro histórico, suas conquistas diárias passam despercebidas, gerando a sensação constante de que não está evoluindo. | Registrar suas sessões de estudo com descrição e categoria. Acompanhar no dashboard quanto tempo e esforço dedicou a cada área ao longo do tempo. Ter um histórico verificável das suas atividades que comprove - inclusive para si mesmo - que está evoluindo de forma consistente. |
 
 ---
 
-### Persona 2 — Beatriz Souza
+### Persona 2 - Beatriz Souza
 
 | | | |
 |---|---|---|
@@ -32,7 +32,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 ---
 
-### Persona 3 — Rafael Mendes
+### Persona 3 - Rafael Mendes
 
 | | | |
 |---|---|---|
@@ -40,11 +40,11 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Rafael tem renda fixa, mas dificuldade crônica em planejar seus gastos. Já tentou aplicativos financeiros tradicionais, mas os abandona rapidamente — sente que são punitivos, apenas evidenciam erros e não oferecem nenhuma sensação de conquista ao acertar. Não tem uma visão clara de onde seu dinheiro vai nem de como está evoluindo financeiramente. | Aplicativos financeiros tradicionais são entediantes e focados no erro, não na conquista. Sem uma forma de registrar e acompanhar metas financeiras de forma positiva e estruturada, o planejamento sempre fica em segundo plano. A falta de uma visão consolidada impede que ele perceba seu próprio progresso. | Registrar metas financeiras e acompanhar sua evolução ao longo do tempo. Ter um dashboard que mostre de forma clara e visual onde está acertando e onde precisa melhorar. Perceber conquistas financeiras — como ter ficado dentro do orçamento — de forma concreta e registrada. |
+| Rafael tem renda fixa, mas dificuldade crônica em planejar seus gastos. Já tentou aplicativos financeiros tradicionais, mas os abandona rapidamente - sente que são punitivos, apenas evidenciam erros e não oferecem nenhuma sensação de conquista ao acertar. Não tem uma visão clara de onde seu dinheiro vai nem de como está evoluindo financeiramente. | Aplicativos financeiros tradicionais são entediantes e focados no erro, não na conquista. Sem uma forma de registrar e acompanhar metas financeiras de forma positiva e estruturada, o planejamento sempre fica em segundo plano. A falta de uma visão consolidada impede que ele perceba seu próprio progresso. | Registrar metas financeiras e acompanhar sua evolução ao longo do tempo. Ter um dashboard que mostre de forma clara e visual onde está acertando e onde precisa melhorar. Perceber conquistas financeiras - como ter ficado dentro do orçamento - de forma concreta e registrada. |
 
 ---
 
-### Persona 4 — Camila Torres
+### Persona 4 - Camila Torres
 
 | | | |
 |---|---|---|
@@ -52,11 +52,11 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Camila tem total autonomia sobre seu tempo como freelancer, o que é uma liberdade e um desafio. Sem estrutura externa, alterna entre dias extremamente produtivos e dias completamente parados. Tem metas em diferentes áreas — saúde, aprendizado e finanças — mas cada uma registrada em um lugar diferente, sem uma visão consolidada do conjunto. | Sem uma plataforma única, perde o fio condutor entre suas diferentes metas. A falta de uma visão integrada faz com que não perceba desequilíbrios — como estar evoluindo muito profissionalmente enquanto negligencia saúde e finanças. O progresso existe, mas está invisível e fragmentado. | Centralizar metas de diferentes áreas em uma única plataforma. Usar o dashboard por categoria para enxergar onde está investindo energia e onde está negligenciando. Ter um histórico de atividades que funcione como um retrato fiel do seu equilíbrio pessoal ao longo do tempo. |
+| Camila tem total autonomia sobre seu tempo como freelancer, o que é uma liberdade e um desafio. Sem estrutura externa, alterna entre dias extremamente produtivos e dias completamente parados. Tem metas em diferentes áreas - saúde, aprendizado e finanças - mas cada uma registrada em um lugar diferente, sem uma visão consolidada do conjunto. | Sem uma plataforma única, perde o fio condutor entre suas diferentes metas. A falta de uma visão integrada faz com que não perceba desequilíbrios - como estar evoluindo muito profissionalmente enquanto negligencia saúde e finanças. O progresso existe, mas está invisível e fragmentado. | Centralizar metas de diferentes áreas em uma única plataforma. Usar o dashboard por categoria para enxergar onde está investindo energia e onde está negligenciando. Ter um histórico de atividades que funcione como um retrato fiel do seu equilíbrio pessoal ao longo do tempo. |
 
 ---
 
-### Persona 5 — André Lima
+### Persona 5 - André Lima
 
 | | | |
 |---|---|---|
@@ -64,7 +64,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| André é altamente disciplinado com seus treinos, mas não tem o hábito de registrá-los de forma estruturada. Sem um histórico organizado, perde a percepção da sua própria consistência ao longo do tempo e não consegue identificar padrões — como períodos de queda de desempenho ou de maior evolução. O esforço existe, mas é invisível até para ele mesmo. | A ausência de um registro estruturado faz com que seu progresso seja percebido apenas de forma subjetiva. Sem dados históricos, é difícil identificar o que está funcionando e ajustar sua rotina de treinos com base em evidências concretas. Sente que o esforço diário se perde sem deixar rastro. | Registrar treinos com descrição, categoria e foto como prova concreta do que realizou. Acompanhar no dashboard a frequência e evolução dos seus treinos ao longo das semanas. Ter um histórico que evidencie sua consistência e permita identificar padrões na sua rotina de atividades físicas. |
+| André é altamente disciplinado com seus treinos, mas não tem o hábito de registrá-los de forma estruturada. Sem um histórico organizado, perde a percepção da sua própria consistência ao longo do tempo e não consegue identificar padrões - como períodos de queda de desempenho ou de maior evolução. O esforço existe, mas é invisível até para ele mesmo. | A ausência de um registro estruturado faz com que seu progresso seja percebido apenas de forma subjetiva. Sem dados históricos, é difícil identificar o que está funcionando e ajustar sua rotina de treinos com base em evidências concretas. Sente que o esforço diário se perde sem deixar rastro. | Registrar treinos com descrição, categoria e foto como prova concreta do que realizou. Acompanhar no dashboard a frequência e evolução dos seus treinos ao longo das semanas. Ter um histórico que evidencie sua consistência e permita identificar padrões na sua rotina de atividades físicas. |
 
 # Histórias de Usuários
 

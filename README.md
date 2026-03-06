@@ -6,7 +6,7 @@
 
 `2° Semestre`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O WeDo é uma proposta de software desenvolvida para ajudar estudantes e jovens adultos a gerenciar o tempo e alcançar metas em meio à sobrecarga de informações do mundo digital. A plataforma centraliza a organização de tarefas e o acompanhamento de progresso em áreas como saúde, finanças e estudos, visando combater a desorganização e aumentar a produtividade.
 
 ## Integrantes
 

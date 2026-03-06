@@ -6,86 +6,65 @@ Definição do problema e ideia de solução a partir da perspectiva do usuário
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
-## Personas
+# Personas
 
-Identifique, em torno de, 5 personas. Para cada persona, lembre-se de descrever suas angústicas, frustrações e expectativas de vida relacionadas ao problema. Além disso, defina uma "aparência" para a persona. Para isso, você poderá utilizar sites como [https://this-person-does-not-exist.com/pt#google_vignette](https://this-person-does-not-exist.com/pt) ou https://thispersondoesnotexist.com/ 
-
-### Persona 1,Lucas Ferreira
+### Persona 1 — Lucas Ferreira
 
 | | | |
 |---|---|---|
-| ![Lucas Ferreira]() | **Lucas Ferreira** _"Quero evoluir, mas fico me comparando com quem está em outro nível."_ | **Idade:** 21 anos **Profissão:** Estudante de ADS + Estagiário **Localização:** São Paulo, SP **Formação:** Graduação em Análise e Desenvolvimento de Sistemas **Objetivo:** Manter consistência nos estudos e mensurar sua evolução técnica |
+| ![Lucas Ferreira](./img/lucas.jpg) | **Lucas Ferreira** <br> _"Estudo muito, mas no fim do mês não sei o que realmente aprendi."_ | **Idade:** 21 anos <br> **Profissão:** Estudante de ADS + Estagiário <br> **Localização:** São Paulo, SP <br> **Formação:** Graduação em Análise e Desenvolvimento de Sistemas <br> **Objetivo:** Acompanhar sua evolução técnica e manter consistência nos estudos |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Lucas tem uma rotina intensa entre aulas, estágio e projetos pessoais. Apaixonado por programação, consome muito conteúdo técnico no YouTube e Discord. Apesar do esforço, tem dificuldade em perceber seu próprio progresso e tende a se comparar com perfis de devs nas redes sociais, o que frequentemente o desmotiva. | Sente que estuda muito, mas não consegue mensurar sua evolução de forma concreta. Já tentou Notion, Trello e planilhas, mas abandona em poucas semanas. A comparação com influenciadores tech o faz sentir permanentemente "para trás", desvalorizando suas conquistas reais do dia a dia. | Registrar sessões de estudo e acompanhar o XP acumulado ao longo do tempo. Competir em um ranking de estudos com amigos do curso,não com estranhos da internet. Usar a foto como prova de que concluiu uma tarefa e ter visibilidade sobre sua própria evolução por categoria. |
+| Lucas tem uma rotina intensa entre aulas, estágio e projetos pessoais. Apaixonado por programação, consome muito conteúdo técnico, mas tem dificuldade em transformar esse esforço em metas claras e mensuráveis. Já tentou Notion, Trello e planilhas para se organizar, mas abandona tudo em poucas semanas por não enxergar progresso concreto. | Não consegue mensurar sua própria evolução ao longo do tempo. As ferramentas que já tentou são genéricas e não oferecem uma visão integrada do seu desenvolvimento. Sem registro histórico, suas conquistas diárias passam despercebidas, gerando a sensação constante de que não está evoluindo. | Registrar suas sessões de estudo com descrição e categoria. Acompanhar no dashboard quanto tempo e esforço dedicou a cada área ao longo do tempo. Ter um histórico verificável das suas atividades que comprove — inclusive para si mesmo — que está evoluindo de forma consistente. |
 
 ---
 
-### Persona 2,Beatriz Souza
+### Persona 2 — Beatriz Souza
 
 | | | |
 |---|---|---|
-| ![Beatriz Souza]() | **Beatriz Souza** _"Fico animada no começo, mas sem alguém pra me cobrar, desisto."_ | **Idade:** 23 anos **Profissão:** Estudante de Nutrição + Estagiária **Localização:** Belo Horizonte, MG **Formação:** Graduação em Nutrição **Objetivo:** Manter hábitos saudáveis com consistência junto às amigas |
+| ![Beatriz Souza](./img/beatriz.jpg) | **Beatriz Souza** <br> _"Começo animada, mas sem ver resultado, desisto antes de criar o hábito."_ | **Idade:** 23 anos <br> **Profissão:** Estudante de Nutrição + Estagiária <br> **Localização:** Belo Horizonte, MG <br> **Formação:** Graduação em Nutrição <br> **Objetivo:** Manter hábitos saudáveis com consistência e visualizar sua evolução |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Beatriz tenta conciliar faculdade, estágio e academia. Tem um grupo de amigas que também busca manter uma rotina saudável, mas a comunicação fica dispersa em grupos de WhatsApp. Quando a motivação de uma cai, o grupo todo tende a parar junto, sem nenhum mecanismo de retomada. | Sente falta de accountability real,ninguém "segura" o grupo quando a motivação cai. Não tem como saber se as amigas estão mantendo os hábitos, e seu esforço individual acaba sendo invisível para quem ela se importa. Ferramentas individuais não resolvem um problema coletivo. | Acompanhar o feed de atividades das amigas em tempo real. Marcar as colegas quando forem juntas à academia e dividir o XP da conquista. Ter um registro visual (foto) das atividades do grupo e sentir que seu esforço é reconhecido pelo círculo social mais próximo. |
+| Beatriz tenta conciliar faculdade, estágio e manter uma rotina de cuidados com a saúde. É disciplinada nas primeiras semanas, mas sem uma forma clara de visualizar seu progresso, perde a motivação rapidamente. Não tem um registro estruturado das suas atividades, o que faz com que pequenas conquistas diárias sejam esquecidas ou desvalorizadas. | Sem um histórico visual do que já conquistou, tem dificuldade em perceber sua própria evolução. A ausência de um registro concreto faz com que a sensação de "não estar avançando" prevaleça, mesmo quando está mantendo bons hábitos. Ferramentas genéricas não atendem à especificidade das suas metas de saúde. | Registrar atividades de saúde com descrição e foto como prova concreta do que realizou. Acompanhar no dashboard a frequência e consistência dos seus hábitos ao longo das semanas. Ter um histórico que reforce sua percepção de progresso e a motive a continuar. |
 
 ---
 
-### Persona 3,Rafael Mendes
+### Persona 3 — Rafael Mendes
 
 | | | |
 |---|---|---|
-| ![Rafael Mendes]() | **Rafael Mendes** _"Gasto demais no fim de semana e me arrependo,mas também não quero parar de sair."_ | **Idade:** 26 anos **Profissão:** Analista Júnior em Logística **Localização:** Curitiba, PR **Formação:** Tecnólogo em Gestão Empresarial **Objetivo:** Equilibrar vida social ativa com responsabilidade financeira |
+| ![Rafael Mendes](./img/rafael.jpg) | **Rafael Mendes** <br> _"Sei que preciso me organizar financeiramente, mas nunca sei por onde começar."_ | **Idade:** 26 anos <br> **Profissão:** Analista Júnior em Logística <br> **Localização:** Curitiba, PR <br> **Formação:** Tecnólogo em Gestão Empresarial <br> **Objetivo:** Controlar melhor seus gastos e criar metas financeiras alcançáveis |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Rafael tem uma vida social ativa e valoriza os momentos de lazer com os amigos. Porém, os gastos nos fins de semana comprometem frequentemente seu planejamento mensal. Já tentou aplicativos financeiros tradicionais, mas os abandona rapidamente por sentir que eles só mostram o que ele errou, sem nenhum estímulo positivo. | Aplicativos financeiros são entediantes e punitivos: apenas evidenciam os erros sem oferecer recompensa por acertos. Não há incentivo para registrar conquistas financeiras, como ter ficado dentro do orçamento. Sente que os amigos também lidam mal com finanças, mas o tema é tabu no grupo. | Ganhar XP ao registrar que ficou dentro do orçamento em um fim de semana. Ver que os amigos também tentam equilibrar lazer e responsabilidade, normalizando a conversa sobre finanças. Competir de forma leve e sem julgamento em um ranking da categoria financeira. |
+| Rafael tem renda fixa, mas dificuldade crônica em planejar seus gastos. Já tentou aplicativos financeiros tradicionais, mas os abandona rapidamente — sente que são punitivos, apenas evidenciam erros e não oferecem nenhuma sensação de conquista ao acertar. Não tem uma visão clara de onde seu dinheiro vai nem de como está evoluindo financeiramente. | Aplicativos financeiros tradicionais são entediantes e focados no erro, não na conquista. Sem uma forma de registrar e acompanhar metas financeiras de forma positiva e estruturada, o planejamento sempre fica em segundo plano. A falta de uma visão consolidada impede que ele perceba seu próprio progresso. | Registrar metas financeiras e acompanhar sua evolução ao longo do tempo. Ter um dashboard que mostre de forma clara e visual onde está acertando e onde precisa melhorar. Perceber conquistas financeiras — como ter ficado dentro do orçamento — de forma concreta e registrada. |
 
 ---
 
-### Persona 4,Camila Torres
+### Persona 4 — Camila Torres
 
 | | | |
 |---|---|---|
-| ![Camila Torres]() | **Camila Torres** _"Quero crescer em tudo ao mesmo tempo e acabo não evoluindo em nada."_ | **Idade:** 24 anos **Profissão:** Freelancer de Design Gráfico **Localização:** Recife, PE **Formação:** Graduação em Design + Pós-graduação EAD **Objetivo:** Ter uma visão integrada e equilibrada de todas as áreas da vida |
+| ![Camila Torres](./img/camila.jpg) | **Camila Torres** <br> _"Quero crescer em tudo ao mesmo tempo e acabo não enxergando progresso em nada."_ | **Idade:** 24 anos <br> **Profissão:** Freelancer de Design Gráfico <br> **Localização:** Recife, PE <br> **Formação:** Graduação em Design + Pós-graduação EAD <br> **Objetivo:** Ter uma visão integrada e equilibrada de todas as áreas da sua vida |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| Camila tem total autonomia sobre seu tempo como freelancer, o que é uma liberdade e um desafio. Sem estrutura externa, alterna entre dias ultra produtivos e dias completamente parados. Usa diversas ferramentas digitais no trabalho (Figma, Adobe Suite), mas nenhuma integra sua vida pessoal, profissional e de saúde de forma social e gamificada. | Sente que evolui em áreas isoladas, mas não tem uma visão do conjunto de sua vida. Trabalha sozinha e sente falta de um grupo que compartilhe o mesmo ritmo de crescimento. Não tem métricas para avaliar se está equilibrando estudos, trabalho e saúde ao longo do tempo. | Usar o Dashboard por categoria para enxergar onde está investindo mais energia e onde está negligenciando. Conectar-se com outros freelancers e estudantes EAD em situação parecida. Ter a "teia de vida" como espelho visual do seu equilíbrio individual comparado ao do grupo. |
+| Camila tem total autonomia sobre seu tempo como freelancer, o que é uma liberdade e um desafio. Sem estrutura externa, alterna entre dias extremamente produtivos e dias completamente parados. Tem metas em diferentes áreas — saúde, aprendizado e finanças — mas cada uma registrada em um lugar diferente, sem uma visão consolidada do conjunto. | Sem uma plataforma única, perde o fio condutor entre suas diferentes metas. A falta de uma visão integrada faz com que não perceba desequilíbrios — como estar evoluindo muito profissionalmente enquanto negligencia saúde e finanças. O progresso existe, mas está invisível e fragmentado. | Centralizar metas de diferentes áreas em uma única plataforma. Usar o dashboard por categoria para enxergar onde está investindo energia e onde está negligenciando. Ter um histórico de atividades que funcione como um retrato fiel do seu equilíbrio pessoal ao longo do tempo. |
 
 ---
 
-### Persona 5,André Lima
+### Persona 5 — André Lima
 
 | | | |
 |---|---|---|
-| ![André Lima]() | **André Lima** _"Treino todo dia, mas ninguém sabe disso,e isso me desmotiva."_ | **Idade:** 20 anos **Profissão:** Estudante de Educação Física **Localização:** Porto Alegre, RS **Formação:** Graduação em Educação Física (em andamento) **Objetivo:** Manter consistência nos treinos e inspirar pessoas próximas pelo exemplo |
+| ![André Lima](./img/andre.jpg) | **André Lima** <br> _"Treino todo dia, mas sem registro, parece que o esforço some."_ | **Idade:** 20 anos <br> **Profissão:** Estudante de Educação Física <br> **Localização:** Porto Alegre, RS <br> **Formação:** Graduação em Educação Física (em andamento) <br> **Objetivo:** Documentar sua consistência nos treinos e acompanhar sua evolução física |
 
 | Descrição | Dores | Expectativas |
 |---|---|---|
-| André é altamente disciplinado com seus treinos e frequentemente serve de referência entre os amigos em assuntos de saúde e atividade física. Porém, sente que seu esforço diário passa despercebido. Usa o Instagram eventualmente para registrar progresso, mas o ambiente da rede social valoriza aparência, não constância. | Seu esforço cotidiano é invisível para o círculo social. As redes sociais tradicionais valorizam resultado estético e não consistência. Sente dificuldade em motivar os amigos a adotarem hábitos saudáveis, pois não há uma plataforma compartilhada que torne o progresso de todos visível e comparável. | Registrar treinos com fotos como prova de presença e receber reconhecimento do grupo por consistência. Marcar amigos que treinaram juntos e distribuir o XP coletivamente. Usar o ranking de saúde para motivar o círculo de amigos de forma leve e colaborativa, sem o peso julgador das redes sociais convencionais. |
-
----
-
-Utilize também como referência o exemplo abaixo:
-
-<img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/IntApplicationProject-Template/blob/main/docs/img/AnaClara1.png" alt="Persona1"/>
-
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
-
-> **Links Úteis**:
-> 
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+| André é altamente disciplinado com seus treinos, mas não tem o hábito de registrá-los de forma estruturada. Sem um histórico organizado, perde a percepção da sua própria consistência ao longo do tempo e não consegue identificar padrões — como períodos de queda de desempenho ou de maior evolução. O esforço existe, mas é invisível até para ele mesmo. | A ausência de um registro estruturado faz com que seu progresso seja percebido apenas de forma subjetiva. Sem dados históricos, é difícil identificar o que está funcionando e ajustar sua rotina de treinos com base em evidências concretas. Sente que o esforço diário se perde sem deixar rastro. | Registrar treinos com descrição, categoria e foto como prova concreta do que realizou. Acompanhar no dashboard a frequência e evolução dos seus treinos ao longo das semanas. Ter um histórico que evidencie sua consistência e permita identificar padrões na sua rotina de atividades físicas. |
 
 ## Histórias de Usuários
 

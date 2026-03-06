@@ -52,21 +52,14 @@ Além da relevância prática, o projeto também contribui para objetivos mais a
 
 Assim, o desenvolvimento do software se justifica pela necessidade de ferramentas que auxiliem na organização da rotina em um ambiente digital cada vez mais complexo, além de contribuir para melhorar a produtividade, o bem-estar e o desenvolvimento pessoal dos usuários.
 
-## Público-Alvo
+# Público-Alvo
 
-O WeDo é direcionado a **estudantes universitários e jovens profissionais** com idade entre 18 e 30 anos, que já possuem familiaridade com tecnologia e aplicativos móveis, especialmente aqueles que consomem plataformas com elementos sociais e gamificados, como Instagram, Duolingo ou jogos com sistemas de progressão.
+O LifeSync é voltado para qualquer pessoa que enfrente dificuldades em organizar sua rotina, acompanhar o próprio progresso e manter consistência na realização de metas pessoais. Embora o perfil mais recorrente entre os usuários esperados seja o de estudantes universitários e jovens profissionais, a aplicação foi concebida para atender a um público mais amplo — qualquer indivíduo que deseje centralizar o acompanhamento de diferentes áreas da vida, como saúde, estudos e finanças, em uma única plataforma.
 
-O público pode ser segmentado em dois perfis principais:
+De forma geral, o público-alvo pode ser caracterizado por dois perfis principais, sem que isso exclua outros:
 
-**Estudantes universitários**, cursando graduações presenciais ou EAD, com rotina intensa e múltiplas responsabilidades simultâneas (faculdade, estágio, vida social). Geralmente têm alta exposição a redes sociais e estão habituados a dinâmicas de gamificação. Sentem dificuldade em manter constância nos estudos e hábitos saudáveis sem um estímulo externo ou grupo de suporte. Possuem conhecimento básico a intermediário em tecnologia e interagem naturalmente com aplicativos de organização, mas tendem a abandoná-los por falta de engajamento social.
+**Estudantes e jovens adultos** — pessoas em fase de formação acadêmica ou início de carreira, com rotinas intensas e múltiplas responsabilidades simultâneas. Têm familiaridade com tecnologia e aplicativos digitais, mas tendem a abandonar ferramentas de organização por falta de clareza sobre seu próprio progresso. Buscam uma solução simples que centralize metas de diferentes áreas e torne visível a evolução ao longo do tempo.
 
-**Jovens profissionais**,  recém-inseridos no mercado de trabalho, entre 22 e 30 anos, que buscam equilibrar desenvolvimento profissional, saúde física e equilíbrio financeiro. Têm maior autonomia financeira e motivação por crescimento pessoal, mas enfrentam dificuldades em manter hábitos consistentes diante da rotina profissional. São usuários frequentes de aplicativos de produtividade e bem-estar, e valorizam métricas de progresso e comparações contextualizadas com seu próprio círculo social.
+**Adultos em geral com metas pessoais ativas** — pessoas em qualquer faixa etária que buscam estruturar melhor sua rotina, seja para desenvolver hábitos de saúde, controlar finanças ou organizar compromissos e objetivos profissionais. Valorizam praticidade, clareza visual e um histórico confiável do que já conquistaram.
 
-Em ambos os perfis, a relação com a tecnologia é fluente: os usuários navegam com facilidade em aplicativos com múltiplas funcionalidades, compreendem conceitos como feed, ranking e notificações, e estão acostumados a interações sociais mediadas por plataformas digitais. Não há necessidade de experiência técnica prévia para utilizar a aplicação, o onboarding deve ser intuitivo e orientado por elementos visuais familiares ao público.
-
-
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+Em ambos os casos, não é necessário nenhum conhecimento técnico prévio para utilizar a aplicação. A interface deve ser intuitiva e acessível, atendendo tanto usuários com alta familiaridade digital quanto aqueles com menor experiência com ferramentas de produtividade.

@@ -1,6 +1,10 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+O avanço das tecnologias digitais e o aumento do fluxo de informações têm impactado a forma como as pessoas organizam suas rotinas, administram e acompanham seus objetivos pessoais. Diante de tantas responsabilidades, muitos indivíduos enfrentam dificuldades para gerenciar o tempo, definir prioridades e manter uma visão clara do próprio progresso em áreas importantes da vida, como estudos, saúde e finanças.
+
+Nesse contexto, propõe-se o desenvolvimento do WeDo, um software voltado para a organização de tarefas e o acompanhamento de metas pessoais. A proposta do sistema é permitir que os usuários registrem atividades, acompanhem seus objetivos ao longo do tempo e visualizem seu progresso de maneira clara, integrando diferentes aspectos da rotina em uma única plataforma.
+
+A criação do projeto surge da necessidade de ferramentas que ajudem na organização da rotina em meio ao excesso de distrações do ambiente digital. Nesse contexto, o WeDo busca apoiar usuários, especialmente estudantes e jovens adultos, no planejamento de suas atividades e no acompanhamento de metas pessoais, contribuindo para uma rotina mais organizada e produtiva.
 
 ## Problema
 

@@ -18,11 +18,6 @@ Distorção por Comparação Digital: A exposição contínua a estilos de vida 
 
 Dificuldade de Convergência Multidisciplinar: Existe uma lacuna na centralização de metas que abrangem diferentes áreas da vida (saúde, finanças e produtividade). A falta de uma visão consolidada que permita, por exemplo, visualizar simultaneamente uma meta de emagrecimento, um planejamento de reserva financeira e as tarefas operacionais do dia a dia, impede o desenvolvimento de uma rotina equilibrada e sustentável.
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
-
 ## Objetivos
 
 ### Objetivo Geral

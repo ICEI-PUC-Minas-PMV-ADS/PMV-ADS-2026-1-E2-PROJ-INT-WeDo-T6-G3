@@ -18,6 +18,8 @@ GILMAR, F. et al. **Impacto das redes sociais na saúde mental de universitário
 
 UNIVERSIDADE FEDERAL DE MINAS GERAIS (UFMG). **Uso excessivo de telas piora saúde mental de diferentes gerações**. Belo Horizonte: UFMG, 2023. Disponível em: https://www3.ufmg.br/comunicacao/noticias/sem-limite-de-idade-uso-excessivo-de-telas-piora-saude-mental-de-diferentes-geracoes. Acesso em: 7 mar. 2026.
 
+MESTRES DA WEB. **Requisitos funcionais e não funcionais: o que são**. Disponível em: https://www.mestresdaweb.com.br/tecnologias/requisitos-funcionais-e-nao-funcionais-o-que-sao. Acesso em: 7 mar. 2026.
+
 ---
 
 ### Síntese de Validação para o WeDo

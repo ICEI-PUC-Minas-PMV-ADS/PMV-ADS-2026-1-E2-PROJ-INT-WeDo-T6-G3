@@ -1,5 +1,13 @@
 ### Referências Bibliográficas 
 
+
+KEMP, Simon. **Digital 2024: Brazil**. DataReportal, 23 fev. 2024. Disponível em: (https://datareportal.com/reports/digital-2024-brazil). Acesso em: 05 mar. 2026.
+
+[1] REDAÇÃO GS1 BRASIL. **Tempo de tela: brasileiros passam mais de 9 horas/dia conectados**. GS1 Brasil Notícias, 31 out. 2025. Disponível em: [https://noticias.gs1br.org/...](https://noticias.gs1br.org/tempo-de-tela-entre-os-brasileiros-pesquisa/). Acesso em: 05 mar. 2026.
+
+[2] PIMENTEL, Carolina. **Uso excessivo de dispositivo digital afeta desempenho de alunos**. Agência Brasil, Brasília, 05 dez. 2023. Disponível em: [https://agenciabrasil.ebc.com.br/...](https://agenciabrasil.ebc.com.br/educacao/noticia/2023-12/pisa-uso-excessivo-de-dispositivo-digital-afeta-desempenho-de-alunos). Acesso em: 05 mar. 2026.
+
+
 BEDIM, B. P. et al. **Relação entre tempo de tela e nível de ansiedade em estudantes**. Revista Aracê, São José dos Pinhais, v. 6, n. 3, p. 9219-9234, 2024. Disponível em: https://periodicos.newsciencepubl.com/arace/article/view/1561. Acesso em: 7 mar. 2026.
 
 COMITÊ GESTOR DA INTERNET NO BRASIL (CGI.br). **Pesquisa TIC Domicílios 2024: livro eletrônico**. São Paulo: CGI.br, 2025. Disponível em: https://cetic.br/media/docs/publicacoes/2/20250512120132/tic_domicilios_2024_livro_eletronico.pdf. Acesso em: 7 mar. 2026.

@@ -160,4 +160,4 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-![DiagramaCDU](./img/DiagramaCasosDeUso.jpg)
+![DiagramaCDU](docs/img/WeDoUml.jpeg)

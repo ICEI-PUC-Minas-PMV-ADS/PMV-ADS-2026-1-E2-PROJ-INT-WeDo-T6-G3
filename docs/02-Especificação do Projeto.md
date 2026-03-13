@@ -106,39 +106,33 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| A aplicação deve permitir o cadastro de usuários informando nome, e-mail e senha.| ALTA | 
-|RF-002| A aplicação deve permitir a autenticação (login) de usuários cadastrados.    | ALTA |
-|RF-003| A aplicação deve permitir que o usuário edite suas informações de perfil. | MÉDIA |
-|RF-004| A aplicação deve permitir que o usuário cadastre metas pessoais. | ALTA |
-|RF-005| A aplicação deve permitir que cada meta possua título, descrição, categoria e data de prazo. | ALTA |
-|RF-006| A aplicação deve permitir categorizar metas em áreas da vida como saúde, finanças ou estudos.| MÉDIA |
-|RF-007| A aplicação deve permitir que o usuário registre o progresso de uma meta.| ALTA |
-|RF-008| A aplicação deve permitir atualizar o status de uma meta (em andamento, concluída ou cancelada).| ALTA |
-|RF-009| A aplicação deve permitir que o usuário visualize todas as metas cadastradas em uma listagem organizada.| ALTA |
-|RF-010| A aplicação deve permitir filtrar metas por categoria ou status.| MÉDIA |
-|RF-011| A aplicação deve permitir que o usuário visualize o histórico de metas concluídas.| MÉDIA |
-|RF-012| A aplicação deve permitir que o usuário edite informações de metas cadastradas.| ALTA |
-|RF-013| A aplicação deve permitir que o usuário exclua metas cadastradas.| ALTA |
-|RF-014| A aplicação deve exibir um painel (dashboard) com o resumo das metas ativas e concluídas.| MÉDIA |
-|RF-015| A aplicação deve exibir indicadores simples de progresso das metas (ex: percentual de conclusão).| MÉDIA |
-|RF-016| A aplicação deve permitir que o usuário visualize suas metas organizadas por áreas da vida.| ALTA |
-|RF-017| A aplicação deve permitir anexar uma imagem como comprovação do progresso de uma meta.| MÉDIA |
-
+|RF-001| Cadastrar usuários informando nome, e-mail e senha.| ALTA | 
+|RF-002| Autenticar usuários por meio de login no sistema.  | ALTA |
+|RF-003| Recuperar senha por meio de redefinição de senha. | ALTA |
+|RF-004| Editar informações do perfil do usuário. | MÉDIA |
+|RF-005| Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. | ALTA |
+|RF-006| Definir título, descrição, categoria e prazo para cada meta cadastrada.| ALTA |
+|RF-007| Atualizar o status das metas (em andamento, concluída ou cancelada).| ALTA |
+|RF-008| Gerenciar categorias para organização das metas| ALTA |
+|RF-009| Visualizar painel de evolução com resumo das metas do usuário.| ALTA |
+|RF-010| Gerenciar categorias para controle das metas.| MÉDIA |
+|RF-011| Registrar conquistas no mural quando metas forem concluídas.| MÉDIA |
+|RF-012| Anexar imagens como comprovação de progresso das metas.| MÉDIA |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| A aplicação deve possuir interface responsiva, permitindo uso em dispositivos móveis e computadores. | MÉDIA | 
-|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  ALTA | 
-|RNF-003| O back-end deve ser desenvolvido em C# com .NET Core. |  ALTA | 
-|RNF-004| Os dados devem ser persistidos em SQL Server ou MySQL. |  ALTA | 
-|RNF-005| As senhas dos usuários devem ser armazenadas de forma criptografada. |  ALTA | 
-|RNF-006| A aplicação deve validar os dados inseridos pelo usuário antes de salvá-los no banco de dados. |  ALTA | 
-|RNF-007| O sistema deve restringir o acesso às funcionalidades apenas para usuários autenticados. |  ALTA | 
-|RNF-008| O sistema deve registrar automaticamente a data de criação e atualização das metas.|ALTA| 
-|RNF-009| A interface do sistema deve apresentar navegação simples e organizada para facilitar o uso. |  ALTA | 
-|RNF-010| O sistema deve garantir a integridade das relações entre usuários e metas armazenadas no banco de dados. |  ALTA | 
+|RNF-001| Possuir interface responsiva para uso em dispositivos móveis e desktops. | ALTA | 
+|RNF-002| Processar requisições do usuário em até 3 segundos. |  ALTA | 
+|RNF-003| Garantir armazenamento seguro das senhas utilizando criptografia. |  ALTA | 
+|RNF-004| Validar os dados inseridos pelo usuário antes de salvá-los no banco de dados. |  ALTA | 
+|RNF-005| Apresentar interface simples e intuitiva para facilitar o uso do sistema. |  ALTA | 
+|RNF-006| Oferecer acessibilidade visual adequada para usuários com daltonismo.. |  ALTA | 
+|RNF-007| Proteger os dados dos usuários contra acessos não autorizados. |  ALTA | 
+|RNF-008| Garantir integridade dos dados armazenados no sistema.|ALTA| 
+|RNF-009| Permitir navegação de até 2 segundos entre as funcionalidades do sistema. |  ALTA | 
+|RNF-010| Garantir a degradação suave do sistema durante falhas. |  ALTA | 
 
 
 ## Restrições

@@ -17,8 +17,6 @@ https://lucid.app/lucidchart/7ebc4eee-5ad4-421a-bd7c-5c829cd5c6ec/edit?viewport_
 
 Link para visualização do Wireframes: https://www.figma.com/site/28ffPGfNZIXDvDNJQU5qfA/Wedo?node-id=0-1&t=yrziYJckoGbjgous-1
 
----
-
 ### Página de Cadastro e Login (RF-001, RF-002)
 Esta tela representa a porta de entrada do sistema WeDo. Ela possui uma divisão clara entre o formulário de Cadastro (lado esquerdo), permitindo que novos usuários insiram Nome, E-mail e Senha, e o formulário de Autenticação/Login (lado direito). A interface contempla o suporte a Social Login (Google e Apple) e o redirecionamento para o fluxo de recuperação de acesso.
 

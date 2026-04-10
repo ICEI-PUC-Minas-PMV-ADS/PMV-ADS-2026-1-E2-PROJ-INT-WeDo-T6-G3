@@ -17,7 +17,7 @@ O sistema WeDo é composto pelas seguintes classes principais:
 - **HistoricoAtividade** — mantém o histórico de atividades vinculadas ao usuário, com suporte a filtros por categoria e período.
 - **Notificacao** — gerencia notificações enviadas ao usuário, com controle de leitura e tipo.
 
-📄 [Visualizar Diagrama de Classes (PDF)](img/Diagrama%20de%20Classes%20-%20WeDo.pdf)
+![Diagrama de Classes - WeDo](img/diagrama_classes_WeDo.jpg)
 
 ## Modelo ER (Projeto Conceitual)
 

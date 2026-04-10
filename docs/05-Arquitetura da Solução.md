@@ -8,26 +8,45 @@ Definição de como o software é estruturado em termos dos componentes que faze
 
 O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
+O sistema WeDo é composto pelas seguintes classes principais:
 
-> - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
-> - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
+- **Usuario** — representa o usuário da plataforma, com atributos como `id`, `nome`, `email`, `senhaHash`, `areaFoco` e `dataCadastro`, e métodos de cadastro, edição de perfil e autenticação.
+- **Atividade** — registra as atividades realizadas pelo usuário, com `descricao`, `data`, `fotoUrl`, `status` e referências a `usuarioId` e `categoriaId`.
+- **Meta** — define as metas do usuário, com `descricao`, `prazo`, `status` e o campo `conquistaMural` para conquistas no mural.
+- **Categoria** — agrupa atividades e metas por categoria, com métodos de busca e listagem.
+- **HistoricoAtividade** — mantém o histórico de atividades vinculadas ao usuário, com suporte a filtros por categoria e período.
+- **Notificacao** — gerencia notificações enviadas ao usuário, com controle de leitura e tipo.
+
+📄 [Visualizar Diagrama de Classes (PDF)](img/Diagrama%20de%20Classes%20-%20WeDo.pdf)
 
 ## Modelo ER (Projeto Conceitual)
 
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
 
-Sugestão de ferramentas para geração deste artefato: LucidChart e Draw.io.
+O diagrama abaixo apresenta as entidades **usuario**, **atividade**, **meta**, **categoria**, **historico_atividade** e **notificacao**, e seus respectivos relacionamentos:
 
-A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
+- Um **usuario** *Registra* N **atividade**s, *Define* N **meta**s e *Recebe* N **notificacao**s.
+- Uma **atividade** e uma **meta** *Pertencem a* uma **categoria**.
+- O **historico_atividade** é *Gerado* a partir das atividades e *Referencia* uma **categoria**.
 
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
+![Diagrama de Entidade Relacionamento - WeDo](img/%5BWedo%5D%20-%20DIAGRAMA%20DE%20ENTIDADE%20RELACIONAMENTO.jpg)
 
 ## Projeto da Base de Dados
 
 O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
- 
-Para mais informações, consulte o microfundamento "Modelagem de Dados".
+
+O esquema abaixo detalha as tabelas do sistema e seus atributos:
+
+| Tabela | Colunas principais |
+|---|---|
+| **usuario** | `id PK`, `nome VARCHAR(100)`, `email UNIQUE`, `senha_hash VARCHAR(150)`, `area_foco VARCHAR(100)`, `data_cadastro DATE` |
+| **atividade** | `id PK`, `usuario_id FK`, `categoria_id FK`, `descricao VARCHAR(500)`, `data DATE`, `foto_url VARCHAR(500)`, `status VARCHAR(30)` |
+| **meta** | `id PK`, `usuario_id FK`, `categoria_id FK`, `descricao VARCHAR(500)`, `prazo VARCHAR(100)`, `status VARCHAR(20)`, `conquista_mural BOOLEAN` |
+| **categoria** | `id PK`, `nome VARCHAR(50)`, `descricao VARCHAR(300)` |
+| **historico_atividade** | `id PK`, `usuario_id FK`, `atividade_id FK`, `categoria_id FK`, `data_registro DATETIME` |
+| **notificacao** | `id PK`, `usuario_id FK`, `mensagem VARCHAR(500)`, `data_envio DATETIME`, `lida BOOLEAN`, `tipo VARCHAR(30)` |
+
+![Projeto de Base de Dados - WeDo](img/Projeto%20base%20de%20dados.jpeg)
 
 ## ATENÇÃO!!!
 

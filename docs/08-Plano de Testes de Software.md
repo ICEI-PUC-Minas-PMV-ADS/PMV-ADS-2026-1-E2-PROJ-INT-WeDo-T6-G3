@@ -1,78 +1,90 @@
-# Plano de Testes de Usabilidade
+# Plano de Testes de Software
 
-Os testes de usabilidade permitem avaliar a qualidade da interface com o usuário da aplicação interativa WeDo, garantindo que o sistema atenda ao propósito de centralizar e facilitar o acompanhamento de metas pessoais.
+| **Caso de Teste** | **CT01 – Cadastro de Usuário** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-001 - Cadastrar usuários informando nome, e-mail e senha. |
+| Objetivo do Teste 	| Verificar se o sistema permite a criação de uma nova conta preenchendo todos os campos obrigatórios. |
+| Passos 	| 1. Acessar a página inicial do sistema. <br>2. No formulário de Cadastro, preencher "Nome completo", "E-mail" e "Senha". <br>3. Clicar no botão "Cadastrar". |
+|Critério de Êxito | O sistema valida os dados, salva o novo usuário no banco de dados e redireciona para a tela de login ou Dashboard. |
 
-## Definição dos objetivos
+<br>
 
-Antes de iniciar os testes, é essencial definir o que se deseja avaliar na usabilidade do sistema WeDo. Os principais objetivos deste teste são:
+| **Caso de Teste** | **CT02 – Trocar Senha** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-003 - Recuperar senha por meio de redefinição de senha. |
+| Objetivo do Teste 	| Verificar se o usuário consegue redefinir sua senha com sucesso, respeitando as regras de validação exigidas pelo sistema. |
+| Passos 	| 1. Acessar a tela de redefinição de senha (rota `/refazer-senha`) <br>2. Confirmar se o e-mail alvo está listado corretamente <br>3. Preencher o campo "Digite a nova senha" informando uma senha válida (Mínimo 8 caracteres, contendo ao menos uma letra maiúscula, um número e um caractere especial) <br>4. Preencher o campo "Confirmar senha" com a exata mesma senha <br>5. Clicar no botão "Salvar" |
+|Critério de Êxito | - O sistema valida os critérios de segurança, salva a nova senha com sucesso e apresenta uma mensagem de confirmação (e/ou redireciona para a tela de login). |
 
-- Verificar se os usuários conseguem registrar, categorizar e acompanhar metas sem dificuldades de navegação.
-- Avaliar se a interface do Dashboard e do Mural de Conquistas comunica o progresso de forma clara e motivacional.
-- Identificar barreiras na atualização diária de status das atividades, garantindo que o processo seja rápido e não desencoraje o uso contínuo.
-- Validar a eficácia dos filtros de categoria na organização da visão do usuário.
+<br>
 
-## Seleção dos participantes
 
-Para garantir que o teste reflita o uso real do sistema, os participantes foram selecionados com base nas personas do projeto (estudantes, jovens adultos e profissionais com metas ativas).
+| **Caso de Teste** | **CT03 – Dashboard** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-005 - Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. <br> RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário. |
+| Objetivo do Teste 	| Verificar se o usuário consegue visualizar as atividades do dia, acessar seus detalhes e atualizar o status de conclusão diretamente pelo Dashboard. |
+| Passos 	| 1. Acessar a aplicação e efetuar o login <br>2. Navegar pelo menu lateral e clicar em "Dashboard" (rota `/dashboard`) <br>3. Na seção "Oque fazer hoje?", visualizar a lista de atividades <br>4. Clicar em uma atividade específica (ex: "Cardio") <br>5. Verificar se os detalhes (descrição e meta associada) são exibidos no painel lateral <br>6. Na seção "Status", marcar uma das opções disponíveis ("Concluido", "Parcialmente concluido" ou "Nao concluido") |
+|Critério de Êxito | - As atividades pendentes são listadas corretamente na tela. <br> - Os detalhes da atividade clicada são renderizados no painel ao lado. <br> - O status da atividade é atualizado com sucesso ao marcar o respectivo checkbox. |
 
-**Critérios para selecionar participantes:**
-- **Perfil A (Foco em Produtividade/Estudos):** Estudantes universitários que buscam organizar rotinas acadêmicas e visualizar progresso.
-- **Perfil B (Foco em Hábitos/Saúde):** Pessoas interessadas em manter a consistência de atividades físicas ou alimentação.
-- **Perfil C (Foco em Gestão/Finanças):** Jovens adultos que precisam conciliar diferentes áreas da vida (freelancers, profissionais liberais).
-- Diferentes níveis de familiaridade com ferramentas digitais de organização (desde usuários de planilhas até iniciantes).
+<br>
 
-**Quantidade recomendada:**
-O teste será conduzido com **5 a 8 participantes**, garantindo diversidade suficiente para identificar os principais gargalos de interação.
+| **Caso de Teste** | **CT04 – Gerenciamento e Organização de Metas** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-005, RF-008 e RF-010 - Gerenciar metas e categorias para organização e controle. |
+| Objetivo do Teste 	| Validar se o usuário consegue visualizar suas metas e se a organização por categorias está funcional. |
+| Passos 	| 1. Efetuar login e clicar em "Metas" no menu lateral.<br>2. Visualizar a listagem de metas existentes.<br>3. Utilizar o recurso de filtro ou seleção de categorias (ex: "Saúde" ou "Finanças").<br>4. Verificar se a interface agrupa as metas conforme a categoria selecionada. |
+|Critério de Êxito | O sistema exibe as metas corretamente e permite a organização visual através das categorias cadastradas. |
 
-## Definição de cenários de teste
+<br>
 
-Nesta etapa, os voluntários executarão cinco tarefas baseadas em fluxos reais de uso do sistema WeDo. Nenhuma assistência direta deve ser fornecida durante a execução para não invalidar os dados.
+| **Caso de Teste** | **CT05 – Registro de Atividades** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-005 - Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. <br> RF-006 - Definir título, descrição, categoria e prazo para cada meta cadastrada. <br> RF-012 - Anexar imagens como comprovação de progresso das metas. |
+| Objetivo do Teste 	| Verificar se o usuário consegue registrar uma nova meta preenchendo os campos principais de nome e motivação, e interagindo com as opções de tempo, objetivos e categoria. |
+| Passos 	| 1. Acessar a aplicação e efetuar o login <br>2. Navegar pelo menu lateral e clicar em "Registrar Atividade" (rota `/registro-de-atividades`) <br>3. Preencher o campo de texto "Digite um nome para sua meta" (título) <br>4. Preencher a área de texto "Digite sua motivação" (descrição) <br>5. Marcar os checkboxes desejados ("Definir tempo de conclusao?", "Atribuir objetivos ?", "Atribuir Categoria ?") e preencher os dados caso novos campos sejam exibidos <br>6. Clicar no botão "Registrar" |
+|Critério de Êxito | - O sistema valida os dados inseridos e registra a nova meta com sucesso. <br> - Uma mensagem de feedback visual é apresentada ao usuário confirmando a criação. <br> - A meta recém-criada passa a estar disponível no Dashboard e na lista de Metas. |
 
-**Cenário 1: Cadastro e Primeiro Acesso**
-- **Objetivo:** Avaliar a fluidez do processo de onboarding e criação de conta (RF-001, RF-002).
-- **Contexto:** Você é um estudante que acabou de conhecer o WeDo e quer usar a plataforma para organizar seus estudos e rotina.
-- **Tarefa:** Acessar a tela inicial, preencher os dados de cadastro (Nome, E-mail e Senha) e realizar o primeiro login para acessar o Dashboard.
-- **Critério de sucesso:** O usuário conclui o cadastro e chega ao Dashboard sem erros de validação ou confusão sobre onde clicar.
+<br>
 
-**Cenário 2: Registro de uma Nova Meta com Categoria**
-- **Objetivo:** Validar a facilidade de criação de uma meta e atribuição de categorias (RF-005, RF-006).
-- **Contexto:** Você decidiu criar um hábito diário de leitura e precisa registrar isso no sistema para não esquecer.
-- **Tarefa:** Navegar até a tela de "Registro de Atividades", criar uma meta chamada "Leitura Diária", adicionar uma motivação, vinculá-la à categoria "Estudos" e salvá-la.
-- **Critério de sucesso:** A meta é registrada corretamente e o usuário visualiza a confirmação de que ela foi adicionada ao sistema.
+| **Caso de Teste** | **CT06 – Mural de Conquistas** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-011 - Registrar conquista no mural quando metas são concluídas. |
+| Objetivo do Teste 	| Garantir que o sistema automatize o registro de sucesso quando uma meta atinge o status de concluída. |
+| Passos 	| 1. No Dashboard, atualizar o status de uma meta para "Concluído" (RF-007).<br>2. Navegar até a tela "Mural" através do menu lateral.<br>3. Verificar se a meta concluída aparece listada como uma conquista.|
+|Critério de Êxito | A meta deve ser exibida no Mural de Conquistas imediatamente após a alteração de status para concluída. |
 
-**Cenário 3: Atualização de Status Diário**
-- **Objetivo:** Avaliar a usabilidade do Dashboard para gestão rápida de tarefas cotidianas (RF-007, RF-009).
-- **Contexto:** Você acabou de voltar da academia e quer registrar que cumpriu sua meta de exercícios de hoje para manter seu histórico positivo.
-- **Tarefa:** No Dashboard, na seção "O que fazer hoje?", localizar a atividade de treino e alterar seu status para "Concluído".
-- **Critério de sucesso:** O usuário identifica a atividade pendente rapidamente e consegue alterar o status através dos indicadores visuais (cores/checkbox) em menos de 1 minuto.
+<br>
 
-**Cenário 4: Organização e Filtragem de Metas**
-- **Objetivo:** Testar a clareza visual e o funcionamento da organização por categorias na visão estratégica (RF-008).
-- **Contexto:** Você está planejando seu orçamento do mês e quer focar apenas nos seus objetivos financeiros, ocultando as metas de saúde e estudos.
-- **Tarefa:** Acessar a página de "Metas" e utilizar a ferramenta de filtro para exibir exclusivamente as metas da categoria "Finanças".
-- **Critério de sucesso:** O usuário encontra a opção de filtro facilmente e a interface atualiza exibindo apenas os cards corretos.
+| **Caso de Teste** | **CT07 – Visualizar Histórico de Metas** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-005 - Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário. |
+| Objetivo do Teste 	| Verificar se o usuário consegue visualizar o histórico de progresso das suas metas através do calendário e utilizar filtros para refinar a busca. |
+| Passos 	| 1. Acessar a aplicação e efetuar o login <br>2. Navegar pelo menu lateral e clicar em "Histórico" (rota `/historico`) <br>3. Visualizar a seção "Visualizar historico" contendo as metas cadastradas (ex: Emagrecer, Quitar dívidas, etc.) <br>4. Observar o calendário mensal exibido abaixo das metas <br>5. Clicar na opção "Filtrar" para testar a ordenação/filtro do histórico <br>6. Selecionar uma meta específica na lista (ex: "Emagrecer") para verificar o destaque no calendário |
+|Critério de Êxito | - A tela carrega corretamente as metas do usuário e seus respectivos status. <br> - O calendário exibe marcadores visuais (ícones verdes) nos dias em que houve progresso ou conclusão de atividades. <br> - Os filtros funcionam corretamente, atualizando os dados do calendário com base na meta selecionada. |
 
-**Cenário 5: Verificação de Progresso no Mural**
-- **Objetivo:** Verificar a eficácia da tela de recompensas e registro histórico (RF-011).
-- **Contexto:** Você acabou de finalizar o pagamento da última parcela de uma dívida, concluindo totalmente uma grande meta financeira.
-- **Tarefa:** Após marcar a meta como concluída, navegar até o "Mural de Conquistas" e verificar se ela aparece na sua lista de vitórias.
-- **Critério de sucesso:** O usuário navega até o Mural sem dificuldades e identifica visualmente o card da sua meta finalizada.
+<br>
 
-## Métodos de coleta de dados
+| **Caso de Teste** | **CT08 – Painel de Notificações** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-009 - Visualizar painel de evolução com resumo das metas do usuário. |
+| Objetivo do Teste 	| Verificar se a tela de notificações resume corretamente as atividades recentes e a evolução do usuário. |
+| Passos 	| 1. Realizar uma ação no sistema (ex: cadastrar nova meta ou concluir atividade).<br>2. Clicar no ícone de notificações (Sino) ou acessar a rota /notificacoes.<br>3. Validar se os cards informativos refletem as ações recentes do usuário. |
+|Critério de Êxito | A tela deve renderizar mensagens claras sobre o progresso das metas e alertas de sistema em ordem cronológica. |
 
-Durante a execução dos cenários, o moderador do teste observará silenciosamente e registrará o comportamento do usuário. Serão coletados os seguintes dados:
+<br>
 
-**1. Métricas Quantitativas:**
-- **Tempo de conclusão:** Tempo cronometrado para a execução de cada cenário.
-- **Taxa de sucesso:** Se o usuário concluiu a tarefa com sucesso, com sucesso parcial (precisou de dicas) ou falhou.
-- **Quantidade de cliques/erros:** Número de vezes que o usuário clicou em áreas não clicáveis ou acessou telas erradas antes de encontrar o caminho certo.
+| **Caso de Teste** | **CT09 – Configurações Gerais** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-001 - Cadastrar usuários informando nome, e-mail e senha. |
+| Objetivo do Teste 	| Verificar se o usuário consegue alterar e salvar as preferências da aplicação, como tema (claro/escuro) e permissão de notificações. |
+| Passos 	| 1. Acessar a aplicação e efetuar o login <br>2. Clicar no ícone de engrenagem (Configurações) localizado no canto superior direito (rota `/Configurações-geral`) <br>3. Verificar a exibição do idioma ("Idioma: Portugues-Br") <br>4. Alternar a opção de "Tema" selecionando a caixa "Escuro" ou "Claro" <br>5. Marcar ou desmarcar a caixa de seleção "Exibir Notificação" <br>6. Clicar no botão "Salvar" |
+|Critério de Êxito | - As preferências são atualizadas e salvas com sucesso. <br> - Ao alterar o tema, a interface deve refletir imediatamente a mudança para o modo claro ou escuro. <br> - O sistema passa a respeitar a nova configuração de exibição de notificações. |
 
-**2. Métricas Qualitativas:**
-- **Think Aloud (Pensar em voz alta):** Os usuários serão encorajados a verbalizar seus pensamentos, frustrações e expectativas enquanto navegam.
-- **Questionário Pós-Teste:** Aplicação de perguntas curtas após a sessão para medir a satisfação geral:
-  - *A interface foi fácil de entender?*
-  - *Você encontrou dificuldades na organização das suas metas?*
-  - *As cores e ícones ajudaram a identificar o status das tarefas?*
+<br>
 
-**Conformidade com a LGPD:**
-Nenhum dado sensível ou de identificação pessoal (como nome completo, CPF ou e-mail real) dos voluntários será armazenado ou exposto nos relatórios finais. Os participantes serão identificados apenas por códigos (ex: Voluntário 01, Voluntário 02), garantindo total privacidade e anonimato.
+| **Caso de Teste** | **CT10 – Edição de Perfil** |
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-004 - Editar informações do perfil do usuário. |
+| Objetivo do Teste 	| Validar a funcionalidade de alteração de dados cadastrais. |
+| Passos 	| 1. Acessar a tela de Configurações de Perfil através do ícone de usuário.<br>2. Alterar o nome ou e-mail nos campos de edição.<br>3. Clicar no botão de confirmação/salvar. |
+|Critério de Êxito | O sistema deve persistir as novas informações no banco de dados e exibir os dados atualizados na interface. |

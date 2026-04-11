@@ -8,8 +8,7 @@ Visão geral da interação do usuário pelas telas do sistema e protótipo inte
  Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
 
 ## Diagrama de Fluxo
-![DiagramaDeFluxo](https://github.com/ICEI-PUC-Minas-PMV-ADS/PMV-ADS-2026-1-E2-PROJ-INT-WeDo-T6-G3/blob/main/docs/img/Diagrama%20De%20Fluxo.jpeg)
-
+![DiagramaDeFluxo - Página 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/PMV-ADS-2026-1-E2-PROJ-INT-WeDo-T6-G3/blob/74c75f19f2a5e243bdac747e05594408e77124a2/docs/img/Diagrama%20De%20Fluxo%20-%20P%C3%A1gina%202.jpeg)
 
 https://lucid.app/lucidchart/7ebc4eee-5ad4-421a-bd7c-5c829cd5c6ec/edit?viewport_loc=4822%2C-4525%2C2950%2C3590%2C_LgGQva0u0ys&invitationId=inv_572f10b5-cf03-4a17-a6ba-3a2807954eea
 

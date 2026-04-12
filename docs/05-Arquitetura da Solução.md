@@ -54,9 +54,48 @@ Os três artefatos — **Diagrama de Classes, Modelo ER e Projeto da Base de Dad
 
 ## Tecnologias Utilizadas
 
-Descreva aqui qual(is) tecnologias você vai usar para resolver o seu problema, ou seja, implementar a sua solução. Liste todas as tecnologias envolvidas, linguagens a serem utilizadas, serviços web, frameworks, bibliotecas, IDEs de desenvolvimento, e ferramentas.
+#  Planejamento e Arquitetura do Sistema
 
-Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
+Este repositório contém a documentação técnica e o código-fonte da solução desenvolvida em **C#/.NET**. O sistema foi projetado para gerenciar atividades, metas e notificações com foco em performance e escalabilidade.
+
+---
+
+##  Stack Tecnológica
+
+Abaixo, as tecnologias e ferramentas selecionadas para a implementação:
+
+### **Backend & Lógica de Negócio**
+* **Linguagem:** C# (C-Sharp)
+* **Framework:** ASP.NET Core Web API
+* **Acesso a Dados:** Entity Framework Core (ORM)
+* **Segurança:** BCrypt (para Hash de senhas) e JWT para autenticação.
+
+### **Frontend (Interface)**
+* **Framework:** React.js ou Blazor
+* **Estilização:** CSS3 / Tailwind CSS
+* **Comunicação:** Axios ou Fetch API (JSON/HTTP)
+
+### **Banco de Dados**
+* **SGBD:** SQL Server ou PostgreSQL
+* **Modelagem:** Relacional com integridade referencial.
+
+### **Ferramentas & Design**
+* **IDE:** Visual Studio 2022 ou VS Code
+* **Prototipagem:** Figma (UI/UX)
+* **Modelagem de Dados:** draw.io e Lucidchart
+* **Testes de API:** Postman
+
+---
+
+##  Arquitetura e Fluxo de Dados
+
+O projeto segue uma arquitetura multicamadas, garantindo a separação de responsabilidades:
+
+1.  **Client (Front-end):** Interação do usuário e visualização dos resultados.
+2.  **Server (Back-end):** Processamento das requisições, validação de dados e regras de negócio.
+3.  **Database (Persistência):** Armazenamento seguro e estruturado das informações.
+
+---
 
 ## Hospedagem
 

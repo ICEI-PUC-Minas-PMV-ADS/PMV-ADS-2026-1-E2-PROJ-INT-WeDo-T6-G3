@@ -56,7 +56,7 @@ Os três artefatos — **Diagrama de Classes, Modelo ER e Projeto da Base de Dad
 
 #  Planejamento e Arquitetura do Sistema
 
-Este repositório contém a documentação técnica e o código-fonte da solução desenvolvida em **C#/.NET**. O sistema foi projetado para gerenciar atividades, metas e notificações com foco em performance e escalabilidade.
+O sistema foi projetado para gerenciar atividades, metas e notificações com foco em performance e escalabilidade.
 
 ---
 

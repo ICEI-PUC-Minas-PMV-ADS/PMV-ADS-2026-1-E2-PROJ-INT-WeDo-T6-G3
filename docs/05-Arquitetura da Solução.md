@@ -97,6 +97,8 @@ O projeto segue uma arquitetura multicamadas, garantindo a separação de respon
 
 ---
 
+![Image](https://github.com/user-attachments/assets/e750857a-f39c-4f70-b77e-ad2834aff58d)
+
 ## Hospedagem
 
 Explique como a hospedagem e o lançamento da plataforma foi feita.

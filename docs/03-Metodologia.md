@@ -1,15 +1,9 @@
 
 # Metodologia
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
-
 A equipe organiza seu trabalho através de metodologias ágeis, utilizando o GitHub Projects para gerenciar o fluxo de tarefas que inicialmente foi planejado no Trello. Todo o design de interface e a modelagem do sistema são centralizados no Figma, enquanto a comunicação ocorre via Microsoft Teams e WhatsApp. Para otimizar a execução, o time divide-se em três duplas de trabalho — Nicolas e Caio, Carla e Diego, e João e Evelin — que realizam as entregas de forma colaborativa durante as sprints.
 
 ## Controle de Versão
-
-A ferramenta de controle de versão adotada no projeto foi o
-[Git](https://git-scm.com/), sendo que o [Github](https://github.com)
-foi utilizado para hospedagem do repositório.
 
 O projeto segue a seguinte convenção para o nome de branches:
 
@@ -26,52 +20,50 @@ etiquetas:
 - `enhancement`: uma funcionalidade precisa ser melhorada
 - `feature`: uma nova funcionalidade precisa ser introduzida
 
-Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
-
-> **Links Úteis**:
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
-
 ## Gerenciamento de Projeto
 
 ### Divisão de Papéis
 
-Apresente a divisão de papéis entre os membros do grupo.
+Realizamos as divisões de papéis por meio de chamadas via Microsoft Teams e mensagens via Whatsapp. Ficou decidido que as duplas ficaraiam responsáveis cada uma por três partes do projeto. Abaixo estará listado as respectivas duplas, e o que cada dupla ficou responsável por organizar.
 
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu 
-> Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
+
+- Evellyn e João:
+
+Diagrama de Classes - Modelo Entidade Relacionamento - Projeto da Base de Dados.
+
+- Carla e Diego:
+
+Wireframes interativos - Plano de Testes de Software - Plano de Testes de Usabilidade.
+
+- Nicolas e Caio:
+
+Diagrama de Fluxo - Documentação da Metodologia - Projeto do Github com Backlog e Plano de Sprints.
+
+---
+
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo poderá fazer uso de ferramentas on-line para acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
-> **Links Úteis**:
-> - [Project management, made simple](https://github.com/features/project-management/)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/github/managing-your-work-on-github/about-project-boards)
-> - [Como criar Backlogs no Github](https://www.youtube.com/watch?v=RXEy6CFu9Hk)
-> - [Tutorial Slack](https://slack.com/intl/en-br/)
+Nessa etapa utilizamos algumas ferramentas para a conclusão das tarrefas, acompanhando o andamento do projeto e os status de desenvolvimento. Utilizamos o Lucidchat e Drawio para criação de diagramas, como o diagrama de Classes e diagrama de Fluxo.
+
+Também utilizamos o Figma para design de interface do Wireframe e Diagrama de Classes
+
+No inicio do Projeto utilizamos o Trello para acompanhamento das tarefas do grupo, porém transferimos os dados deste gestor para o Projects dentro do Github.
+
+---
 
 ### Ferramentas
 
 As ferramentas empregadas no projeto são:
 
-- Editor de código.
-- Ferramentas de comunicação
-- Ferramentas de desenho de tela (_wireframing_)
+- Lucidchat e Drawio
 
-O editor de código foi escolhido porque ele possui uma integração com o
-sistema de versão. As ferramentas de comunicação utilizadas possuem
-integração semelhante e por isso foram selecionadas. Por fim, para criar
-diagramas utilizamos essa ferramenta por melhor captar as
-necessidades da nossa solução.
+O Lucidchat e o Drawio foram escolhidos porque eles possuem uma facilidade de criação e visualização de fluxogramas e mapas mentais.
 
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+- Figma
+
+Escolhemos o Figma pois, sua agilidade para criação de design de interfaces e por ser uma ferramenta baseada na nuvem, o que facilita a colaboração em tempo real.
+
+- Trello e Projects
+
+Inicialmente escolhemos o Trello por ser bem intuitivo, o que entrega facilidade na sua usabilidade e conexão em nuvem. Porém optamos pelo Projects no Git, o que facilita a verificação das tarefas, já que se encontra no mesmo local em que realizamos divisoes e entregas.

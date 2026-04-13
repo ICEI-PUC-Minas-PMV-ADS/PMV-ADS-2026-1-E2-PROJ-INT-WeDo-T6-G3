@@ -1,12 +1,6 @@
 
 # Projeto de Interface
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
-
-Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
-
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
-
 ## Diagrama de Fluxo
 ![DiagramaDeFluxo - Página 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/PMV-ADS-2026-1-E2-PROJ-INT-WeDo-T6-G3/blob/74c75f19f2a5e243bdac747e05594408e77124a2/docs/img/Diagrama%20De%20Fluxo%20-%20P%C3%A1gina%202.jpeg)
 

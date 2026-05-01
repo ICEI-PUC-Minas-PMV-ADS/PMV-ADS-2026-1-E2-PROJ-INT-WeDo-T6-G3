@@ -26,5 +26,15 @@ namespace WeDo.Models
 
         public ICollection<Meta> Metas { get; set; }                   // Relacionamento um-para-muitos com a tabela de metas
 
+        public Usuario() { }
+        public Usuario(string nome, string descricao, string urlFoto, string email, string senha)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            UrlFoto = urlFoto;
+            Email = email;
+            Senha = senha;
+        }
+
     }
 }

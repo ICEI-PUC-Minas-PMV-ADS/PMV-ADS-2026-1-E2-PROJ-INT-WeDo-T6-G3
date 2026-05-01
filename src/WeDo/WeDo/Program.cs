@@ -1,4 +1,5 @@
-using WeDo.Context;
+using WeDo.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

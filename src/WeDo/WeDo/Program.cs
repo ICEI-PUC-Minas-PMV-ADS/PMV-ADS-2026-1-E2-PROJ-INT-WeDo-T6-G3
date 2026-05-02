@@ -10,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Registrando o serviço de email para injeção de dependência
+builder.Services.AddScoped<WeDo.Services.EmailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace WeDo.Services
 {

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Confirmação"; 
+}
+<div class=" text-center mt-5"> 
+    <h2>E-mail Enviado!</h2>
+
+    @if( ViewBag.Message != null)
+    {
+        <div class="alert alert-success mt-4">
+            @ViewBag.Message
+        </div>
+    }else if(ViewBag.Error != null)
+    {
+        <div class="alert alert-info mt-4">
+            @ViewBag.Error
+        </div>
+    }
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-primary">Voltar para o Inicio</a>
+    </div>
+
+</div>

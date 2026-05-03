@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Recuperar Senha";
+}
+
+<h1>EsqueciSenha</h1>
+<!-- se houver algum erro ele aparece aqui  -->
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>      
+}
+
+<p>Digite o seu e-mail para receber a senha temporaria</p>  
+
+<!-- O formulario aponta para a Action "Esqueci Senha do Controller Usuairios via Post -->
+<form asp-action="EsqueciSenha"  asp-controller="Usuarios" method="post">
+
+    <div class=" form-group mb-3">
+        <label for="email" class="control-label" >E-mail</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>  
+    <div class="form-group">
+        <input type="submit" value="Enviar Nova Senha" class="btn btn-primary" />
+        <a asp-action="Index" class=" btn btn-secondary">Voltar para Login</a>
+    </div>
+
+
+ </form>

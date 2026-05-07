@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Criar nova senha";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Criar nova senha</h2>
+            <hr />
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <p>Sua nova senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial.</p>
+            
+            <form asp-action="RefazerSenha" asp-controller="Usuarios" method="post">
+
+                <input type="hidden" name="token" value="@ViewBag.Token" />
+
+                <div class="form-group mb-3">
+                    <label for="novaSenha" class="control-label">Nova Senha</label>
+                    <input type="password" class="form-control" id="novaSenha" name="novaSenha" required />
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label for="confirmarSenha" class="control-label">Confirmar Nova Senha</label>
+                    <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required />
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success w-100" value="Salvar Nova Senha" />
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</div>

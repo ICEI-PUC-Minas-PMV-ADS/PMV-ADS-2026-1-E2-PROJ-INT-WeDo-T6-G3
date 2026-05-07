@@ -24,6 +24,11 @@ namespace WeDo.Models
         [Required(ErrorMessage = "Obrigatorio preecher sua senha")]
         public string Senha { get; set; }
 
+        //recuperacao de senha----
+        public string? TokenRecuperacao { get; set; } 
+        public DateTime? DataExpiracaoToken { get; set; }
+        //------------------------
+
         public ICollection<Meta> Metas { get; set; }                   // Relacionamento um-para-muitos com a tabela de metas
 
         public Usuario() { }

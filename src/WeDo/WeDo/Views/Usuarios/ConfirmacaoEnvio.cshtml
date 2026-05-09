@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Confirmação"; 
+    ViewData["Title"] = ViewBag.Titulo ?? "Aviso"; 
 }
-<div class=" text-center mt-5"> 
-    <h2>E-mail Enviado!</h2>
+<div class=" text-center mt-5 container"> 
+    <h2>@ViewBag.Titulo</h2>
 
     @if( ViewBag.Message != null)
     {

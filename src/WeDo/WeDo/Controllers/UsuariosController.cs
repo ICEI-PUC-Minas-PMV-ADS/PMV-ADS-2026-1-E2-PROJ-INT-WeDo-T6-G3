@@ -157,7 +157,7 @@ namespace WeDo.Controllers
         public async Task<IActionResult> EsqueciSenha(string email)
         {
             if (string.IsNullOrEmpty(email))
-            {
+            {   
                 ViewBag.Error = "Por favor, insira um email válido.";
                 return View();
             }
@@ -188,7 +188,8 @@ namespace WeDo.Controllers
                       $"<p>Se você não solicitou isso, apenas ignore este e-mail.</p>";
 
             await _emailService.EnviarEmailAsync(usuario.Email, assunto, mensagem); // Envia o email com a nova senha temporária
-            ViewBag.Message = "";
+            ViewBag.Titulo = "E-mail Enviado!";
+            ViewBag.Message = "O link para redefinir sua senha foi enviado para o seu e-mail!";
             return View("ConfirmacaoEnvio");
         }
         // GET: exibe a tela para o usuário criar uma nova senha, validando o token de recuperação
@@ -243,6 +244,7 @@ namespace WeDo.Controllers
             _context.Update(usuario);
             await _context.SaveChangesAsync();
 
+            ViewBag.Titulo = "Senha Redefinida!";
             ViewBag.Message = "Senha redefinida com sucesso! Você já pode fazer login com sua nova senha.";
             return View("ConfirmacaoEnvio");
         }

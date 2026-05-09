@@ -12,7 +12,7 @@
     </div>      
 }
 
-<p>Digite o seu e-mail para receber a senha temporaria</p>  
+<p>Digite o seu e-mail para receber as intruções para redefinir sua senha</p>  
 
 <!-- O formulario aponta para a Action "Esqueci Senha do Controller Usuairios via Post -->
 <form asp-action="EsqueciSenha"  asp-controller="Usuarios" method="post">
@@ -22,7 +22,7 @@
         <input type="email" class="form-control" id="email" name="email" required>
     </div>  
     <div class="form-group">
-        <input type="submit" value="Enviar Nova Senha" class="btn btn-primary" />
+        <input type="submit" value="Enviar Email" class="btn btn-primary" />
         <a asp-action="Index" class=" btn btn-secondary">Voltar para Login</a>
     </div>
 

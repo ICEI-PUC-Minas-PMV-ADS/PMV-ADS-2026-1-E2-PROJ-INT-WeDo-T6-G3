@@ -1,0 +1,79 @@
+﻿@model WeDo.Models.Usuario
+
+@{
+    ViewData["Title"] = "Login e Cadastro - WeDo";
+    // Se você não quiser que o menu superior apareça nesta página, desmarque a linha abaixo:
+    // Layout = null;
+}
+
+<div class="container-principal">
+    
+    @* --- LADO ESQUERDO: FORMULÁRIO DE CADASTRO --- *@
+    <div class="sessao-cadastro">
+        <h2>Cadastrar-se</h2>
+        <form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <input type="text" name="nome" placeholder="nome:" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="email" name="email" placeholder="email:" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="senha" placeholder="senha:" required class="form-control" />
+            </div>
+
+            <button type="submit" class="btn-verde">Cadastrar</button>
+        </form>
+    </div>
+
+    @* --- LADO DIREITO: FORMULÁRIO DE LOGIN --- *@
+    <div class="sessao-login">
+        <h2>Login</h2>
+        <form asp-controller="Usuarios" asp-action="Entrar" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <input type="email" name="email" placeholder="email:" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="senha" placeholder="senha:" required class="form-control" />
+            </div>
+
+            <button type="submit" class="btn-entrar">Entrar</button>
+            
+            <div class="links-auxiliares">
+                <a asp-controller="Usuarios" asp-action="EsqueciSenha">Esqueci minha senha</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@* --- ÁREA DE MENSAGENS DE FEEDBACK (ERRO OU SUCESSO) --- *@
+<div class="alertas-sistema" style="margin-top: 20px; text-align: center;">
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" style="color: #ff4d4d; font-weight: bold;">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success" style="color: #2ecc71; font-weight: bold;">
+            @ViewBag.Success
+        </div>
+    }
+</div>
+
+@* Opcional: Script para validação do lado do cliente *@
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

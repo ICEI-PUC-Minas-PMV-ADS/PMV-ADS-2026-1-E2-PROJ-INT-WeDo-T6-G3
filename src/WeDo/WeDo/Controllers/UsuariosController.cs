@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using WeDo.Models;
 using WeDo.Services;
+using Microsoft.AspNetCore.Authentication; // ADICIONADO
+using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
+using System.Security.Claims; // ADICIONADO
 
 namespace WeDo.Controllers
 {
@@ -10,12 +13,76 @@ namespace WeDo.Controllers
         private readonly AppDbContext _context;
         private readonly EmailService _emailService;// Injeção do serviço de email
 
-        public UsuariosController(AppDbContext context, EmailService emailService )
+        public UsuariosController(AppDbContext context, EmailService emailService)
         {
             _emailService = emailService;
             _context = context;
         }
 
+        // --- INÍCIO DA ADIÇÃO: SISTEMA DE LOGIN E CADASTRO ---
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+           // if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cadastrar(string nome, string email, string senha)
+        {
+            if (_context.Usuarios.Any(u => u.Email == email))
+            {
+                ViewBag.Error = "Este e-mail já está cadastrado.";
+                return View("Login");
+            }
+
+            var novoUsuario = new Usuario(nome, "Membro WeDo", "", email, senha);
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(novoUsuario);
+                await _context.SaveChangesAsync();
+                ViewBag.Success = "Cadastro realizado com sucesso! Agora entre com sua conta.";
+                return View("Login");
+            }
+            return View("Login");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Entrar(string email, string senha)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+
+            if (usuario != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, usuario.Nome),
+                    new Claim(ClaimTypes.Email, usuario.Email),
+                    new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString())
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity));
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Error = "E-mail ou senha incorretos.";
+            return View("Login");
+        }
+
+        public async Task<IActionResult> Sair()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login");
+        }
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {

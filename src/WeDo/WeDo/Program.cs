@@ -1,5 +1,6 @@
 using WeDo.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Registrando o serviço de email para injeção de dependência
 builder.Services.AddScoped<WeDo.Services.EmailService>();
+
+// --- ADICIONADO: Configuração do sistema de Cookies ---
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Usuarios/Login"; // Rota para onde o usuário vai se não estiver logado
+        options.AccessDeniedPath = "/Usuarios/Login";
+    });
+// -------------------------------------------------------
 
 var app = builder.Build();
 
@@ -26,6 +36,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// --- ADICIONADO: Ativação da Autenticação ---
+app.UseAuthentication(); // O sistema reconhece quem é o usuário
+// --------------------------------------------
+
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -34,6 +48,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

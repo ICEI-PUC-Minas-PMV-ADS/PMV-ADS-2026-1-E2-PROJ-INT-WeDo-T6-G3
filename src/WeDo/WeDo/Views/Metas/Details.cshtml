@@ -1,0 +1,77 @@
+﻿@model WeDo.Models.Meta
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Detalhes da Meta: @Model.Nome</h2>
+        <div>
+            <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-warning">Editar Meta</a>
+            <a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <p><strong>Categoria:</strong> @(Model.Categoria?.Nome ?? "Sem Categoria")</p>
+            <p><strong>Condição:</strong> @Model.Condicao</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Início:</strong> @Model.DataInicial.ToShortDateString()</p>
+            <p><strong>Término:</strong> @Model.DataFinal.ToShortDateString()</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Descrição:</strong> @Model.Descricao</p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h3>📌 Histórico de Atividades Diárias</h3>
+        <a asp-controller="AtividadesDiarias" asp-action="Registrar" class="btn btn-success btn-sm">
+            + Registrar Novo Progresso
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Data</th>
+                    <th>Título da Atividade</th>
+                    <th>Descrição/Relato</th>
+                    <th>Evidência (Foto)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AtividadesDiarias != null && Model.AtividadesDiarias.Any())
+                {
+                    @foreach (var atividade in Model.AtividadesDiarias.OrderByDescending(a => a.Data))
+                    {
+                        <tr>
+                            <td>@atividade.Data.ToShortDateString()</td>
+                            <td><strong>@atividade.Nome</strong></td>
+                            <td>@atividade.Descricao</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(atividade.UrlFoto))
+                                {
+                                    <a href="@atividade.UrlFoto" target="_blank" class="btn btn-sm btn-outline-info">Ver Foto</a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Sem foto</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            Nenhuma atividade registrada para esta meta até o momento.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

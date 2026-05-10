@@ -48,7 +48,7 @@ namespace WeDo.Models
             Dias = dias;
             Condicao = condicao;
         }
-        public ICollection<AtividadeDiaria> Atividadediaria  { get; set; }                   // Relacionamento um-para-muitos com a tabela de metas
+        public virtual ICollection<AtividadeDiaria> AtividadesDiarias  { get; set; }                   // Relacionamento um-para-muitos com a tabela de metas
 
     }
     public enum CondicaoMeta { Iniciada, EmAndamento, Concluida }

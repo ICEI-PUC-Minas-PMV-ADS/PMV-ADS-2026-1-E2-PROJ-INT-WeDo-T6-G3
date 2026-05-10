@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WeDo.Models.Meta>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gerenciar Minhas Metas</h2>
+        <a asp-action="Criar" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> + Nova Meta
+        </a>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label">Filtrar por Categoria</label>
+                
+                    <select name="categoriaId" class="form-select" asp-items="ViewBag.Categorias">
+                        <option value="">-- Todas as Categorias --</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-secondary w-100">Filtrar</button>
+                </div>
+                <div class="col-md-2">
+                    <a asp-action="Index" class="btn btn-outline-secondary w-100">Limpar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Meta</th>
+                <th>Categoria</th>
+                <th>Data Inicial</th>
+                <th>Previsão Término</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><strong>@item.Nome</strong></td>
+                    <td>
+                        <span class="badge bg-info text-dark">
+                            @item.Categoria?.Nome
+                        </span>
+                    </td>
+                    <td>@item.DataInicial.ToShortDateString()</td>
+                    <td>@item.DataFinal.ToShortDateString()</td>
+                    <td class="text-center">
+                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Ver</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

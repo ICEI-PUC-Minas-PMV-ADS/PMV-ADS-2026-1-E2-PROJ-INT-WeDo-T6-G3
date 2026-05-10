@@ -1,0 +1,20 @@
+﻿@model WeDo.Models.Categoria
+
+<div class="container mt-4">
+    <h2>Cadastrar Nova Categoria</h2>
+    <p class="text-muted">Crie uma classificação para suas metas (ex: Saúde, Estudos, Trabalho).</p>
+    <hr />
+
+    <form asp-action="Criar" method="post">
+        <div class="mb-3">
+            <label class="form-label">Nome da Categoria</label>
+            <input asp-for="Nome" class="form-control" placeholder="Ex: Finanças" required />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Salvar Categoria</button>
+            <a asp-controller="Metas" asp-action="Criar" class="btn btn-outline-secondary">Voltar</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+﻿@model WeDo.Models.Categoria
+
+<div class="container mt-4">
+    <h2>Editar Categoria</h2>
+    <hr />
+
+    <form asp-action="Editar" method="post">
+        @* IMPORTANTE: Campo oculto para o ID *@
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label class="form-label">Nome da Categoria</label>
+            <input asp-for="Nome" class="form-control" required />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Salvar Alterações</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

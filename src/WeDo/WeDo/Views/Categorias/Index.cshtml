@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WeDo.Models.Categoria>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Gerenciar Categorias</h2>
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Atenção!</strong> @TempData["Erro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <a asp-action="Criar" class="btn btn-primary"> + Nova Categoria</a>
+    </div>
+    <hr />
+
+    <table class="table table-hover mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Nome da Categoria</th>
+                <th class="text-end">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td class="text-end">
+                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarExclusaoCategoria(@item.Id)">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Metas" asp-action="Criar" class="btn btn-outline-secondary">Voltar para Metas</a>
+</div>
+
+@* Formulário Oculto para Exclusão *@
+<form id="formExcluirCat" asp-action="Excluir" method="post" style="display:none;">
+    <input type="hidden" name="id" id="categoriaIdExcluir" />
+</form>
+
+<script>
+    function confirmarExclusaoCategoria(id) {
+        if (confirm("Cuidado! Se você excluir esta categoria, as metas ligadas a ela podem dar erro. Deseja continuar?")) {
+            document.getElementById('categoriaIdExcluir').value = id;
+            document.getElementById('formExcluirCat').submit();
+        }
+    }
+</script>

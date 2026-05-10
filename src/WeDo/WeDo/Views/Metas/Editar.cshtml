@@ -1,0 +1,64 @@
+﻿@model WeDo.Models.Meta
+
+<div class="container mt-4">
+    <h2>Editar Meta</h2>
+    <p class="text-muted">Altere as informações do seu objetivo.</p>
+    <hr />
+
+    <form asp-action="Editar" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="IdUsuarioMeta" />
+
+        <div class="mb-3">
+            <label class="form-label">Título da Meta</label>
+            <input asp-for="Nome" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição / Detalhes</label>
+            <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select asp-for="IdCategoriaMeta" class="form-select" asp-items="ViewBag.IdCategoriaMeta">
+                <option value="">-- Selecione uma Categoria --</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Data Inicial</label>
+                <input asp-for="DataInicial" class="form-control" type="date" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Previsão de Término</label>
+                <input asp-for="DataFinal" class="form-control" type="date" />
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            
+           
+            <button type="button" class="btn btn-danger" onclick="confirmarExclusao()">
+                Excluir Meta
+            </button>
+
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    </form> 
+
+   
+    <form id="formExcluir" asp-action="Excluir" method="post" style="display:none;">
+        <input type="hidden" name="id" value="@Model.Id" />
+    </form>
+</div>
+
+<script>
+    function confirmarExclusao() {
+        if (confirm("Tem certeza que deseja apagar esta meta permanentemente?")) {
+            document.getElementById('formExcluir').submit();
+        }
+    }
+</script>

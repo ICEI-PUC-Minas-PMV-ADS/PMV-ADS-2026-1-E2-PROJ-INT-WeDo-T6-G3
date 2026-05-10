@@ -52,12 +52,12 @@ namespace WeDo.Controllers
             return View(await metasQuery.ToListAsync());
         }
 
-        // --- MÉTODO DETAILS ÚNICO E COMPLETO ---
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
 
-            // Aqui trazemos a Categoria (para o nome) E as AtividadesDiarias (para a lista)
+            
             var meta = await _context.Metas
                 .Include(m => m.Categoria)
                 .Include(m => m.AtividadesDiarias)

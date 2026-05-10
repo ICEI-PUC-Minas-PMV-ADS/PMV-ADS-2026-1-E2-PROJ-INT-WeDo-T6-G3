@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeDo.Models;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore; // IMPORTANTE: Adicione essa linha para o ToListAsync e FindAsync funcionarem
+using Microsoft.EntityFrameworkCore; 
 
 namespace WeDo.Controllers
 {
@@ -14,7 +14,7 @@ namespace WeDo.Controllers
             _context = context;
         }
 
-        // 1. LISTAGEM (Index)
+        
         public async Task<IActionResult> Index()
         {
             var categorias = await _context.Categorias.ToListAsync();
@@ -39,9 +39,9 @@ namespace WeDo.Controllers
             return View(categoria);
         }
 
-        // --- INÍCIO DA PARTE 2 (COLE ABAIXO) ---
+       
 
-        // 2. EDITAR (Abre a tela)
+        
         public async Task<IActionResult> Editar(int? id)
         {
             if (id == null) return NotFound();
@@ -52,7 +52,6 @@ namespace WeDo.Controllers
             return View(categoria);
         }
 
-        // 2. EDITAR (Salva as mudanças)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(int id, Categoria categoria)
@@ -68,17 +67,17 @@ namespace WeDo.Controllers
             return View(categoria);
         }
 
-        // 3. EXCLUIR
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Excluir(int id)
         {
-            // Verifica se existe alguma meta que usa essa categoria
+           
             bool possuiMetas = await _context.Metas.AnyAsync(m => m.IdCategoriaMeta == id);
 
             if (possuiMetas)
             {
-                // Se houver metas, cria um aviso para a tela
+               
                 TempData["Erro"] = "Não é possível excluir esta categoria pois existem metas vinculadas a ela. Exclua as metas primeiro.";
                 return RedirectToAction(nameof(Index));
             }
@@ -94,6 +93,6 @@ namespace WeDo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // --- FIM DA PARTE 2 ---
+      
     }
 }

@@ -14,10 +14,10 @@ namespace WeDo.Controllers
             _context = context;
         }
 
-        // GET: AtividadesDiarias/Registrar
+       
         public IActionResult Registrar()
         {
-            // Carrega a lista de metas para o usuário escolher uma no formulário
+            
             ViewBag.IdMeta = new SelectList(_context.Metas, "Id", "Nome");
             return View();
         }
@@ -31,7 +31,7 @@ namespace WeDo.Controllers
                 _context.Add(atividade);
                 await _context.SaveChangesAsync();
 
-                // Após registrar, você pode mandar ele para o Histórico ou para a lista de metas
+                
                 return RedirectToAction("Index", "Metas");
             }
 

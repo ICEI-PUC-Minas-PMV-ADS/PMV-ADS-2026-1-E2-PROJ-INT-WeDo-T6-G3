@@ -24,7 +24,11 @@ A tabela a seguir é um exemplo de como ela deverá ser preenchida considerando 
 |RF-001| A aplicação deve permitir que o usuário avalie uma agência de intercâmbio com base na sua experiência| |  |
 |RF-002| A aplicação deve permitir que o usuário inclua comentários ao fazer uma avaliação de uma agência de intercâmbio     |  |  |
 |RF-003| A aplicação deve permitir que o usuário consulte todas as agências de intercâmbio cadastradas ordenando-as com base em suas notas |  |  |
-
+|RF-005| Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. | Views/Metas | Nicolas Pereira Mendoza |
+|RF-006| Definir título, descrição, categoria e prazo para cada meta cadastrada. | Views/Metas/Criar | Nicolas Pereira Mendoza |
+|RF-008| Gerenciar categorias para organização das metas | Views/Categoria | Nicolas Pereira Mendoza |
+|RF-010| Gerenciar categorias para controle das metas. | Views/Categoria/Editar | Nicolas Pereira Mendoza |
+|RF-012| Anexar imagens como comprovação de progresso das metas | Views/Metas/Criar | Nicolas Pereira Mendoza |
 
 # Instruções de acesso
 

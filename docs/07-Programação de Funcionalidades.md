@@ -27,6 +27,7 @@ A tabela a seguir é um exemplo de como ela deverá ser preenchida considerando 
 |RF-005| Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. | Views/Metas | Nicolas Pereira Mendoza |
 |RF-006| Definir título, descrição, categoria e prazo para cada meta cadastrada. | Views/Metas/Criar | Nicolas Pereira Mendoza |
 |RF-008| Gerenciar categorias para organização das metas | Views/Categoria | Nicolas Pereira Mendoza |
+|RF-009| Visualizar painel de evolução com resumo das metas, histórico de progresso e notificações | Views/Metas/Historico | Carla Rodrigues Castelo |
 |RF-010| Gerenciar categorias para controle das metas. | Views/Categoria/Editar | Nicolas Pereira Mendoza |
 |RF-012| Anexar imagens como comprovação de progresso das metas | Views/Metas/Criar | Nicolas Pereira Mendoza |
 

@@ -5,6 +5,7 @@ using WeDo.Services;
 using Microsoft.AspNetCore.Authentication; // ADICIONADO
 using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
 using System.Security.Claims; // ADICIONADO
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeDo.Controllers
 {
@@ -318,6 +319,115 @@ namespace WeDo.Controllers
         private bool UsuarioExists(int id)
         {
             return _context.Usuarios.Any(e => e.Id == id);
+        }
+
+        //=================== Configurações de Perfil (RF-004) ===================//
+
+        // Recupera o usuário autenticado a partir do claim NameIdentifier definido no Login.
+        private async Task<Usuario> ObterUsuarioLogadoAsync()
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(idClaim, out var id)) return null;
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Perfil()
+        {
+            var usuario = await ObterUsuarioLogadoAsync();
+            if (usuario == null) return RedirectToAction("Login");
+            return View(usuario);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Perfil(string nome, string apelido, string email, string descricao, string urlFoto)
+        {
+            var usuario = await ObterUsuarioLogadoAsync();
+            if (usuario == null) return RedirectToAction("Login");
+
+            // Normaliza entradas: remove espaços extras que costumam quebrar comparações posteriores (login por email).
+            nome = nome?.Trim();
+            apelido = apelido?.Trim();
+            email = email?.Trim();
+            descricao = descricao?.Trim();
+            urlFoto = urlFoto?.Trim();
+
+            // Aplica os valores ao model em memória ANTES das validações para que, em caso de erro,
+            // a view re-renderize exibindo o que o usuário acabou de digitar (não o que estava no banco).
+            usuario.Nome = nome;
+            usuario.Apelido = apelido;
+            usuario.Email = email;
+            usuario.Descricao = descricao;
+            usuario.UrlFoto = urlFoto;
+
+            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(email))
+            {
+                ViewBag.Error = "Nome e e-mail são obrigatórios.";
+                return View(usuario);
+            }
+
+            if (!new System.ComponentModel.DataAnnotations.EmailAddressAttribute().IsValid(email))
+            {
+                ViewBag.Error = "Informe um e-mail em formato válido.";
+                return View(usuario);
+            }
+
+            // Bloqueia troca de e-mail para um já cadastrado por outro usuário
+            if (_context.Usuarios.Any(u => u.Email == email && u.Id != usuario.Id))
+            {
+                ViewBag.Error = "Este e-mail já está em uso por outra conta.";
+                return View(usuario);
+            }
+
+            _context.Update(usuario);
+            await _context.SaveChangesAsync();
+
+            // Atualiza o cookie de autenticação para refletir nome/email novos
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, usuario.Nome),
+                new Claim(ClaimTypes.Email, usuario.Email),
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString())
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+            ViewBag.Success = "Perfil atualizado com sucesso!";
+            return View(usuario);
+        }
+
+        //=================== Configurações Gerais (RF-013) ===================//
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Configuracoes()
+        {
+            var usuario = await ObterUsuarioLogadoAsync();
+            if (usuario == null) return RedirectToAction("Login");
+            return View(usuario);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Configuracoes(Idioma idioma, Tema tema, bool notificacoesEmail, bool notificacoesPush)
+        {
+            var usuario = await ObterUsuarioLogadoAsync();
+            if (usuario == null) return RedirectToAction("Login");
+
+            usuario.Idioma = idioma;
+            usuario.Tema = tema;
+            usuario.NotificacoesEmail = notificacoesEmail;
+            usuario.NotificacoesPush = notificacoesPush;
+
+            _context.Update(usuario);
+            await _context.SaveChangesAsync();
+
+            ViewBag.Success = "Configurações salvas com sucesso!";
+            return View(usuario);
         }
     }
 }

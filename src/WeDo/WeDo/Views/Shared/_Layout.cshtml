@@ -1,5 +1,40 @@
-﻿<!DOCTYPE html>
+@using Microsoft.EntityFrameworkCore
+@using System.Security.Claims
+@using WeDo.Models
+@inject AppDbContext DbContext
+
+@{
+    // Aplica o tema preferido do usuário logado (RF-013).
+    // Falha silenciosamente para não derrubar o layout se o banco estiver indisponível.
+    string bodyClass = "";
+
+    if (User?.Identity?.IsAuthenticated == true)
+    {
+        try
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (int.TryParse(idClaim, out var idUsuario))
+            {
+                var temaUsuario = await DbContext.Usuarios
+                    .Where(u => u.Id == idUsuario)
+                    .Select(u => (Tema?)u.Tema)
+                    .FirstOrDefaultAsync();
+
+                if (temaUsuario == Tema.Escuro)
+                    bodyClass = "tema-escuro";
+            }
+        }
+        catch
+        {
+            // Mantém tema claro como fallback
+        }
+    }
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +45,7 @@
     <link rel="stylesheet" href="~/WeDo.styles.css" asp-append-version="true" />
 </head>
 
-<body>
+<body class="@bodyClass">
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -84,6 +119,7 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2026 - WeDo -
+
             <a asp-area=""
                    asp-controller="Home"
                    asp-action="Privacy">

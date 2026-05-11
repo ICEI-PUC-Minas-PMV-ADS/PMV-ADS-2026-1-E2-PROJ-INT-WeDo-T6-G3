@@ -1,5 +1,33 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+@using Microsoft.EntityFrameworkCore
+@using System.Security.Claims
+@using WeDo.Models
+@inject AppDbContext DbContext
+@{
+    // Aplica o tema preferido do usuário logado (RF-013).
+    // Falha silenciosamente para não derrubar o layout se o banco estiver indisponível.
+    string bodyClass = "";
+    if (User?.Identity?.IsAuthenticated == true)
+    {
+        try
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (int.TryParse(idClaim, out var idUsuario))
+            {
+                var temaUsuario = await DbContext.Usuarios
+                    .Where(u => u.Id == idUsuario)
+                    .Select(u => (Tema?)u.Tema)
+                    .FirstOrDefaultAsync();
+                if (temaUsuario == Tema.Escuro) bodyClass = "tema-escuro";
+            }
+        }
+        catch
+        {
+            // Mantém tema claro como fallback
+        }
+    }
+}
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,11 +37,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WeDo.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="@bodyClass">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WeDo</a>
+                <a class="navbar-brand navbar-brand-wedo" asp-area="" asp-controller="Home" asp-action="Index">WeDo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,9 +51,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Perfil">Meu Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Configuracoes">Configurações</a>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-muted">Olá, @User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Sair">Sair</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Login">Entrar</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -1,3 +1,14 @@
+:root {
+  --wedo-green: #147A3B;
+  --wedo-green-dark: #0F5C2C;
+  --wedo-green-light: #E8F5EE;
+  --wedo-text: #212529;
+  --wedo-muted: #6c757d;
+  --wedo-bg: #f7f9f7;
+  --wedo-card-bg: #ffffff;
+  --wedo-border: #e2e8e4;
+}
+
 html {
   font-size: 14px;
 }
@@ -9,7 +20,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.2rem var(--wedo-green);
 }
 
 html {
@@ -19,6 +30,8 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: var(--wedo-bg);
+  color: var(--wedo-text);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +41,214 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+/* ===== Identidade visual WeDo ===== */
+.navbar-brand-wedo {
+  color: var(--wedo-green) !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.btn-wedo {
+  background-color: var(--wedo-green);
+  color: #fff;
+  border: 1px solid var(--wedo-green);
+  font-weight: 600;
+}
+
+.btn-wedo:hover, .btn-wedo:focus {
+  background-color: var(--wedo-green-dark);
+  border-color: var(--wedo-green-dark);
+  color: #fff;
+}
+
+.btn-wedo-outline {
+  background-color: transparent;
+  color: var(--wedo-green);
+  border: 1px solid var(--wedo-green);
+  font-weight: 600;
+}
+
+.btn-wedo-outline:hover {
+  background-color: var(--wedo-green);
+  color: #fff;
+}
+
+/* ===== Páginas de Configuração ===== */
+.config-wrapper {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.config-card {
+  background: var(--wedo-card-bg);
+  border: 1px solid var(--wedo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(20, 122, 59, 0.04);
+}
+
+@media (max-width: 576px) {
+  .config-wrapper {
+    margin: 1rem auto;
+    padding: 0 0.5rem;
+  }
+  .config-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+  .config-card h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.config-card h1 {
+  color: var(--wedo-green);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.config-subtitle {
+  color: var(--wedo-muted);
+  margin-bottom: 2rem;
+}
+
+.config-section {
+  border-top: 1px solid var(--wedo-border);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.config-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.config-section h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--wedo-green-dark);
+  margin-bottom: 1rem;
+}
+
+.config-section .description {
+  font-size: 0.9rem;
+  color: var(--wedo-muted);
+  margin-bottom: 1rem;
+}
+
+.foto-perfil {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid var(--wedo-green-light);
+  object-fit: cover;
+  background-color: var(--wedo-green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wedo-green);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--wedo-green);
+  box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.15);
+}
+
+.form-check-input:checked {
+  background-color: var(--wedo-green);
+  border-color: var(--wedo-green);
+}
+
+.link-senha {
+  color: var(--wedo-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-senha:hover {
+  color: var(--wedo-green-dark);
+  text-decoration: underline;
+}
+
+/* ===== Tema escuro ===== */
+body.tema-escuro {
+  --wedo-bg: #1a1d1b;
+  --wedo-card-bg: #25292a;
+  --wedo-border: #3a3f3c;
+  --wedo-text: #e8eae9;
+  --wedo-muted: #a0a8a4;
+  background-color: var(--wedo-bg);
+  color: var(--wedo-text);
+}
+
+body.tema-escuro .navbar {
+  background-color: #25292a !important;
+  border-color: #3a3f3c !important;
+}
+
+body.tema-escuro .nav-link {
+  color: var(--wedo-text) !important;
+}
+
+body.tema-escuro .form-control,
+body.tema-escuro .form-select {
+  background-color: #1a1d1b;
+  border-color: var(--wedo-border);
+  color: var(--wedo-text);
+}
+
+body.tema-escuro .config-card {
+  background: var(--wedo-card-bg);
+  border-color: var(--wedo-border);
+}
+
+body.tema-escuro .footer,
+body.tema-escuro .text-muted,
+body.tema-escuro .footer .text-muted {
+  color: var(--wedo-muted) !important;
+  border-color: var(--wedo-border) !important;
+}
+
+body.tema-escuro .btn-wedo-outline {
+  color: #4ea670;
+  border-color: #4ea670;
+  background-color: transparent;
+}
+
+body.tema-escuro .btn-wedo-outline:hover {
+  background-color: var(--wedo-green);
+  color: #fff;
+}
+
+body.tema-escuro .foto-perfil {
+  background-color: #2d4a38;
+  color: #6cc88a;
+  border-color: #2d4a38;
+}
+
+body.tema-escuro .form-control::placeholder {
+  color: #7a8580;
+  opacity: 1;
+}
+
+body.tema-escuro .form-control:focus,
+body.tema-escuro .form-select:focus {
+  background-color: #1a1d1b;
+  color: var(--wedo-text);
+  border-color: var(--wedo-green);
+  box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.35);
+}
+
+body.tema-escuro .config-section .description {
+  color: #b0b8b4;
+}
+
+body.tema-escuro .form-label {
+  color: var(--wedo-text);
 }

@@ -21,8 +21,8 @@ A tabela a seguir é um exemplo de como ela deverá ser preenchida considerando 
 
 |ID    | Descrição do Requisito  | Artefatos produzidos | Aluno(a) responsável |
 |------|-----------------------------------------|----|----|
-|RF-001| A aplicação deve permitir que o usuário avalie uma agência de intercâmbio com base na sua experiência| |  |
-|RF-002| A aplicação deve permitir que o usuário inclua comentários ao fazer uma avaliação de uma agência de intercâmbio     |  |  |
+|RF-001| Cadastrar usuários informando nome, e-mail e senha.|Controllers/Usuarios |Evellyn Maia da Conceição |
+|RF-002| Autenticar usuários por meio de login no sistema. | Views/Login  |Evellyn Maia da Conceição  |
 |RF-003| A aplicação deve permitir que o usuário consulte todas as agências de intercâmbio cadastradas ordenando-as com base em suas notas |  |  |
 |RF-005| Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. | Views/Metas | Nicolas Pereira Mendoza |
 |RF-006| Definir título, descrição, categoria e prazo para cada meta cadastrada. | Views/Metas/Criar | Nicolas Pereira Mendoza |

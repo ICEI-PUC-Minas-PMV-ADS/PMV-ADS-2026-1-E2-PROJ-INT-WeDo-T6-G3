@@ -23,7 +23,7 @@ A tabela a seguir é um exemplo de como ela deverá ser preenchida considerando 
 |------|-----------------------------------------|----|----|
 |RF-001| Cadastrar usuários informando nome, e-mail e senha.|Controllers/Usuarios |Evellyn Maia da Conceição |
 |RF-002| Autenticar usuários por meio de login no sistema. | Views/Login  |Evellyn Maia da Conceição  |
-|RF-003| A aplicação deve permitir que o usuário consulte todas as agências de intercâmbio cadastradas ordenando-as com base em suas notas |  |  |
+|RF-003|Recuperar senha por meio de redefinição de senha. |Usuários/Meta Controllers/ EmailService/ Model/Meta/Usuário,Categoria   |Diego Parreiras Andrade  |
 |RF-005| Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. | Views/Metas | Nicolas Pereira Mendoza |
 |RF-006| Definir título, descrição, categoria e prazo para cada meta cadastrada. | Views/Metas/Criar | Nicolas Pereira Mendoza |
 |RF-008| Gerenciar categorias para organização das metas | Views/Categoria | Nicolas Pereira Mendoza |

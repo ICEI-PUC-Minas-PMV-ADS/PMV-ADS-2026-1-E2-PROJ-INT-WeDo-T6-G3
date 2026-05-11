@@ -11,6 +11,6 @@ namespace WeDo.Models
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Meta> Metas { get; set; }
         public DbSet<AtividadeDiaria> AtividadesDiarias { get; set; }
-
+        public DbSet<Notificacao> Notificacoes { get; set; }
     }
 }

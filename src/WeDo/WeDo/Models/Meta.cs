@@ -22,7 +22,7 @@ namespace WeDo.Models
         [Required(ErrorMessage = "O nome da meta é obrigatório.")]       // Validação de campo obrigatório
         public string Nome { get; set; }
 
-        [Display(Name= "Descrição")]                                
+        [Display(Name= "Descrição")]             
         public string Descricao { get; set; }
 
         [Display(Name = "Data de Inicio")]                         // Exibe um rótulo personalizado para o campo
@@ -31,13 +31,22 @@ namespace WeDo.Models
         [Display(Name = "Data de Término")]
         public DateTime DataFinal { get; set; }
 
-        public DiasDaSemana Dias { get; set; }                     // Dias Da semana para caso seja exibida diariamente
 
         [Display(Name = "Condição")]
         public CondicaoMeta Condicao { get; set; }                 // Condição da meta (Pendente ou Concluída)
         
+        public bool Domingo { get; set; }
+        public bool Segunda { get; set; }
+        public bool Terca { get; set; }
+        public bool Quarta { get; set; }
+        public bool Quinta { get; set; }
+        public bool Sexta { get; set; }
+        public bool Sabado { get; set; }
+
         public Meta() { }                                          // Construtor padrão
-        public Meta(int idUsuarioMeta,int idCategoriaMeta, string nome, string descricao, DateTime dataInicial, DateTime dataFinal, DiasDaSemana dias, CondicaoMeta condicao)
+
+        public Meta(int idUsuarioMeta, int idCategoriaMeta, string nome, string descricao, DateTime dataInicial, DateTime dataFinal, CondicaoMeta condicao,
+            bool domingo, bool segunda, bool terca, bool quarta, bool quinta, bool sexta, bool sabado)
         {
             IdUsuarioMeta = idUsuarioMeta;
             IdCategoriaMeta = idCategoriaMeta;
@@ -45,13 +54,18 @@ namespace WeDo.Models
             Descricao = descricao;
             DataInicial = dataInicial;
             DataFinal = dataFinal;
-            Dias = dias;
             Condicao = condicao;
+            Domingo = domingo;
+            Segunda = segunda;
+            Terca = terca;
+            Quarta = quarta;
+            Quinta = quinta;
+            Sexta = sexta;
+            Sabado = sabado;
         }
         public virtual ICollection<AtividadeDiaria> AtividadesDiarias  { get; set; }                   // Relacionamento um-para-muitos com a tabela de metas
 
     }
     public enum CondicaoMeta { Iniciada, EmAndamento, Concluida }
-    public enum DiasDaSemana { Segunda, Terca, Quarta, Quinta, Sexta, Sabado, Domingo }
 
 }

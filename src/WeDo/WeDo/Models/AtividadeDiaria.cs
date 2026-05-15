@@ -13,7 +13,7 @@ namespace WeDo.Models
 		
 		public int IdMeta { get; set; }                           // Chave estrangeira para a meta associada à atividade diária
         [ForeignKey("IdMeta")]                                    // Chave estrangeira para a tabela de metas
-		public Meta Meta { get; set; }                         // Relacionamento com a tabela de metas
+		public Meta Meta { get; set; }                            // Relacionamento com a tabela de metas
 
 		[Required(ErrorMessage = "O nome da atividade é obrigatório.")]
 		public string Nome { get; set; }
@@ -33,6 +33,9 @@ namespace WeDo.Models
 			Data = data;
 			UrlFoto = urlFoto;
 		}
+		[Display(Name = "Status da Atividade")]
+        public StatusAtividade Status { get; set; } = StatusAtividade.Pendente;          // Ja nasce com o status Pendente, podendo ser atualizado para ParcialmenteConcluida ou Concluida conforme o progresso da atividade
 
-	}
+    }
+	public enum StatusAtividade { Pendente, ParcialmenteConcluida, Concluida }
 }

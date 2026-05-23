@@ -18,11 +18,17 @@ namespace WeDo.Controllers
             DateTime dataHoje = DateTime.Today;
             DayOfWeek diaDaSemana = dataHoje.DayOfWeek;
 
-            var atvDiaria = _context.Metas.Where(m => m.IdUsuarioMeta == usuarioLogado                // quebrada ainda, vou continuar daqui
+              var atvDiaria = await _context.Metas.Where(m => m.IdUsuarioMeta == usuarioLogado
                                                  && m.Condicao != CondicaoMeta.Concluida
                                                  && dataHoje <= m.DataFinal
-                                                 && diaDaSemana == m.Condicao.CompareTo(1);
-
+                                                 && (diaDaSemana == DayOfWeek.Monday && m.Segunda
+                                                 || diaDaSemana == DayOfWeek.Tuesday && m.Terca
+                                                 || diaDaSemana == DayOfWeek.Wednesday && m.Quarta
+                                                 || diaDaSemana == DayOfWeek.Thursday && m.Quinta
+                                                 || diaDaSemana == DayOfWeek.Friday && m.Sexta
+                                                 || diaDaSemana == DayOfWeek.Saturday && m.Sabado
+                                                 || diaDaSemana == DayOfWeek.Sunday && m.Domingo)
+            ).ToListAsync();
             return View();
         }
 

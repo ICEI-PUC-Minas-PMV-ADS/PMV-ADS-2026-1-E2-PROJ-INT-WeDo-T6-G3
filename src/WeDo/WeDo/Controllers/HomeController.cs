@@ -37,6 +37,7 @@ namespace WeDo.Controllers
                 var modelo = new DashboardViewModel
                 {
                     // setando os valores no modelo a ser exibido na view
+                    MetaId = atv.Id,
                     NomeMetaPai = atv.Nome,
                     NomeAtividade = atv.Nome,
                     DescricaoAtividade = atv.Descricao,
@@ -53,6 +54,49 @@ namespace WeDo.Controllers
             }
             return View(listaAtvDiaria);
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Atualizar(List<DashboardViewModel> listaAtvDiaria)
+        {
+            if (listaAtvDiaria == null || !listaAtvDiaria.Any())
+                return RedirectToAction(nameof(Index));
+
+            foreach (var item in listaAtvDiaria)
+            {
+                // Se a atividade não existe (Id == 0) e continua pendente, ignoramos para não sujar o banco
+                if (item.AtividadeId == 0 && item.StatusHoje == StatusAtividade.Pendente)
+                    continue;
+
+                if (item.AtividadeId == 0)
+                {
+                    // O "Fantasma" virou real: Usuário marcou como Concluída/Cancelada
+                    var novaAtividade = new AtividadeDiaria
+                    {
+                        IdMeta = item.MetaId,
+                        Nome = item.NomeAtividade,
+                        Descricao = item.DescricaoAtividade,
+                        Data = DateTime.Today,
+                        Status = item.StatusHoje
+                    };
+                    _context.AtividadesDiarias.Add(novaAtividade);
+                }
+                else
+                {
+                    // A atividade já existia hoje: Apenas atualizamos o status
+                    var atividadeExistente = await _context.AtividadesDiarias.FindAsync(item.AtividadeId);
+                    if (atividadeExistente != null)
+                    {
+                        atividadeExistente.Status = item.StatusHoje;
+                        _context.Update(atividadeExistente);
+                    }
+                }
+            }
+
+            // Salva tudo de uma vez só no banco!
+            await _context.SaveChangesAsync();
+
+            // Recarrega a tela inicial
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

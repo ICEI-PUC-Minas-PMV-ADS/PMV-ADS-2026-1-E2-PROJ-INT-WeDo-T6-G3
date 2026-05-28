@@ -8,7 +8,8 @@ namespace WeDo.Models.ViewModels
     //ela nao tem uma tabela no banco de dados, é apenas um modelo para passar os dados para a view
     public class DashboardViewModel
     {
-
+        public int MetaId { get; set; } 
+      
         public int AtividadeId { get; set; }
         public string NomeAtividade { get; set; }
         public string DescricaoAtividade { get; set; }

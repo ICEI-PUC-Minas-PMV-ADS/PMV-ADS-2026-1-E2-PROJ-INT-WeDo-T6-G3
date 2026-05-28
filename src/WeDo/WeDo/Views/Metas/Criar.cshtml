@@ -22,7 +22,7 @@
                 <select asp-for="IdCategoriaMeta" class="form-select" asp-items="ViewBag.IdCategoriaMeta">
                     <option value="">-- Selecione uma Categoria --</option>
                 </select>
-        
+
                 @* Botão que força a navegação via JavaScript se o link falhar *@
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/Categorias/Criar'">
                     + Nova
@@ -31,15 +31,57 @@
             <span asp-validation-for="IdCategoriaMeta" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label>Data Inicial</label>
             <input asp-for="DataInicial" class="form-control" type="date" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label>Previsão de Término</label>
             <input asp-for="DataFinal" class="form-control" type="date" />
         </div>
+
+        <!-- INÍCIO DA NOVA SEÇÃO DE DIAS DA SEMANA -->
+        <div class="form-check form-switch mb-3 mt-4">
+            <input class="form-check-input" type="checkbox" id="chkAtividadeDiaria" onchange="toggleDiasSemana()" style="cursor: pointer;">
+            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">Registrar atividade recorrente?</label>
+        </div>
+
+        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: none; background-color: #f8f9fa;">
+            <label class="form-label fw-bold mb-3">Quais dias da semana?</label>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Domingo" />
+                    <label class="form-check-label" asp-for="Domingo">Dom</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Segunda" />
+                    <label class="form-check-label" asp-for="Segunda">Seg</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Terca" />
+                    <label class="form-check-label" asp-for="Terca">Ter</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Quarta" />
+                    <label class="form-check-label" asp-for="Quarta">Qua</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Quinta" />
+                    <label class="form-check-label" asp-for="Quinta">Qui</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Sexta" />
+                    <label class="form-check-label" asp-for="Sexta">Sex</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Sabado" />
+                    <label class="form-check-label" asp-for="Sabado">Sáb</label>
+                </div>
+            </div>
+        </div>
+        <!-- FIM DA NOVA SEÇÃO -->
+
         <input type="hidden" asp-for="IdUsuarioMeta" value="1" />
 
         <div class="mt-4">
@@ -48,3 +90,21 @@
         </div>
     </form>
 </div>
+
+<!-- Script para a animação de esconder/mostrar -->
+<script>
+    function toggleDiasSemana() {
+        var chk = document.getElementById("chkAtividadeDiaria");
+        var div = document.getElementById("divDiasSemana");
+
+        if (chk.checked) {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+            // Se o usuário desmarcar a caixa principal, nós desmarcamos todos os dias para não salvar lixo no banco
+            document.querySelectorAll('#divDiasSemana .form-check-input').forEach(function(el) {
+                el.checked = false;
+            });
+        }
+    }
+</script>

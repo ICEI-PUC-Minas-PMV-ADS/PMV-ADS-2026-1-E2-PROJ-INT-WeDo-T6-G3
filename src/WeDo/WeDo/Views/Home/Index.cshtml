@@ -4,33 +4,283 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div>
-    <form asp-action="Atualizar" asp-controller="Home" method="post">
+<style>
+    /* Estilos específicos da Dashboard */
+    .dashboard-title {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: bold;
+        color: var(--wedo-text);
+        margin-bottom: 1.5rem;
+    }
 
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <div class="mb-3 p-3 border rounded">
-                <h3>@Model[i].NomeMetaPai</h3>
-                <p>@Model[i].DescricaoAtividade</p>
-                <p>@Model[i].NomeAtividade</p>
+    /* Lista lateral de atividades */
+    .task-list-btn {
+        text-align: left;
+        border-radius: 20px !important;
+        padding: 12px 20px;
+        margin-bottom: 10px;
+        color: var(--wedo-text);
+        background-color: transparent;
+        border: none;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s;
+        width: 100%;
+    }
 
-                <input type="hidden" asp-for="@Model[i].AtividadeId" />
-                <input type="hidden" asp-for="@Model[i].MetaId" /> <input type="hidden" asp-for="@Model[i].NomeMetaPai" />
-                <input type="hidden" asp-for="@Model[i].AtividadeId" />
-                <input type="hidden" asp-for="@Model[i].NomeMetaPai" />
-                <input type="hidden" asp-for="@Model[i].DescricaoAtividade" />
-                <input type="hidden" asp-for="@Model[i].NomeAtividade" />
-
-                <label>Status de Hoje:</label>
-                <select asp-for="@Model[i].StatusHoje" class="form-select">
-                    <option value="0">Pendente</option>
-                    <option value="1">Concluída</option>
-                    <option value="2">Cancelada</option>
-                </select>
-            </div>
+        .task-list-btn:hover {
+            background-color: var(--wedo-green-light);
         }
 
-        <button type="submit" class="btn btn-success mt-4">Confirmar Tudo</button>
+        .task-list-btn.active {
+            background-color: var(--wedo-active-menu) !important;
+            color: #000 !important;
+            font-weight: 500;
+        }
 
+    /* === O SEGREDO DO VISUAL DE CONCLUÍDO === */
+    .task-completed {
+        text-decoration: line-through;
+        opacity: 0.5;
+    }
+
+    /* Bolinhas de status na lista lateral */
+    .status-dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .dot-pendente {
+        background-color: #f6c278;
+    }
+    /* Laranja */
+    .dot-concluida {
+        background-color: #6cc88a;
+    }
+    /* Verde */
+    .dot-cancelada {
+        background-color: #ff6b6b;
+    }
+    /* Vermelho */
+
+    /* Painel direito de detalhes */
+    .task-details-panel {
+        background-color: var(--wedo-bg);
+        border-radius: 20px;
+        padding: 40px;
+        min-height: 400px;
+        position: relative;
+        border: 1px solid var(--wedo-border);
+    }
+
+    .task-details-title {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .task-details-desc {
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--wedo-muted);
+        margin-bottom: 3rem;
+    }
+
+    /* Customização dos Radio Buttons */
+    .custom-radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .custom-radio-label {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--wedo-text);
+    }
+
+    .custom-radio-input {
+        display: none;
+    }
+
+    .custom-radio-box {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #000;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    /* Agora o CSS lê a palavra exata do Enum gerado pelo C# */
+    .custom-radio-input[value="Concluida"] + .custom-radio-box {
+        background-color: #6cc88a;
+    }
+
+    .custom-radio-input[value="Pendente"] + .custom-radio-box {
+        background-color: #f6c278;
+    }
+
+    .custom-radio-input[value="Cancelada"] + .custom-radio-box {
+        background-color: #ff6b6b;
+    }
+
+    .custom-radio-box i {
+        color: transparent;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .custom-radio-input:checked + .custom-radio-box i {
+        color: #000;
+    }
+
+    .task-meta-info {
+        position: absolute;
+        bottom: 40px;
+        font-style: italic;
+        color: var(--wedo-muted);
+    }
+</style>
+
+<div class="container-fluid p-0">
+    <!-- Feedback visual global quando salva -->
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Mensagem"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <form asp-action="Atualizar" asp-controller="Home" method="post">
+        <div class="row">
+            <!-- ================= COLUNA ESQUERDA: LISTA ================= -->
+            <div class="col-md-5 pe-md-5">
+                <h2 class="dashboard-title">O que fazer hoje? <i class="bi bi-pencil fs-4 ms-2"></i></h2>
+
+                <div class="nav flex-column nav-pills mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var isActive = i == 0 ? "active" : "";
+                        var statusDotClass = Model[i].StatusHoje == WeDo.Models.StatusAtividade.Concluida ? "dot-concluida" :
+                                             Model[i].StatusHoje == WeDo.Models.StatusAtividade.Pendente ? "dot-pendente" : "dot-cancelada";
+
+                        // Se vier do banco como concluída/cancelada, já aplica o efeito de riscado
+                        var isCompletedClass = Model[i].StatusHoje != WeDo.Models.StatusAtividade.Pendente ? "task-completed" : "";
+
+                        <button class="task-list-btn @isActive @isCompletedClass" id="v-pills-tab-@i" data-bs-toggle="pill" data-bs-target="#v-pills-pane-@i" type="button" role="tab" aria-controls="v-pills-pane-@i" aria-selected="@(i == 0 ? "true" : "false")">
+                            <span class="status-dot @statusDotClass"></span>
+                            @Model[i].NomeAtividade
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <!-- ================= COLUNA DIREITA: DETALHES ================= -->
+            <div class="col-md-7 mt-4 mt-md-0">
+                <div class="tab-content" id="v-pills-tabContent">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var isActive = i == 0 ? "show active" : "";
+
+                        <div class="tab-pane fade @isActive" id="v-pills-pane-@i" role="tabpanel" aria-labelledby="v-pills-tab-@i" tabindex="0">
+
+                            <div class="task-details-panel shadow-sm">
+                                <input type="hidden" asp-for="@Model[i].AtividadeId" />
+                                <input type="hidden" asp-for="@Model[i].MetaId" />
+                                <input type="hidden" asp-for="@Model[i].NomeMetaPai" />
+                                <input type="hidden" asp-for="@Model[i].DescricaoAtividade" />
+                                <input type="hidden" asp-for="@Model[i].NomeAtividade" />
+
+                                <h3 class="task-details-title">@Model[i].NomeAtividade</h3>
+                                <p class="task-details-desc">@Model[i].DescricaoAtividade</p>
+
+                                <div class="mb-4">
+                                    <p class="font-serif fs-5 mb-3">Status:</p>
+                                    <div class="custom-radio-group">
+                                        <!-- Forçando o valor exato do Enum -->
+                                        <label class="custom-radio-label">
+                                            <input type="radio" asp-for="@Model[i].StatusHoje" value="@(WeDo.Models.StatusAtividade.Concluida.ToString())" class="custom-radio-input" />
+                                            <div class="custom-radio-box"><i class="bi bi-check"></i></div>
+                                            Concluído
+                                        </label>
+
+                                        <label class="custom-radio-label">
+                                            <input type="radio" asp-for="@Model[i].StatusHoje" value="@(WeDo.Models.StatusAtividade.Pendente.ToString())" class="custom-radio-input" />
+                                            <div class="custom-radio-box"><i class="bi bi-check"></i></div>
+                                            Pendente
+                                        </label>
+
+                                        <label class="custom-radio-label">
+                                            <input type="radio" asp-for="@Model[i].StatusHoje" value="@(WeDo.Models.StatusAtividade.Cancelada.ToString())" class="custom-radio-input" />
+                                            <div class="custom-radio-box"><i class="bi bi-check"></i></div>
+                                            Não concluído
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="task-meta-info">
+                                    Meta: @Model[i].NomeMetaPai
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-wedo px-5 py-2 fs-5 rounded-pill shadow-sm">Confirmar Tudo</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
+
+<!-- Script atualizado para refletir o clique na hora -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const radios = document.querySelectorAll('.custom-radio-input');
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const name = this.name;
+                const match = name.match(/\[(\d+)\]/);
+                if (match) {
+                    const index = match[1];
+                    const valor = this.value;
+                    const btnElement = document.getElementById('v-pills-tab-' + index);
+                    const dot = btnElement.querySelector('.status-dot');
+
+                    // Limpa as classes
+                    dot.classList.remove('dot-concluida', 'dot-pendente', 'dot-cancelada');
+
+                    // Aplica cores e risco no texto baseado no Enum
+                    if (valor === "Concluida") {
+                        dot.classList.add('dot-concluida');
+                        btnElement.classList.add('task-completed');
+                    }
+                    else if (valor === "Pendente") {
+                        dot.classList.add('dot-pendente');
+                        btnElement.classList.remove('task-completed');
+                    }
+                    else if (valor === "Cancelada") {
+                        dot.classList.add('dot-cancelada');
+                        btnElement.classList.add('task-completed');
+                    }
+                }
+            });
+        });
+    });
+</script>

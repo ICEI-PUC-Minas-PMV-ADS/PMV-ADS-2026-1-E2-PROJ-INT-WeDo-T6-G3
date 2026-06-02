@@ -5,37 +5,44 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WeDo.Models
 {
-	[Table("AtividadesDiarias")]
-	public class AtividadeDiaria
-	{
-		[Key]
-		public int Id { get; set; }
-		
-		public int IdMeta { get; set; }                           // Chave estrangeira para a meta associada à atividade diária
-        [ForeignKey("IdMeta")]                                    // Chave estrangeira para a tabela de metas
-		public Meta Meta { get; set; }                            // Relacionamento com a tabela de metas
+    [Table("AtividadesDiarias")]
+    public class AtividadeDiaria
+    {
+        [Key]
+        public int Id { get; set; }
 
-		[Required(ErrorMessage = "O nome da atividade é obrigatório.")]
-		public string Nome { get; set; }
+        public int IdMeta { get; set; }
+        [ForeignKey("IdMeta")]
+        public Meta Meta { get; set; }
 
-		[Display(Name = "Descrição")]
-		public string Descricao { get; set; }
+        [Required(ErrorMessage = "O nome da atividade é obrigatório.")]
+        public string Nome { get; set; }
 
-		public DateTime Data { get; set; }
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
 
-		public string UrlFoto { get; set; }
+        public DateTime Data { get; set; }
+
+        public string UrlFoto { get; set; }
 
         public AtividadeDiaria() { }
-		public AtividadeDiaria(string nome, string descricao, DateTime data, string urlFoto)
-		{
-			Nome = nome;
-			Descricao = descricao;
-			Data = data;
-			UrlFoto = urlFoto;
-		}
-		[Display(Name = "Status da Atividade")]
-        public StatusAtividade Status { get; set; } = StatusAtividade.Pendente;          // Ja nasce com o status Pendente, podendo ser atualizado para ParcialmenteConcluida ou Concluida conforme o progresso da atividade
 
+        public AtividadeDiaria(string nome, string descricao, DateTime data, string urlFoto)
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Data = data;
+            UrlFoto = urlFoto;
+        }
+
+        [Display(Name = "Status da Atividade")]
+        public StatusAtividade? Status { get; set; } = StatusAtividade.Pendente;
     }
-	public enum StatusAtividade { Pendente, ParcialmenteConcluida, Concluida }
+
+    public enum StatusAtividade
+    {
+        Pendente = 0,
+        ParcialmenteConcluida = 1,
+        Concluida = 2
+    }
 }

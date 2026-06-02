@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WeDo.Models;
 using WeDo.Models.ViewModels;
+
 namespace WeDo.Controllers
 {
     public class HomeController : Controller
@@ -13,6 +14,7 @@ namespace WeDo.Controllers
         {
             _context = context;
         }
+
         public async Task<IActionResult> Index()
         {
             int usuarioLogado = 1; // ID fixo apenas para testes 
@@ -29,73 +31,76 @@ namespace WeDo.Controllers
                                                || diaDaSemana == DayOfWeek.Friday && m.Sexta
                                                || diaDaSemana == DayOfWeek.Saturday && m.Sabado
                                                || diaDaSemana == DayOfWeek.Sunday && m.Domingo)
-          ).ToListAsync();
+            ).ToListAsync();
+
             List<DashboardViewModel> listaAtvDiaria = new List<DashboardViewModel>();
+
             foreach (var atv in atvDiaria)
             {
-               var atividadeHoje = await _context.AtividadesDiarias.FirstOrDefaultAsync(a => a.IdMeta == atv.Id && a.Data == dataHoje);    //calcular o status da atividade diária de acordo com a data e o status registrado
+                var atividadeHoje = await _context.AtividadesDiarias.FirstOrDefaultAsync(a => a.IdMeta == atv.Id && a.Data == dataHoje);
+
+                // LIMPEZA: Volta a usar o Enum nativo. Se não houver atividade no banco hoje, o status será Pendente (0).
+                var statusAtual = atividadeHoje?.Status ?? StatusAtividade.Pendente;
+
                 var modelo = new DashboardViewModel
                 {
-                    // setando os valores no modelo a ser exibido na view
                     MetaId = atv.Id,
                     NomeMetaPai = atv.Nome,
                     NomeAtividade = atv.Nome,
                     DescricaoAtividade = atv.Descricao,
-
-                    // Se a atividade existir, pega o ID dela. Se for nula, o ID é 0
                     AtividadeId = atividadeHoje?.Id ?? 0,
 
-                    // Se a atividade existir, pega o Status dela. Se for nula, fica Pendente
-                    StatusHoje = atividadeHoje?.Status ?? StatusAtividade.Pendente
+                    // Envia o Enum exato para a tela e guarda o original para comparar depois
+                    StatusHoje = statusAtual,
+                    StatusOriginal = statusAtual
                 };
 
-                // Adiciona na lista
                 listaAtvDiaria.Add(modelo);
             }
             return View(listaAtvDiaria);
-
         }
+
         [HttpPost]
-        public async Task<IActionResult> Atualizar(List<DashboardViewModel> listaAtvDiaria)
+        public async Task<IActionResult> Atualizar(List<DashboardViewModel> model)
         {
-            if (listaAtvDiaria == null || !listaAtvDiaria.Any())
+            if (model == null || !model.Any())
                 return RedirectToAction(nameof(Index));
 
-            foreach (var item in listaAtvDiaria)
+            foreach (var item in model)
             {
-                // Se a atividade não existe (Id == 0) e continua pendente, ignoramos para não sujar o banco
+                // PROTEÇÃO: Se o usuário não alterou o Dropdown na tela, ignora a linha e não vai ao banco!
+                if (item.StatusHoje == item.StatusOriginal)
+                    continue;
+
+                // PROTEÇÃO 2: Se a atividade não existe no banco e o usuário deixou como Pendente, ignoramos para não criar lixo (0).
                 if (item.AtividadeId == 0 && item.StatusHoje == StatusAtividade.Pendente)
                     continue;
 
                 if (item.AtividadeId == 0)
                 {
-                    // O "Fantasma" virou real: Usuário marcou como Concluída/Cancelada
                     var novaAtividade = new AtividadeDiaria
                     {
                         IdMeta = item.MetaId,
                         Nome = item.NomeAtividade,
                         Descricao = item.DescricaoAtividade,
                         Data = DateTime.Today,
-                        Status = item.StatusHoje
+                        Status = item.StatusHoje // Salva o Enum diretamente, sem conversões!
                     };
                     _context.AtividadesDiarias.Add(novaAtividade);
                 }
                 else
                 {
-                    // A atividade já existia hoje: Apenas atualizamos o status
                     var atividadeExistente = await _context.AtividadesDiarias.FindAsync(item.AtividadeId);
                     if (atividadeExistente != null)
                     {
-                        atividadeExistente.Status = item.StatusHoje;
+                        atividadeExistente.Status = item.StatusHoje; // Atualiza o Enum diretamente!
                         _context.Update(atividadeExistente);
                     }
                 }
             }
 
-            // Salva tudo de uma vez só no banco!
             await _context.SaveChangesAsync();
-
-            // Recarrega a tela inicial
+            TempData["Mensagem"] = "Progresso salvo com sucesso!";
             return RedirectToAction(nameof(Index));
         }
 

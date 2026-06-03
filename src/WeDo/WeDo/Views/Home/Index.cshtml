@@ -1,8 +1,111 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<WeDo.Models.ViewModels.DashboardViewModel>
+@using WeDo.Models
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
+<div class="container-fluid p-0">
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Mensagem"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <form asp-action="Atualizar" asp-controller="Home" method="post">
+        <div class="row">
+
+            <div class="col-md-5 pe-md-5">
+                <h2 class="dashboard-title">O que fazer hoje? <i class="bi bi-pencil fs-4 ms-2"></i></h2>
+
+                <div class="nav flex-column nav-pills mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var isActive = i == 0 ? "active" : "";
+
+                        // Determina as classes CSS da lista lateral com base no status atual da atividade
+                        var statusDotClass = Model[i].StatusHoje == StatusAtividade.Concluida ? "dot-concluida" :
+                                             Model[i].StatusHoje == StatusAtividade.ParcialmenteConcluida ? "dot-parcial" : "dot-pendente";
+
+                        var isCompletedClass = Model[i].StatusHoje == StatusAtividade.Concluida ? "task-completed" : "";
+
+                        <button class="task-list-btn @isActive @isCompletedClass" id="v-pills-tab-@i" data-bs-toggle="pill" data-bs-target="#v-pills-pane-@i" type="button" role="tab" aria-selected="@(i == 0 ? "true" : "false")">
+                            <span class="status-dot @statusDotClass"></span>
+                            @Model[i].NomeAtividade
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-7 mt-4 mt-md-0">
+                <div class="tab-content" id="v-pills-tabContent">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var isActive = i == 0 ? "show active" : "";
+                        <div class="tab-pane fade @isActive" id="v-pills-pane-@i" role="tabpanel" tabindex="0">
+                            <div class="task-details-panel shadow-sm">
+
+                                <input type="hidden" asp-for="@Model[i].AtividadeId" />
+                                <input type="hidden" asp-for="@Model[i].MetaId" />
+                                <input type="hidden" asp-for="@Model[i].NomeMetaPai" />
+                                <input type="hidden" asp-for="@Model[i].DescricaoAtividade" />
+                                <input type="hidden" asp-for="@Model[i].NomeAtividade" />
+                                <input type="hidden" asp-for="@Model[i].StatusOriginal" />
+
+                                <h3 class="task-details-title">@Model[i].NomeAtividade</h3>
+                                <p class="task-details-desc">@Model[i].DescricaoAtividade</p>
+
+                                <div class="mb-4">
+                                    <p class="font-serif fs-5 mb-2">Status de Hoje:</p>
+
+                                    <select asp-for="@Model[i].StatusHoje" class="form-select form-select-lg status-dropdown wedo-select" data-index="@i">
+                                        <option value="@((int)StatusAtividade.Concluida)">Concluído</option>
+                                        <option value="@((int)StatusAtividade.ParcialmenteConcluida)">Parcialmente concluído</option>
+                                        <option value="@((int)StatusAtividade.Pendente)">Pendente</option>
+                                    </select>
+
+                                </div>
+                                <div class="task-meta-info">Meta: @Model[i].NomeMetaPai</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-wedo px-5 py-2 fs-5 rounded-pill shadow-sm" style="background-color: #6cc88a; color: #000; font-weight: bold; border: 2px solid #000;">Confirmar Tudo</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Adiciona um ouvinte de evento para cada dropdown de status
+        document.querySelectorAll('.status-dropdown').forEach(select => {
+            select.addEventListener('change', function() {
+                const index = this.getAttribute('data-index');
+                const dot = document.querySelector('#v-pills-tab-' + index + ' .status-dot');
+                const btn = document.getElementById('v-pills-tab-' + index);
+
+                // Remove os estados visuais anteriores
+                dot.classList.remove('dot-concluida', 'dot-parcial', 'dot-pendente');
+                btn.classList.remove('task-completed');
+
+                // Aplica o novo estado visual com base no valor do Enum selecionado (2: Concluída, 1: Parcialmente, 0: Pendente)
+                if (this.value == "2") {
+                    dot.classList.add('dot-concluida');
+                    btn.classList.add('task-completed');
+                } else if (this.value == "1") {
+                    dot.classList.add('dot-parcial');
+                } else {
+                    dot.classList.add('dot-pendente');
+                }
+            });
+        });
+    });
+</script>

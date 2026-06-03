@@ -1,0 +1,187 @@
+﻿/* =========================================
+   LISTA LATERAL DE ATIVIDADES
+   ========================================= */
+.dashboard-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--wedo-text);
+    margin-bottom: 1.5rem;
+}
+
+.task-list-btn {
+    text-align: left;
+    border-radius: 20px !important;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    color: var(--wedo-text);
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+    .task-list-btn:hover {
+        background-color: var(--wedo-green-light);
+    }
+
+    .task-list-btn.active {
+        background-color: var(--wedo-active-menu) !important;
+        color: #000 !important;
+        font-weight: 500;
+    }
+
+/* Modificador visual para tarefas com status Concluído */
+.task-completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+/* =========================================
+   INDICADORES DE STATUS (DOTS)
+   ========================================= */
+.status-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+/* Mapeamento de cores referente ao Enum StatusAtividade */
+.dot-neutro {
+    background-color: #d1d5db;
+}
+
+.dot-concluida {
+    background-color: #6cc88a;
+}
+
+.dot-parcial {
+    background-color: #f6c278;
+}
+
+.dot-pendente {
+    background-color: #ff6b6b;
+}
+
+/* =========================================
+   PAINEL DE DETALHES (DIREITA)
+   ========================================= */
+.task-details-panel {
+    background-color: var(--wedo-bg);
+    border-radius: 20px;
+    padding: 40px;
+    min-height: 400px;
+    position: relative;
+    border: 1px solid var(--wedo-border);
+}
+
+.task-details-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.task-details-desc {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--wedo-muted);
+    margin-bottom: 3rem;
+}
+
+.task-meta-info {
+    position: absolute;
+    bottom: 40px;
+    font-style: italic;
+    color: var(--wedo-muted);
+}
+
+/* =========================================
+   COMPONENTES CUSTOMIZADOS DE SELEÇÃO
+   ========================================= */
+
+/* Dropdown customizado WeDo */
+.wedo-select {
+    background-color: #f8f9fa;
+    border: 1px solid #d1d5db;
+    border-radius: 12px !important;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    color: #333;
+    font-style: normal !important;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+    .wedo-select:focus {
+        border-color: #6cc88a;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.25rem rgba(108, 200, 138, 0.25) !important;
+        outline: none;
+    }
+
+    .wedo-select option {
+        background-color: #ffffff;
+        color: #333;
+        padding: 10px;
+    }
+
+/* Radio Buttons Customizados (Componente Legado / Alternativo) */
+.custom-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.custom-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--wedo-text);
+}
+
+.custom-radio-input {
+    display: none;
+}
+
+.custom-radio-box {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+/* Vínculo de cores de estado para Radio Buttons */
+.radio-concluida + .custom-radio-box {
+    background-color: #6cc88a;
+}
+
+.radio-parcial + .custom-radio-box {
+    background-color: #f6c278;
+}
+
+.radio-pendente + .custom-radio-box {
+    background-color: #ff6b6b;
+}
+
+.custom-radio-box i {
+    color: transparent;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.custom-radio-input:checked + .custom-radio-box i {
+    color: #000;
+}

@@ -1,254 +1,387 @@
+/* ==========================================================================
+   VARIÁVEIS GLOBAIS DE TEMA (PALETA DE CORES)
+   ==========================================================================
+   Define o esquema de cores padrão (Light Mode) da aplicação WeDo.
+   A utilização do ':root' garante consistência visual em todo o sistema e 
+   permite a inversão dinâmica de cores quando o tema escuro for acionado.
+   ========================================================================== */
 :root {
-  --wedo-green: #147A3B;
-  --wedo-green-dark: #0F5C2C;
-  --wedo-green-light: #E8F5EE;
-  --wedo-text: #212529;
-  --wedo-muted: #6c757d;
-  --wedo-bg: #f7f9f7;
-  --wedo-card-bg: #ffffff;
-  --wedo-border: #e2e8e4;
+    --wedo-green: #147A3B; /* Cor principal de identidade visual e botões primários */
+    --wedo-green-dark: #0F5C2C; /* Estado de 'hover' ou foco para elementos primários */
+    --wedo-green-light: #E8F5EE; /* Fundo suave para destaques e itens de menu em repouso */
+    --wedo-text: #212529; /* Cor padrão para textos e tipografia principal */
+    --wedo-muted: #6c757d; /* Textos secundários, legendas e descrições auxiliares */
+    --wedo-bg: #c4c4c4; /* Cor de fundo externa (espaço negativo da aplicação) */
+    --wedo-card-bg: #ffffff; /* Fundo interno utilizado nos painéis e formulários */
+    --wedo-border: #e2e8e4; /* Cor unificada para bordas e divisórias */
+    --wedo-active-menu: #b1cfbc; /* Destaque visual para o item de navegação ativo */
 }
 
+/* ==========================================================================
+   CONFIGURAÇÕES BASE E RESET DE COMPORTAMENTO
+   ==========================================================================
+   Ajustes globais do documento HTML e do Body para garantir que a aplicação 
+   tenha um comportamento similar a um software nativo (Desktop/Mobile).
+   ========================================================================== */
 html {
-  font-size: 14px;
+    font-size: 14px; /* Tamanho base da fonte para telas menores */
+    position: relative;
+    min-height: 100%;
 }
 
+/* Responsividade de tipografia: aumenta a fonte base em telas maiores (Tablets/Desktops) */
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.2rem var(--wedo-green);
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: var(--wedo-bg);
-  color: var(--wedo-text);
+    margin: 0;
+    background-color: var(--wedo-bg);
+    color: var(--wedo-text);
+    /* Bloqueia a rolagem global da página para simular uma "Single Page Application" (App-like feel).
+       A rolagem deve ocorrer apenas nas áreas de conteúdo interno. */
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Tipografia padronizada para os títulos principais dos painéis */
+.font-serif {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* ==========================================================================
+   ACESSIBILIDADE E SOBRESCRITA DE FORMS (BOOTSTRAP)
+   ==========================================================================
+   Substitui o comportamento padrão azul do Bootstrap pela paleta do WeDo,
+   mantendo as sombras de foco (box-shadow) ativas para navegação por teclado.
+   ========================================================================== */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem var(--wedo-card-bg), 0 0 0 0.2rem var(--wedo-green);
 }
 
-/* ===== Identidade visual WeDo ===== */
-.navbar-brand-wedo {
-  color: var(--wedo-green) !important;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
 }
 
-.btn-wedo {
-  background-color: var(--wedo-green);
-  color: #fff;
-  border: 1px solid var(--wedo-green);
-  font-weight: 600;
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
 }
 
-.btn-wedo:hover, .btn-wedo:focus {
-  background-color: var(--wedo-green-dark);
-  border-color: var(--wedo-green-dark);
-  color: #fff;
-}
-
-.btn-wedo-outline {
-  background-color: transparent;
-  color: var(--wedo-green);
-  border: 1px solid var(--wedo-green);
-  font-weight: 600;
-}
-
-.btn-wedo-outline:hover {
-  background-color: var(--wedo-green);
-  color: #fff;
-}
-
-/* ===== Páginas de Configuração ===== */
-.config-wrapper {
-  max-width: 860px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.config-card {
-  background: var(--wedo-card-bg);
-  border: 1px solid var(--wedo-border);
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 2px 12px rgba(20, 122, 59, 0.04);
-}
-
-@media (max-width: 576px) {
-  .config-wrapper {
-    margin: 1rem auto;
-    padding: 0 0.5rem;
-  }
-  .config-card {
-    padding: 1.25rem;
-    border-radius: 8px;
-  }
-  .config-card h1 {
-    font-size: 1.5rem;
-  }
-}
-
-.config-card h1 {
-  color: var(--wedo-green);
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.config-subtitle {
-  color: var(--wedo-muted);
-  margin-bottom: 2rem;
-}
-
-.config-section {
-  border-top: 1px solid var(--wedo-border);
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.config-section:first-of-type {
-  border-top: none;
-  padding-top: 0;
-  margin-top: 0;
-}
-
-.config-section h2 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--wedo-green-dark);
-  margin-bottom: 1rem;
-}
-
-.config-section .description {
-  font-size: 0.9rem;
-  color: var(--wedo-muted);
-  margin-bottom: 1rem;
-}
-
-.foto-perfil {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 3px solid var(--wedo-green-light);
-  object-fit: cover;
-  background-color: var(--wedo-green-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--wedo-green);
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-
-.form-control:focus, .form-select:focus {
-  border-color: var(--wedo-green);
-  box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.15);
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--wedo-green);
+    box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.15);
 }
 
 .form-check-input:checked {
-  background-color: var(--wedo-green);
-  border-color: var(--wedo-green);
+    background-color: var(--wedo-green);
+    border-color: var(--wedo-green);
 }
+
+/* ==========================================================================
+   ESTRUTURA PRINCIPAL DE LAYOUT (FLEXBOX)
+   ==========================================================================
+   Divide a tela entre o Menu Lateral (Sidebar) e a área central de conteúdo.
+   ========================================================================== */
+.wrapper {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px; /* Espaçamento entre a Sidebar e o Main Container */
+}
+
+/* Menu Lateral Esquerdo */
+.sidebar {
+    width: 250px;
+    background-color: var(--wedo-card-bg);
+    border-radius: 20px;
+    transition: all 0.3s ease; /* Animação suave para o recolhimento do menu */
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+}
+
+    /* Modificadores dinâmicos via JavaScript para recolher o menu lateral */
+    .sidebar.collapsed {
+        width: 80px;
+    }
+
+        .sidebar.collapsed .sidebar-text,
+        .sidebar.collapsed .logo-text {
+            display: none; /* Oculta os rótulos de texto quando recolhido, mantendo apenas ícones */
+        }
+
+        .sidebar.collapsed .nav-link {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+            .sidebar.collapsed .nav-link i {
+                margin-right: 0 !important;
+            }
+
+/* Botões de Navegação do Menu */
+.nav-link {
+    color: var(--wedo-text);
+    border-radius: 30px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+    .nav-link:hover {
+        background-color: var(--wedo-green-light);
+        color: var(--wedo-text);
+    }
+
+    /* Estado visual do menu para a página atualmente carregada */
+    .nav-link.active {
+        background-color: var(--wedo-active-menu);
+        color: #000;
+        font-weight: 500;
+    }
+
+/* ==========================================================================
+   PAINEL PRINCIPAL DE CONTEÚDO (MAIN CONTAINER)
+   ==========================================================================
+   Área direita da tela que recebe o cabeçalho superior e o corpo dinâmico.
+   ========================================================================== */
+.main-container {
+    flex-grow: 1;
+    background-color: var(--wedo-card-bg);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.topbar {
+    padding: 15px 30px;
+    border-bottom: 1px solid var(--wedo-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-icons i {
+    font-size: 1.4rem;
+    margin-left: 15px;
+    cursor: pointer;
+    color: var(--wedo-text);
+}
+
+/* Área central habilitada para rolagem (Scroll) independente do body */
+.content-area {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+   COMPONENTES REUTILIZÁVEIS DA IDENTIDADE WEDO
+   ========================================================================== */
+.navbar-brand-wedo {
+    color: var(--wedo-green) !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Botão padrão preenchido */
+.btn-wedo {
+    background-color: var(--wedo-green);
+    color: #fff;
+    border: 1px solid var(--wedo-green);
+    font-weight: 600;
+}
+
+    .btn-wedo:hover,
+    .btn-wedo:focus {
+        background-color: var(--wedo-green-dark);
+        border-color: var(--wedo-green-dark);
+        color: #fff;
+    }
+
+/* Botão secundário com borda e fundo transparente */
+.btn-wedo-outline {
+    background-color: transparent;
+    color: var(--wedo-green);
+    border: 1px solid var(--wedo-green);
+    font-weight: 600;
+}
+
+    .btn-wedo-outline:hover {
+        background-color: var(--wedo-green);
+        color: #fff;
+    }
+
+/* Componente de Avatar do Usuário */
+.foto-perfil {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 3px solid var(--wedo-green-light);
+    object-fit: cover;
+    background-color: var(--wedo-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wedo-green);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   ESTRUTURA DAS PÁGINAS DE CONFIGURAÇÃO / RECUPERAÇÃO
+   ==========================================================================
+   Classes aplicadas a painéis de configurações, gestão de contas e formulários.
+   ========================================================================== */
+.config-wrapper {
+    max-width: 860px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.config-card {
+    background: var(--wedo-card-bg);
+    border: 1px solid var(--wedo-border);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(20, 122, 59, 0.04);
+}
+
+/* Ajustes de espaçamento para visualização em dispositivos móveis */
+@media (max-width: 576px) {
+    .config-wrapper {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .config-card {
+        padding: 1.25rem;
+        border-radius: 8px;
+    }
+
+        .config-card h1 {
+            font-size: 1.5rem;
+        }
+}
+
+.config-card h1 {
+    color: var(--wedo-green);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.config-subtitle {
+    color: var(--wedo-muted);
+    margin-bottom: 2rem;
+}
+
+.config-section {
+    border-top: 1px solid var(--wedo-border);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+    .config-section:first-of-type {
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    .config-section h2 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--wedo-green-dark);
+        margin-bottom: 1rem;
+    }
+
+    .config-section .description {
+        font-size: 0.9rem;
+        color: var(--wedo-muted);
+        margin-bottom: 1rem;
+    }
 
 .link-senha {
-  color: var(--wedo-green);
-  text-decoration: none;
-  font-weight: 500;
+    color: var(--wedo-green);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.link-senha:hover {
-  color: var(--wedo-green-dark);
-  text-decoration: underline;
-}
+    .link-senha:hover {
+        color: var(--wedo-green-dark);
+        text-decoration: underline;
+    }
 
-/* ===== Tema escuro ===== */
+/* ==========================================================================
+   TEMA ESCURO (DARK MODE)
+   ==========================================================================
+   Sobrescreve as variáveis do ':root' no nível do 'body' para escurecer
+   dinamicamente toda a interface sem a necessidade de reescrever o layout.
+   ========================================================================== */
 body.tema-escuro {
-  --wedo-bg: #1a1d1b;
-  --wedo-card-bg: #25292a;
-  --wedo-border: #3a3f3c;
-  --wedo-text: #e8eae9;
-  --wedo-muted: #a0a8a4;
-  background-color: var(--wedo-bg);
-  color: var(--wedo-text);
+    --wedo-bg: #1a1d1b;
+    --wedo-card-bg: #25292a;
+    --wedo-border: #3a3f3c;
+    --wedo-text: #e8eae9;
+    --wedo-muted: #a0a8a4;
+    --wedo-green-light: #2d4a38;
+    --wedo-active-menu: #1e3828;
 }
 
-body.tema-escuro .navbar {
-  background-color: #25292a !important;
-  border-color: #3a3f3c !important;
-}
+    /* Ajustes específicos de contraste para inputs no tema escuro */
+    body.tema-escuro .form-control,
+    body.tema-escuro .form-select {
+        background-color: #1a1d1b;
+        border-color: var(--wedo-border);
+        color: var(--wedo-text);
+    }
 
-body.tema-escuro .nav-link {
-  color: var(--wedo-text) !important;
-}
+    body.tema-escuro .text-muted {
+        color: var(--wedo-muted) !important;
+    }
 
-body.tema-escuro .form-control,
-body.tema-escuro .form-select {
-  background-color: #1a1d1b;
-  border-color: var(--wedo-border);
-  color: var(--wedo-text);
-}
+    body.tema-escuro .btn-wedo-outline {
+        color: #4ea670;
+        border-color: #4ea670;
+        background-color: transparent;
+    }
 
-body.tema-escuro .config-card {
-  background: var(--wedo-card-bg);
-  border-color: var(--wedo-border);
-}
+        body.tema-escuro .btn-wedo-outline:hover {
+            background-color: var(--wedo-green);
+            color: #fff;
+        }
 
-body.tema-escuro .footer,
-body.tema-escuro .text-muted,
-body.tema-escuro .footer .text-muted {
-  color: var(--wedo-muted) !important;
-  border-color: var(--wedo-border) !important;
-}
+    body.tema-escuro .foto-perfil {
+        background-color: #2d4a38;
+        color: #6cc88a;
+        border-color: #2d4a38;
+    }
 
-body.tema-escuro .btn-wedo-outline {
-  color: #4ea670;
-  border-color: #4ea670;
-  background-color: transparent;
-}
+    body.tema-escuro .form-control::placeholder {
+        color: #7a8580;
+        opacity: 1;
+    }
 
-body.tema-escuro .btn-wedo-outline:hover {
-  background-color: var(--wedo-green);
-  color: #fff;
-}
-
-body.tema-escuro .foto-perfil {
-  background-color: #2d4a38;
-  color: #6cc88a;
-  border-color: #2d4a38;
-}
-
-body.tema-escuro .form-control::placeholder {
-  color: #7a8580;
-  opacity: 1;
-}
-
-body.tema-escuro .form-control:focus,
-body.tema-escuro .form-select:focus {
-  background-color: #1a1d1b;
-  color: var(--wedo-text);
-  border-color: var(--wedo-green);
-  box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.35);
-}
-
-body.tema-escuro .config-section .description {
-  color: #b0b8b4;
-}
-
-body.tema-escuro .form-label {
-  color: var(--wedo-text);
-}
+    /* Garante que o anel de foco do Bootstrap continue visível e alinhado à paleta escura */
+    body.tema-escuro .form-control:focus,
+    body.tema-escuro .form-select:focus {
+        background-color: #1a1d1b;
+        color: var(--wedo-text);
+        border-color: var(--wedo-green);
+        box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.35);
+    }

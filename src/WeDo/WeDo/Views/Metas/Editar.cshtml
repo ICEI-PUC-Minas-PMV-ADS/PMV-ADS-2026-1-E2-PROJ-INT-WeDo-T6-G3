@@ -37,19 +37,59 @@
             </div>
         </div>
 
+        @{
+            bool temRecorrencia = Model.Domingo || Model.Segunda || Model.Terca || Model.Quarta || Model.Quinta || Model.Sexta || Model.Sabado;
+        }
+
+        <div class="form-check form-switch mb-3 mt-4">
+            <input class="form-check-input" type="checkbox" id="chkAtividadeDiaria" onchange="toggleDiasSemana()" style="cursor: pointer;" @(temRecorrencia ? "checked" : "")>
+            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">Registrar atividade recorrente?</label>
+        </div>
+
+        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: @(temRecorrencia ? "block" : "none"); background-color: #f8f9fa;">
+            <label class="form-label fw-bold mb-3">Quais dias da semana?</label>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Domingo" />
+                    <label class="form-check-label" asp-for="Domingo">Dom</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Segunda" />
+                    <label class="form-check-label" asp-for="Segunda">Seg</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Terca" />
+                    <label class="form-check-label" asp-for="Terca">Ter</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Quarta" />
+                    <label class="form-check-label" asp-for="Quarta">Qua</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Quinta" />
+                    <label class="form-check-label" asp-for="Quinta">Qui</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Sexta" />
+                    <label class="form-check-label" asp-for="Sexta">Sex</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Sabado" />
+                    <label class="form-check-label" asp-for="Sabado">Sáb</label>
+                </div>
+            </div>
+        </div>
         <div class="mt-4 d-flex gap-2">
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            
-           
+
             <button type="button" class="btn btn-danger" onclick="confirmarExclusao()">
                 Excluir Meta
             </button>
 
             <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
         </div>
-    </form> 
+    </form>
 
-   
     <form id="formExcluir" asp-action="Excluir" method="post" style="display:none;">
         <input type="hidden" name="id" value="@Model.Id" />
     </form>
@@ -59,6 +99,20 @@
     function confirmarExclusao() {
         if (confirm("Tem certeza que deseja apagar esta meta permanentemente?")) {
             document.getElementById('formExcluir').submit();
+        }
+    }
+
+    function toggleDiasSemana() {
+        var chk = document.getElementById("chkAtividadeDiaria");
+        var div = document.getElementById("divDiasSemana");
+
+        if (chk.checked) {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+            document.querySelectorAll('#divDiasSemana .form-check-input').forEach(function(el) {
+                el.checked = false;
+            });
         }
     }
 </script>

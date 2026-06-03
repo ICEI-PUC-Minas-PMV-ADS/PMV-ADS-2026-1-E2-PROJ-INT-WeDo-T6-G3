@@ -1,30 +1,34 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Recuperar Senha";
 }
 
-<h1>EsqueciSenha</h1>
-<!-- se houver algum erro ele aparece aqui  -->
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">
-        @ViewBag.Error
-    </div>      
-}
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 
-<p>Digite o seu e-mail para receber as intruções para redefinir sua senha</p>  
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 task-details-panel shadow-sm">
+            <h2 class="dashboard-title">Esqueci a Senha <i class="bi bi-envelope ms-2 fs-4"></i></h2>
 
-<!-- O formulario aponta para a Action "Esqueci Senha do Controller Usuairios via Post -->
-<form asp-action="EsqueciSenha"  asp-controller="Usuarios" method="post">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="border-radius: 12px;">
+                    @ViewBag.Error
+                </div>
+            }
 
-    <div class=" form-group mb-3">
-        <label for="email" class="control-label" >E-mail</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>  
-    <div class="form-group">
-        <input type="submit" value="Enviar Email" class="btn btn-primary" />
-        <a asp-action="Index" class=" btn btn-secondary">Voltar para Login</a>
+            <p class="task-details-desc mb-4">Digite o seu e-mail para receber as instruções para redefinir sua senha.</p>
+
+            <form asp-action="EsqueciSenha" asp-controller="Usuarios" method="post">
+                <div class="form-group mb-4">
+                    <label for="email" class="font-serif fs-5 mb-2">E-mail de Cadastro</label>
+                    <input type="email" class="form-control form-control-lg" id="email" name="email" style="border-radius: 12px; border: 1px solid #d1d5db;" required>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a asp-action="Index" class="text-decoration-none" style="color: var(--wedo-muted); font-style: italic;">Voltar para Login</a>
+                    <button type="submit" class="btn rounded-pill px-4 py-2" style="background-color: #6cc88a; color: #000; font-weight: bold; border: 2px solid #000;">Enviar E-mail</button>
+                </div>
+            </form>
+        </div>
     </div>
-
-
- </form>
+</div>

@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Home\UsuariosController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Views\Registrar.cshtml" />
   </ItemGroup>
 

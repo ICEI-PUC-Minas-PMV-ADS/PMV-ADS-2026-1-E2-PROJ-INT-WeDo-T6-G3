@@ -2,41 +2,39 @@
     ViewData["Title"] = "Criar nova senha";
 }
 
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2>Criar nova senha</h2>
-            <hr />
+        <div class="col-md-6 task-details-panel shadow-sm">
+            <h2 class="dashboard-title">Criar nova senha <i class="bi bi-lock ms-2 fs-4"></i></h2>
 
             @if (ViewBag.Error != null)
             {
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="border-radius: 12px;">
                     @ViewBag.Error
                 </div>
             }
 
-            <p>Sua nova senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial.</p>
-            
-            <form asp-action="RefazerSenha" asp-controller="Usuarios" method="post">
+            <p class="task-details-desc mb-4">Sua nova senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial.</p>
 
+            <form asp-action="RefazerSenha" asp-controller="Usuarios" method="post">
                 <input type="hidden" name="token" value="@ViewBag.Token" />
 
                 <div class="form-group mb-3">
-                    <label for="novaSenha" class="control-label">Nova Senha</label>
-                    <input type="password" class="form-control" id="novaSenha" name="novaSenha" required />
-                </div>
-                
-                <div class="form-group mb-4">
-                    <label for="confirmarSenha" class="control-label">Confirmar Nova Senha</label>
-                    <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required />
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success w-100" value="Salvar Nova Senha" />
+                    <label for="novaSenha" class="font-serif fs-5 mb-2">Nova Senha</label>
+                    <input type="password" class="form-control form-control-lg" id="novaSenha" name="novaSenha" style="border-radius: 12px; border: 1px solid #d1d5db;" required />
                 </div>
 
+                <div class="form-group mb-4">
+                    <label for="confirmarSenha" class="font-serif fs-5 mb-2">Confirmar Nova Senha</label>
+                    <input type="password" class="form-control form-control-lg" id="confirmarSenha" name="confirmarSenha" style="border-radius: 12px; border: 1px solid #d1d5db;" required />
+                </div>
+
+                <div class="form-group mt-4 text-end">
+                    <button type="submit" class="btn w-100 rounded-pill py-2 fs-5" style="background-color: #6cc88a; color: #000; font-weight: bold; border: 2px solid #000;">Salvar Nova Senha</button>
+                </div>
             </form>
-            
         </div>
     </div>
 </div>

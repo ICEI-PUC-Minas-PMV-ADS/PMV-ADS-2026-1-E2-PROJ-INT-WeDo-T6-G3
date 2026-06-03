@@ -224,7 +224,7 @@ namespace WeDo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EsqueciSenha(string email)
         {
-            if (string.IsNullOrEmpty(email))
+            if ( string.IsNullOrEmpty(email))
             {   
                 ViewBag.Error = "Por favor, insira um email válido.";
                 return View();

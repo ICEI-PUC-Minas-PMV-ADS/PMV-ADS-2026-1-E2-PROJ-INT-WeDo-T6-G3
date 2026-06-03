@@ -27,7 +27,7 @@
                     {
                         var isActive = i == 0 ? "active" : "";
 
-                        // Lendo o Enum nativo que veio do C#
+                        // Determina as classes CSS da lista lateral com base no status atual da atividade
                         var statusDotClass = Model[i].StatusHoje == StatusAtividade.Concluida ? "dot-concluida" :
                                              Model[i].StatusHoje == StatusAtividade.ParcialmenteConcluida ? "dot-parcial" : "dot-pendente";
 
@@ -62,7 +62,7 @@
                                 <div class="mb-4">
                                     <p class="font-serif fs-5 mb-2">Status de Hoje:</p>
 
-                                    <select asp-for="@Model[i].StatusHoje" class="form-select form-select-lg status-dropdown" data-index="@i" style="border-radius: 10px; cursor: pointer; border: 2px solid #000; font-style: italic;">
+                                    <select asp-for="@Model[i].StatusHoje" class="form-select form-select-lg status-dropdown wedo-select" data-index="@i">
                                         <option value="@((int)StatusAtividade.Concluida)">Concluído</option>
                                         <option value="@((int)StatusAtividade.ParcialmenteConcluida)">Parcialmente concluído</option>
                                         <option value="@((int)StatusAtividade.Pendente)">Pendente</option>
@@ -85,17 +85,18 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Adiciona um ouvinte de evento para cada dropdown de status
         document.querySelectorAll('.status-dropdown').forEach(select => {
             select.addEventListener('change', function() {
                 const index = this.getAttribute('data-index');
                 const dot = document.querySelector('#v-pills-tab-' + index + ' .status-dot');
                 const btn = document.getElementById('v-pills-tab-' + index);
 
-                // Limpa as classes
+                // Remove os estados visuais anteriores
                 dot.classList.remove('dot-concluida', 'dot-parcial', 'dot-pendente');
                 btn.classList.remove('task-completed');
 
-                // O valor 2 é Concluída, 1 é Parcialmente, 0 é Pendente
+                // Aplica o novo estado visual com base no valor do Enum selecionado (2: Concluída, 1: Parcialmente, 0: Pendente)
                 if (this.value == "2") {
                     dot.classList.add('dot-concluida');
                     btn.classList.add('task-completed');

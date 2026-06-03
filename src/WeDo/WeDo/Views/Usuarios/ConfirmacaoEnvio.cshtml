@@ -1,22 +1,30 @@
 ﻿@{
-    ViewData["Title"] = ViewBag.Titulo ?? "Aviso"; 
+    ViewData["Title"] = ViewBag.Titulo ?? "Aviso";
 }
-<div class=" text-center mt-5 container"> 
-    <h2>@ViewBag.Titulo</h2>
 
-    @if( ViewBag.Message != null)
-    {
-        <div class="alert alert-success mt-4">
-            @ViewBag.Message
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center task-details-panel shadow-sm">
+            <h2 class="dashboard-title">@ViewBag.Titulo</h2>
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success mt-4" style="border-radius: 12px;">
+                    @ViewBag.Message
+                </div>
+            }
+            else if (ViewBag.Error != null)
+            {
+                <div class="alert alert-info mt-4" style="border-radius: 12px;">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <div class="mt-5">
+                <a asp-action="Index" class="btn rounded-pill px-5 py-2 fs-5" style="background-color: #6cc88a; color: #000; font-weight: bold; border: 2px solid #000;">Voltar para o Início</a>
+            </div>
         </div>
-    }else if(ViewBag.Error != null)
-    {
-        <div class="alert alert-info mt-4">
-            @ViewBag.Error
-        </div>
-    }
-    <div class="mt-4">
-        <a asp-action="Index" class="btn btn-primary">Voltar para o Inicio</a>
     </div>
-
 </div>

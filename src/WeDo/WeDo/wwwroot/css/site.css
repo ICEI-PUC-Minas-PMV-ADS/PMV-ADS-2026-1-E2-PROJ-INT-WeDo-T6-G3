@@ -1,23 +1,35 @@
-/* ===== VARIÁVEIS GLOBAIS ===== */
+/* ==========================================================================
+   VARIÁVEIS GLOBAIS DE TEMA (PALETA DE CORES)
+   ==========================================================================
+   Define o esquema de cores padrão (Light Mode) da aplicação WeDo.
+   A utilização do ':root' garante consistência visual em todo o sistema e 
+   permite a inversão dinâmica de cores quando o tema escuro for acionado.
+   ========================================================================== */
 :root {
-    --wedo-green: #147A3B;
-    --wedo-green-dark: #0F5C2C;
-    --wedo-green-light: #E8F5EE;
-    --wedo-text: #212529;
-    --wedo-muted: #6c757d;
-    --wedo-bg: #c4c4c4; /* Fundo cinza do seu wireframe ao redor dos painéis */
-    --wedo-card-bg: #ffffff; /* Fundo branco dos painéis internos */
-    --wedo-border: #e2e8e4;
-    --wedo-active-menu: #b1cfbc; /* Verde suave de seleção do menu */
+    --wedo-green: #147A3B; /* Cor principal de identidade visual e botões primários */
+    --wedo-green-dark: #0F5C2C; /* Estado de 'hover' ou foco para elementos primários */
+    --wedo-green-light: #E8F5EE; /* Fundo suave para destaques e itens de menu em repouso */
+    --wedo-text: #212529; /* Cor padrão para textos e tipografia principal */
+    --wedo-muted: #6c757d; /* Textos secundários, legendas e descrições auxiliares */
+    --wedo-bg: #c4c4c4; /* Cor de fundo externa (espaço negativo da aplicação) */
+    --wedo-card-bg: #ffffff; /* Fundo interno utilizado nos painéis e formulários */
+    --wedo-border: #e2e8e4; /* Cor unificada para bordas e divisórias */
+    --wedo-active-menu: #b1cfbc; /* Destaque visual para o item de navegação ativo */
 }
 
-/* ===== CONFIGURAÇÕES BASE ===== */
+/* ==========================================================================
+   CONFIGURAÇÕES BASE E RESET DE COMPORTAMENTO
+   ==========================================================================
+   Ajustes globais do documento HTML e do Body para garantir que a aplicação 
+   tenha um comportamento similar a um software nativo (Desktop/Mobile).
+   ========================================================================== */
 html {
-    font-size: 14px;
+    font-size: 14px; /* Tamanho base da fonte para telas menores */
     position: relative;
     min-height: 100%;
 }
 
+/* Responsividade de tipografia: aumenta a fonte base em telas maiores (Tablets/Desktops) */
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -28,31 +40,45 @@ body {
     margin: 0;
     background-color: var(--wedo-bg);
     color: var(--wedo-text);
-    overflow: hidden; /* Trava a rolagem da página inteira (Estilo App) */
+    /* Bloqueia a rolagem global da página para simular uma "Single Page Application" (App-like feel).
+       A rolagem deve ocorrer apenas nas áreas de conteúdo interno. */
+    overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Tipografia Serifada para títulos (estilo da imagem) */
+/* Tipografia padronizada para os títulos principais dos painéis */
 .font-serif {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
 }
 
-/* ===== RESETS E FORMS ===== */
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+/* ==========================================================================
+   ACESSIBILIDADE E SOBRESCRITA DE FORMS (BOOTSTRAP)
+   ==========================================================================
+   Substitui o comportamento padrão azul do Bootstrap pela paleta do WeDo,
+   mantendo as sombras de foco (box-shadow) ativas para navegação por teclado.
+   ========================================================================== */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
     box-shadow: 0 0 0 0.1rem var(--wedo-card-bg), 0 0 0 0.2rem var(--wedo-green);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);
     text-align: end;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     border-color: var(--wedo-green);
     box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.15);
 }
@@ -62,34 +88,37 @@ body {
     border-color: var(--wedo-green);
 }
 
-/* =========================================
-   ESTRUTURA PRINCIPAL (O Esqueleto do Layout)
-   ========================================= */
+/* ==========================================================================
+   ESTRUTURA PRINCIPAL DE LAYOUT (FLEXBOX)
+   ==========================================================================
+   Divide a tela entre o Menu Lateral (Sidebar) e a área central de conteúdo.
+   ========================================================================== */
 .wrapper {
     display: flex;
     height: 100vh;
     padding: 20px;
-    gap: 20px;
+    gap: 20px; /* Espaçamento entre a Sidebar e o Main Container */
 }
 
-/* Menu Lateral (Sidebar) */
+/* Menu Lateral Esquerdo */
 .sidebar {
     width: 250px;
     background-color: var(--wedo-card-bg);
     border-radius: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Animação suave para o recolhimento do menu */
     display: flex;
     flex-direction: column;
     padding: 20px 10px;
 }
 
+    /* Modificadores dinâmicos via JavaScript para recolher o menu lateral */
     .sidebar.collapsed {
         width: 80px;
     }
 
         .sidebar.collapsed .sidebar-text,
         .sidebar.collapsed .logo-text {
-            display: none;
+            display: none; /* Oculta os rótulos de texto quando recolhido, mantendo apenas ícones */
         }
 
         .sidebar.collapsed .nav-link {
@@ -102,6 +131,7 @@ body {
                 margin-right: 0 !important;
             }
 
+/* Botões de Navegação do Menu */
 .nav-link {
     color: var(--wedo-text);
     border-radius: 30px;
@@ -118,13 +148,18 @@ body {
         color: var(--wedo-text);
     }
 
+    /* Estado visual do menu para a página atualmente carregada */
     .nav-link.active {
         background-color: var(--wedo-active-menu);
-        color: #000; /* Texto sempre escuro para dar contraste com o fundo verde suave */
+        color: #000;
         font-weight: 500;
     }
 
-/* Painel Principal & Topbar */
+/* ==========================================================================
+   PAINEL PRINCIPAL DE CONTEÚDO (MAIN CONTAINER)
+   ==========================================================================
+   Área direita da tela que recebe o cabeçalho superior e o corpo dinâmico.
+   ========================================================================== */
 .main-container {
     flex-grow: 1;
     background-color: var(--wedo-card-bg);
@@ -149,19 +184,23 @@ body {
     color: var(--wedo-text);
 }
 
+/* Área central habilitada para rolagem (Scroll) independente do body */
 .content-area {
     flex-grow: 1;
     padding: 30px;
-    overflow-y: auto; /* Rolagem apenas no conteúdo central */
+    overflow-y: auto;
 }
 
-/* ===== COMPONENTES WeDo (Identidade, Botões, Perfil) ===== */
+/* ==========================================================================
+   COMPONENTES REUTILIZÁVEIS DA IDENTIDADE WEDO
+   ========================================================================== */
 .navbar-brand-wedo {
     color: var(--wedo-green) !important;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
+/* Botão padrão preenchido */
 .btn-wedo {
     background-color: var(--wedo-green);
     color: #fff;
@@ -169,12 +208,14 @@ body {
     font-weight: 600;
 }
 
-    .btn-wedo:hover, .btn-wedo:focus {
+    .btn-wedo:hover,
+    .btn-wedo:focus {
         background-color: var(--wedo-green-dark);
         border-color: var(--wedo-green-dark);
         color: #fff;
     }
 
+/* Botão secundário com borda e fundo transparente */
 .btn-wedo-outline {
     background-color: transparent;
     color: var(--wedo-green);
@@ -187,6 +228,7 @@ body {
         color: #fff;
     }
 
+/* Componente de Avatar do Usuário */
 .foto-perfil {
     width: 96px;
     height: 96px;
@@ -202,7 +244,11 @@ body {
     font-weight: 700;
 }
 
-/* ===== Páginas de Configuração ===== */
+/* ==========================================================================
+   ESTRUTURA DAS PÁGINAS DE CONFIGURAÇÃO / RECUPERAÇÃO
+   ==========================================================================
+   Classes aplicadas a painéis de configurações, gestão de contas e formulários.
+   ========================================================================== */
 .config-wrapper {
     max-width: 860px;
     margin: 2rem auto;
@@ -217,6 +263,7 @@ body {
     box-shadow: 0 2px 12px rgba(20, 122, 59, 0.04);
 }
 
+/* Ajustes de espaçamento para visualização em dispositivos móveis */
 @media (max-width: 576px) {
     .config-wrapper {
         margin: 1rem auto;
@@ -280,18 +327,23 @@ body {
         text-decoration: underline;
     }
 
-/* ===== TEMA ESCURO ===== */
+/* ==========================================================================
+   TEMA ESCURO (DARK MODE)
+   ==========================================================================
+   Sobrescreve as variáveis do ':root' no nível do 'body' para escurecer
+   dinamicamente toda a interface sem a necessidade de reescrever o layout.
+   ========================================================================== */
 body.tema-escuro {
-    --wedo-bg: #1a1d1b; /* O cinza do fundo vira um chumbo escuro */
-    --wedo-card-bg: #25292a; /* Os painéis ficam grafite */
+    --wedo-bg: #1a1d1b;
+    --wedo-card-bg: #25292a;
     --wedo-border: #3a3f3c;
     --wedo-text: #e8eae9;
     --wedo-muted: #a0a8a4;
     --wedo-green-light: #2d4a38;
-    --wedo-active-menu: #1e3828; /* Verde bem fechado para o botão selecionado no escuro */
+    --wedo-active-menu: #1e3828;
 }
 
-    /* As adaptações do tema escuro continuam iguais, apenas aplicadas às novas classes */
+    /* Ajustes específicos de contraste para inputs no tema escuro */
     body.tema-escuro .form-control,
     body.tema-escuro .form-select {
         background-color: #1a1d1b;
@@ -325,6 +377,7 @@ body.tema-escuro {
         opacity: 1;
     }
 
+    /* Garante que o anel de foco do Bootstrap continue visível e alinhado à paleta escura */
     body.tema-escuro .form-control:focus,
     body.tema-escuro .form-select:focus {
         background-color: #1a1d1b;

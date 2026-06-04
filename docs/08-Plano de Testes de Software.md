@@ -21,7 +21,7 @@
 
 | **Caso de Teste** | **CT03 – Dashboard** |
 |:---:	|:---:	|
-|	Requisito Associado 	| RF-005 - Gerenciar metas pessoais permitindo cadastrar, visualizar, editar e excluir metas. <br> RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário. |
+|	Requisito Associado 	| RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário. |
 | Objetivo do Teste 	| Verificar se o usuário consegue visualizar as atividades do dia, acessar seus detalhes e atualizar o status de conclusão diretamente pelo Dashboard. |
 | Passos 	| 1. Acessar a aplicação e efetuar o login <br>2. Navegar pelo menu lateral e clicar em "Dashboard" (rota `/dashboard`) <br>3. Na seção "Oque fazer hoje?", visualizar a lista de atividades <br>4. Clicar em uma atividade específica (ex: "Cardio") <br>5. Verificar se os detalhes (descrição e meta associada) são exibidos no painel lateral <br>6. Na seção "Status", marcar uma das opções disponíveis ("Concluido", "Parcialmente concluido" ou "Nao concluido") |
 |Critério de Êxito | - As atividades pendentes são listadas corretamente na tela. <br> - Os detalhes da atividade clicada são renderizados no painel ao lado. <br> - O status da atividade é atualizado com sucesso ao marcar o respectivo checkbox. |

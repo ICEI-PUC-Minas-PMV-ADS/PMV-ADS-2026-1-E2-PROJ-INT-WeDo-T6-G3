@@ -14,6 +14,11 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 | Requisito Associado | RF-003 - Recuperar senha por meio de redefinição de senha. |
 | Registro de evidência | https://youtu.be/jAn6rpb3jjk |
 
+| **Caso de Teste** 	| **CT03 – Dashboard** |
+|:---:	|:---:	|
+| Requisito Associado |RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário.  |
+| Registro de evidência |https://youtu.be/F2VoGSLjl3A |
+
 | **Caso de Teste** 	| **CT09 – Configurações Gerais** 	|
 |:---:	|:---:	|
 | Requisito Associado | RF-001 - Cadastrar usuários informando nome, e-mail e senha. |

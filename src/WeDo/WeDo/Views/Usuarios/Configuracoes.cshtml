@@ -1,7 +1,8 @@
 @model Usuario
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Configurações Gerais";
+    ViewData["Title"] = Localizer["Configurações Gerais"].Value;
 
     // Lista de idiomas disponíveis (renderizada via foreach para evitar conflito do tag helper <option> com C# inline)
     var idiomas = new[]
@@ -15,24 +16,30 @@
 <div class="config-wrapper">
     <div class="config-card">
 
-        <h1>Configurações Gerais</h1>
-        <p class="config-subtitle">Personalize sua experiência no WeDo. Suas preferências são salvas na sua conta.</p>
+        <h1>@Localizer["Configurações Gerais"]</h1>
+        <p class="config-subtitle">@Localizer["Personalize sua experiência no WeDo. Suas preferências são salvas na sua conta."]</p>
 
         @if (ViewBag.Success != null)
         {
-            <div class="alert alert-success" role="alert">@ViewBag.Success</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @ViewBag.Success
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @ViewBag.Error
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
 
         <form asp-action="Configuracoes" method="post">
             @Html.AntiForgeryToken()
 
             <div class="config-section">
-                <h2>Idioma</h2>
-                <p class="description">Selecione o idioma de exibição do sistema.</p>
+                <h2><i class="bi bi-translate me-2"></i>@Localizer["Idioma"]</h2>
+                <p class="description">@Localizer["Selecione o idioma de exibição do sistema."]</p>
                 <select id="idioma" name="idioma" class="form-select" style="max-width: 320px;">
                     @foreach (var op in idiomas)
                     {
@@ -46,37 +53,41 @@
                         }
                     }
                 </select>
+                <small class="text-muted d-block mt-2">
+                    <i class="bi bi-info-circle me-1"></i>
+                    @Localizer["Sua preferência é salva na conta e aplicada à interface ao salvar."]
+                </small>
             </div>
 
             <div class="config-section">
-                <h2>Tema</h2>
-                <p class="description">Escolha entre o tema claro ou escuro para a interface.</p>
+                <h2><i class="bi bi-palette me-2"></i>@Localizer["Tema"]</h2>
+                <p class="description">@Localizer["Escolha entre o tema claro ou escuro para a interface."]</p>
                 <div class="d-flex gap-4 flex-wrap">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tema"
                                id="temaClaro" value="@Tema.Claro"
                                @(Model.Tema == Tema.Claro ? "checked" : "") />
-                        <label class="form-check-label" for="temaClaro">Tema claro</label>
+                        <label class="form-check-label" for="temaClaro">@Localizer["Tema claro"]</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tema"
                                id="temaEscuro" value="@Tema.Escuro"
                                @(Model.Tema == Tema.Escuro ? "checked" : "") />
-                        <label class="form-check-label" for="temaEscuro">Tema escuro</label>
+                        <label class="form-check-label" for="temaEscuro">@Localizer["Tema escuro"]</label>
                     </div>
                 </div>
             </div>
 
             <div class="config-section">
-                <h2>Notificações</h2>
-                <p class="description">Defina como você quer ser avisado sobre suas metas e conquistas.</p>
+                <h2><i class="bi bi-bell me-2"></i>@Localizer["Notificações"]</h2>
+                <p class="description">@Localizer["Defina como você quer ser avisado sobre suas metas e conquistas."]</p>
 
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input" type="checkbox" role="switch"
                            id="notificacoesEmail" name="notificacoesEmail" value="true"
                            @(Model.NotificacoesEmail ? "checked" : "") />
                     <label class="form-check-label" for="notificacoesEmail">
-                        Receber notificações por <strong>e-mail</strong>
+                        @Localizer["Receber notificações por <strong>e-mail</strong>"]
                     </label>
                 </div>
 
@@ -85,14 +96,16 @@
                            id="notificacoesPush" name="notificacoesPush" value="true"
                            @(Model.NotificacoesPush ? "checked" : "") />
                     <label class="form-check-label" for="notificacoesPush">
-                        Receber notificações <strong>push</strong> no navegador
+                        @Localizer["Receber notificações <strong>push</strong> no navegador"]
                     </label>
                 </div>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a asp-controller="Home" asp-action="Index" class="btn btn-wedo-outline">Cancelar</a>
-                <button type="submit" class="btn btn-wedo">Salvar configurações</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-wedo-outline">@Localizer["Cancelar"]</a>
+                <button type="submit" class="btn btn-wedo">
+                    <i class="bi bi-check-circle me-1"></i>@Localizer["Salvar configurações"]
+                </button>
             </div>
         </form>
     </div>

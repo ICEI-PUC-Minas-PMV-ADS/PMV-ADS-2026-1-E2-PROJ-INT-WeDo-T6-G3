@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Configurações de Perfil" xml:space="preserve">
+    <value>Profile Settings</value>
+  </data>
+  <data name="Atualize suas informações pessoais e mantenha sua conta sempre em dia." xml:space="preserve">
+    <value>Update your personal information and keep your account up to date.</value>
+  </data>
+  <data name="Foto e identificação" xml:space="preserve">
+    <value>Photo and identification</value>
+  </data>
+  <data name="URL da foto de perfil" xml:space="preserve">
+    <value>Profile photo URL</value>
+  </data>
+  <data name="A pré-visualização aparece automaticamente." xml:space="preserve">
+    <value>The preview appears automatically.</value>
+  </data>
+  <data name="Informações pessoais" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="Nome completo" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="Apelido" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="Como você gosta de ser chamado" xml:space="preserve">
+    <value>What you like to be called</value>
+  </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Sobre você" xml:space="preserve">
+    <value>About you</value>
+  </data>
+  <data name="Conte um pouco sobre suas metas e foco atual" xml:space="preserve">
+    <value>Tell us a little about your goals and current focus</value>
+  </data>
+  <data name="Segurança" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="Para alterar sua senha, enviaremos um link seguro para o seu e-mail cadastrado." xml:space="preserve">
+    <value>To change your password, we'll send a secure link to your registered email.</value>
+  </data>
+  <data name="Alterar minha senha →" xml:space="preserve">
+    <value>Change my password →</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Salvar alterações" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+</root>

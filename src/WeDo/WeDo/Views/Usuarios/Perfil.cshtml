@@ -1,7 +1,8 @@
 @model WeDo.Models.Usuario
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Configurações de Perfil";
+    ViewData["Title"] = Localizer["Configurações de Perfil"].Value;
     string iniciais = "?";
     if (!string.IsNullOrWhiteSpace(Model?.Nome))
     {
@@ -16,23 +17,29 @@
 <div class="config-wrapper">
     <div class="config-card">
 
-        <h1>Configurações de Perfil</h1>
-        <p class="config-subtitle">Atualize suas informações pessoais e mantenha sua conta sempre em dia.</p>
+        <h1>@Localizer["Configurações de Perfil"]</h1>
+        <p class="config-subtitle">@Localizer["Atualize suas informações pessoais e mantenha sua conta sempre em dia."]</p>
 
         @if (ViewBag.Success != null)
         {
-            <div class="alert alert-success" role="alert">@ViewBag.Success</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @ViewBag.Success
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @ViewBag.Error
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
 
         <form asp-action="Perfil" method="post">
             @Html.AntiForgeryToken()
 
             <div class="config-section">
-                <h2>Foto e identificação</h2>
+                <h2><i class="bi bi-image me-2"></i>@Localizer["Foto e identificação"]</h2>
                 <div class="d-flex align-items-center gap-3 mb-3">
                     @if (!string.IsNullOrWhiteSpace(Model.UrlFoto))
                     {
@@ -48,54 +55,59 @@
                         @iniciais
                     </div>
                     <div class="flex-grow-1">
-                        <label for="urlFoto" class="form-label">URL da foto de perfil</label>
-                        <input type="url" id="urlFoto" name="urlFoto" class="form-control"
-                               value="@Model.UrlFoto" placeholder="https://exemplo.com/minha-foto.jpg" />
-                        <small class="text-muted">A pré-visualização aparece automaticamente.</small>
+                        <label asp-for="UrlFoto" class="form-label">@Localizer["URL da foto de perfil"]</label>
+                        <input asp-for="UrlFoto" type="url" id="urlFoto" class="form-control"
+                               placeholder="https://exemplo.com/minha-foto.jpg" />
+                        <span asp-validation-for="UrlFoto" class="text-danger"></span>
+                        <small class="text-muted d-block">@Localizer["A pré-visualização aparece automaticamente."]</small>
                     </div>
                 </div>
             </div>
 
             <div class="config-section">
-                <h2>Informações pessoais</h2>
+                <h2><i class="bi bi-person-vcard me-2"></i>@Localizer["Informações pessoais"]</h2>
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="nome" class="form-label">Nome completo</label>
-                        <input type="text" id="nome" name="nome" class="form-control"
-                               value="@Model.Nome" required />
+                        <label asp-for="Nome" class="form-label">@Localizer["Nome completo"]</label>
+                        <input asp-for="Nome" class="form-control" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <label for="apelido" class="form-label">Apelido</label>
-                        <input type="text" id="apelido" name="apelido" class="form-control"
-                               value="@Model.Apelido" placeholder="Como você gosta de ser chamado" />
+                        <label asp-for="Apelido" class="form-label">@Localizer["Apelido"]</label>
+                        <input asp-for="Apelido" class="form-control"
+                               placeholder="@Localizer["Como você gosta de ser chamado"]" />
+                        <span asp-validation-for="Apelido" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" id="email" name="email" class="form-control"
-                               value="@Model.Email" required />
+                        <label asp-for="Email" class="form-label">@Localizer["E-mail"]</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label for="descricao" class="form-label">Sobre você</label>
-                        <textarea id="descricao" name="descricao" class="form-control" rows="3"
-                                  placeholder="Conte um pouco sobre suas metas e foco atual">@Model.Descricao</textarea>
+                        <label asp-for="Descricao" class="form-label">@Localizer["Sobre você"]</label>
+                        <textarea asp-for="Descricao" class="form-control" rows="3"
+                                  placeholder="@Localizer["Conte um pouco sobre suas metas e foco atual"]"></textarea>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
                 </div>
             </div>
 
             <div class="config-section">
-                <h2>Segurança</h2>
+                <h2><i class="bi bi-shield-lock me-2"></i>@Localizer["Segurança"]</h2>
                 <p class="description">
-                    Para alterar sua senha, enviaremos um link seguro para o seu e-mail cadastrado.
+                    @Localizer["Para alterar sua senha, enviaremos um link seguro para o seu e-mail cadastrado."]
                 </p>
                 <a asp-action="EsqueciSenha" class="link-senha">
-                    Alterar minha senha →
+                    @Localizer["Alterar minha senha →"]
                 </a>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a asp-controller="Home" asp-action="Index" class="btn btn-wedo-outline">Cancelar</a>
-                <button type="submit" class="btn btn-wedo">Salvar alterações</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-wedo-outline">@Localizer["Cancelar"]</a>
+                <button type="submit" class="btn btn-wedo">
+                    <i class="bi bi-check-circle me-1"></i>@Localizer["Salvar alterações"]
+                </button>
             </div>
         </form>
     </div>

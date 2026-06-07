@@ -1,79 +1,305 @@
-﻿@model WeDo.Models.Usuario
+﻿@model WeDo.Models.ViewModels.LoginCadastroViewModel
 
 @{
     ViewData["Title"] = "Login e Cadastro - WeDo";
-    // Se você não quiser que o menu superior apareça nesta página, desmarque a linha abaixo:
-    // Layout = null;
+    // O menu superior dos seus amigos vai aparecer normalmente acima desta tela.
 }
 
-<div class="container-principal">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    /* Área externa que envelopa o conteúdo abaixo do menu principal */
+    .fundo-pagina-wedo {
+        background-color: #d1d1d1;
+        padding: 50px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 75vh;
+        font-family: 'Georgia', serif;
+    }
+
+    /* Moldura branca com as bordas arredondadas do Figma */
+    .moldura-externa-wedo {
+        background-color: #ffffff;
+        border-radius: 40px;
+        width: 100%;
+        max-width: 950px;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+    }
+
+    /* Alinhamento do Logo WeDo interno */
+    .topo-logo-wedo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .topo-logo-wedo i {
+        color: #147A3B;
+        font-size: 38px;
+        margin-right: 12px;
+    }
+
+    .topo-logo-wedo span {
+        font-size: 28px;
+        font-weight: bold;
+        font-style: italic;
+        color: #000000;
+    }
+
+    /* Container cinza interno */
+    .painel-central-wedo {
+        display: flex;
+        background-color: #dbdbdb;
+        border-radius: 30px;
+        overflow: hidden;
+        position: relative;
+        min-height: 460px;
+    }
+
+    /* Divisória vertical central */
+    .painel-central-wedo::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 3px;
+        background-color: #c4c4c4;
+        transform: translateX(-50%);
+    }
+
+    /* Divisão das colunas */
+    .coluna-cadastro-wedo, .coluna-login-wedo {
+        flex: 1;
+        padding: 45px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .painel-central-wedo h2 {
+        font-style: italic;
+        font-weight: normal;
+        color: #000000;
+        font-size: 26px;
+        margin-top: 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .painel-central-wedo form {
+        width: 100%;
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Estilização dos Inputs Arredondados */
+    .grupo-campo-wedo {
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .input-wedo {
+        width: 100%;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-style: italic;
+        color: #555555;
+        background-color: #ffffff;
+        box-sizing: border-box;
+    }
+
+    .input-wedo::placeholder {
+        color: #b0b0b0;
+    }
+
+    .input-wedo:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(20, 122, 59, 0.4);
+    }
+
+    /* Ícone do Olho na senha */
+    .icone-olho-wedo {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #000000;
+        font-size: 16px;
+    }
+
+    .link-esqueci-wedo {
+        margin-top: 2px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .link-esqueci-wedo a {
+        color: #0000ff;
+        text-decoration: underline;
+        font-size: 14px;
+    }
+
+    /* Botão oval Verde Escuro */
+    .btn-verde-wedo {
+        background-color: #147A3B;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 40px;
+        font-size: 18px;
+        font-style: italic;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        min-width: 150px;
+        margin-bottom: 25px;
+    }
+
+    .btn-verde-wedo:hover {
+        background-color: #0f5c2c;
+    }
+
+    /* Cápsula inferior dos botões sociais */
+    .capsula-sociais-wedo {
+        background-color: #ffffff;
+        border-radius: 25px;
+        padding: 8px 35px;
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+    }
+
+    .capsula-sociais-wedo i {
+        font-size: 24px;
+        color: #000000;
+        cursor: pointer;
+    }
+
+    /* Alertas de Retorno do Servidor */
+    .alertas-sistema-wedo {
+        width: 100%;
+        margin-top: 20px;
+        text-align: center;
+    }
+
     
-    @* --- LADO ESQUERDO: FORMULÁRIO DE CADASTRO --- *@
-    <div class="sessao-cadastro">
-        <h2>Cadastrar-se</h2>
-        <form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
-            @Html.AntiForgeryToken()
+    @@media (max-width: 768px) {
+        .painel-central-wedo {
+            flex-direction: column;
+            min-height: auto;
+        }
 
-            <div class="form-group">
-                <input type="text" name="nome" placeholder="nome:" required class="form-control" />
-            </div>
+            .painel-central-wedo::after {
+                display: none;
+            }
 
-            <div class="form-group">
-                <input type="email" name="email" placeholder="email:" required class="form-control" />
-            </div>
+        .coluna-cadastro-wedo {
+            border-bottom: 3px solid #c4c4c4;
+        }
 
-            <div class="form-group">
-                <input type="password" name="senha" placeholder="senha:" required class="form-control" />
-            </div>
+        .coluna-cadastro-wedo, .coluna-login-wedo {
+            padding: 30px 20px;
+        }
+    }
+        }
+    }
+    </text>
+</style>
 
-            <button type="submit" class="btn-verde">Cadastrar</button>
-        </form>
-    </div>
+<div class="fundo-pagina-wedo">
+    <div class="moldura-externa-wedo">
+        
+        <div class="topo-logo-wedo">
+            <i class="fa-solid fa-leaf"></i>
+            <span>WeDo</span>
+        </div>
 
-    @* --- LADO DIREITO: FORMULÁRIO DE LOGIN --- *@
-    <div class="sessao-login">
-        <h2>Login</h2>
-        <form asp-controller="Usuarios" asp-action="Entrar" method="post">
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                <input type="email" name="email" placeholder="email:" required class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <input type="password" name="senha" placeholder="senha:" required class="form-control" />
-            </div>
-
-            <button type="submit" class="btn-entrar">Entrar</button>
+        <div class="painel-central-wedo">
             
-            <div class="links-auxiliares">
-                <a asp-controller="Usuarios" asp-action="EsqueciSenha">Esqueci minha senha</a>
+            <div class="coluna-cadastro-wedo">
+                <h2>Cadastrar-se</h2>
+                <form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="grupo-campo-wedo">
+                        <input type="text" name="CadNome" asp-for="CadNome" placeholder="nome:" required class="input-wedo" />
+                    </div>
+
+                    <div class="grupo-campo-wedo">
+                        <input type="email" name="CadEmail" asp-for="CadEmail" placeholder="email:" required class="input-wedo" />
+                    </div>
+
+                    <div class="grupo-campo-wedo">
+                        <input type="password" name="CadSenha" asp-for="CadSenha" placeholder="senha:" required class="input-wedo" />
+                    </div>
+
+                    <button type="submit" class="btn-verde-wedo">Cadastrar</button>
+
+                    <div class="capsula-sociais-wedo">
+                        <a asp-controller="Usuarios" asp-action="LoginExterno" asp-route-provedor="Google" style="color: #000000; text-decoration: none;"><i class="fa-brands fa-google"></i></a>
+                        <a asp-controller="Usuarios" asp-action="LoginExterno" asp-route-provedor="Apple" style="color: #000000; text-decoration: none;"><i class="fa-brands fa-apple"></i></a>
+                    </div>
+                </form>
             </div>
-        </form>
+
+            <div class="coluna-login-wedo">
+                <h2>Login</h2>
+                <form asp-controller="Usuarios" asp-action="Entrar" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="grupo-campo-wedo">
+                        <input type="email" name="LoginEmail" asp-for="LoginEmail" placeholder="email:" required class="input-wedo" />
+                    </div>
+
+                    <div class="grupo-campo-wedo">
+                        <input type="password" name="LoginSenha" asp-for="LoginSenha" placeholder="senha:" required class="input-wedo" />
+                        <i class="fa-solid fa-eye-slash icone-olho-wedo"></i>
+                    </div>
+
+                    <div class="link-esqueci-wedo">
+                        <a asp-controller="Usuarios" asp-action="EsqueciSenha">Esqueci minha senha</a>
+                    </div>
+
+                    <button type="submit" class="btn-verde-wedo">Entrar</button>
+
+                    <div class="capsula-sociais-wedo">
+                        <i class="fa-brands fa-google"></i>
+                        <i class="fa-brands fa-apple"></i>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="alertas-sistema-wedo">
+            @if (ViewBag.Error != null)
+            {
+                <div style="color: #ff4d4d; font-weight: bold;">@ViewBag.Error</div>
+            }
+            @if (ViewBag.Success != null)
+            {
+                <div style="color: #2ecc71; font-weight: bold;">@ViewBag.Success</div>
+            }
+        </div>
+
     </div>
-
 </div>
 
-@* --- ÁREA DE MENSAGENS DE FEEDBACK (ERRO OU SUCESSO) --- *@
-<div class="alertas-sistema" style="margin-top: 20px; text-align: center;">
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger" style="color: #ff4d4d; font-weight: bold;">
-            @ViewBag.Error
-        </div>
-    }
-
-    @if (ViewBag.Success != null)
-    {
-        <div class="alert alert-success" style="color: #2ecc71; font-weight: bold;">
-            @ViewBag.Success
-        </div>
-    }
-</div>
-
-@* Opcional: Script para validação do lado do cliente *@
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

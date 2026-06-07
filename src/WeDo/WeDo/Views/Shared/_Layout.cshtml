@@ -2,6 +2,7 @@
 @using System.Security.Claims
 @using WeDo.Models
 @inject AppDbContext DbContext
+@inject IViewLocalizer Localizer
 
 @{
     string bodyClass = "";
@@ -89,35 +90,35 @@
                     <a asp-controller="Home" asp-action="Index"
                        class="nav-link @(controller == "Home" ? "active" : "")">
                         <i class="bi bi-house-door fs-5 me-3"></i>
-                        <span class="sidebar-text">DashBoard</span>
+                        <span class="sidebar-text">@Localizer["DashBoard"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a asp-controller="Metas" asp-action="Index"
                        class="nav-link @(controller == "Metas" ? "active" : "")">
                         <i class="bi bi-list-check fs-5 me-3"></i>
-                        <span class="sidebar-text">Metas</span>
+                        <span class="sidebar-text">@Localizer["Metas"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a asp-controller="AtividadesDiarias" asp-action="Registrar"
                        class="nav-link @(controller == "AtividadesDiarias" ? "active" : "")">
                         <i class="bi bi-pencil-square fs-5 me-3"></i>
-                        <span class="sidebar-text">Registrar Atividade</span>
+                        <span class="sidebar-text">@Localizer["Registrar Atividade"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a href="#"
                        class="nav-link @(controller == "Mural" ? "active" : "")">
                         <i class="bi bi-graph-up fs-5 me-3"></i>
-                        <span class="sidebar-text">Mural</span>
+                        <span class="sidebar-text">@Localizer["Mural"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a asp-controller="Historico" asp-action="Index"
                        class="nav-link @(controller == "Historico" ? "active" : "")">
                         <i class="bi bi-clock-history fs-5 me-3"></i>
-                        <span class="sidebar-text">Histórico</span>
+                        <span class="sidebar-text">@Localizer["Histórico"]</span>
                     </a>
                 </li>
             </ul>
@@ -125,6 +126,13 @@
 
         <div class="main-container shadow-sm">
 
+            @{
+                // Identifica a página atual para destacar o ícone correspondente na topbar (estado ativo).
+                var acaoAtual = ViewContext.RouteData.Values["action"]?.ToString();
+                var controllerAtual = ViewContext.RouteData.Values["controller"]?.ToString();
+                var emConfiguracoes = controllerAtual == "Usuarios" && acaoAtual == "Configuracoes";
+                var emPerfil = controllerAtual == "Usuarios" && acaoAtual == "Perfil";
+            }
             <header class="topbar">
                 <button id="toggleSidebar" class="btn btn-light border-0" style="background: transparent;">
                     <i class="bi bi-list fs-2" style="color: var(--wedo-text);"></i>

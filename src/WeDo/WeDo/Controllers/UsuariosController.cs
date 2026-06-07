@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
 using System.Security.Claims; // ADICIONADO
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace WeDo.Controllers
 {

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using WeDo.Models;
 
 namespace WeDo.Controllers
 {
+    [Authorize]
     public class MetasController : Controller
     {
         private readonly AppDbContext _context;
@@ -12,6 +15,12 @@ namespace WeDo.Controllers
         public MetasController(AppDbContext context)
         {
             _context = context;
+        }
+
+        private int ObterIdUsuarioLogado()
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return int.Parse(idClaim ?? "0");
         }
 
         public IActionResult Criar()
@@ -24,7 +33,7 @@ namespace WeDo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Criar(Meta meta)
         {
-            meta.IdUsuarioMeta = 1;
+            meta.IdUsuarioMeta = ObterIdUsuarioLogado();
             ModelState.Remove("Usuario");
             ModelState.Remove("IdUsuarioMeta");
 
@@ -41,7 +50,11 @@ namespace WeDo.Controllers
 
         public async Task<IActionResult> Index(int? categoriaId)
         {
-            var metasQuery = _context.Metas.Include(m => m.Categoria).AsQueryable();
+            var idUsuario = ObterIdUsuarioLogado();
+            var metasQuery = _context.Metas
+                .Include(m => m.Categoria)
+                .Where(m => m.IdUsuarioMeta == idUsuario)
+                .AsQueryable();
 
             if (categoriaId.HasValue)
             {
@@ -52,12 +65,10 @@ namespace WeDo.Controllers
             return View(await metasQuery.ToListAsync());
         }
 
-        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
 
-            
             var meta = await _context.Metas
                 .Include(m => m.Categoria)
                 .Include(m => m.AtividadesDiarias)
@@ -84,7 +95,7 @@ namespace WeDo.Controllers
         {
             if (id != meta.Id) return NotFound();
 
-            meta.IdUsuarioMeta = 1;
+            meta.IdUsuarioMeta = ObterIdUsuarioLogado();
             ModelState.Remove("Usuario");
             ModelState.Remove("IdUsuarioMeta");
 

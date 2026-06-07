@@ -401,3 +401,157 @@ body.tema-escuro {
         border-color: var(--wedo-green);
         box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.35);
     }
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+/* =======================================================
+   ESTILOS COMPLEMENTARES: TELA DE AUTENTICAÇÃO WEDO (FIGMA)
+   ======================================================= */
+.auth-body {
+    background-color: #a3a3a3 !important;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow: hidden;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.auth-card-main {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 920px;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-logo-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-left: 10px;
+}
+
+.auth-brand-text {
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+    color: #000000;
+}
+
+.auth-split-container {
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #e0e0e0;
+}
+
+.auth-panel {
+    flex: 1;
+    padding: 40px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-register {
+    background-color: #e0e0e0;
+    border-right: 3px solid #cccccc;
+}
+
+.panel-login {
+    background-color: #d9d9d9;
+}
+
+.auth-panel-title {
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: #000000;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+    .auth-input-group input {
+        width: 100%;
+        padding: 11px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 15px;
+        font-style: italic;
+        background-color: #ffffff;
+        color: #333333;
+        outline: none;
+    }
+
+.toggle-password-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #000000;
+    font-size: 17px;
+}
+
+.auth-forgot-link {
+    font-size: 13px;
+    color: #002288;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.btn-auth-submit {
+    background-color: #147A3B;
+    color: #ffffff;
+    border: none;
+    padding: 9px 40px;
+    font-size: 15px;
+    font-style: italic;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+    .btn-auth-submit:hover {
+        background-color: #0F5C2C;
+    }
+
+.auth-social-box {
+    background-color: #ffffff;
+    margin-top: 30px;
+    padding: 6px 30px;
+    border-radius: 25px;
+    display: flex;
+    gap: 18px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+    .auth-social-box i {
+        font-size: 20px;
+        color: #000000;
+        cursor: pointer;
+    }

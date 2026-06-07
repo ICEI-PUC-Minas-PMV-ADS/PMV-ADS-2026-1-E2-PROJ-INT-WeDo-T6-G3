@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication; // ADICIONADO
 using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
 using System.Security.Claims; // ADICIONADO
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization; // Cookie de cultura para o idioma (RF-013)
+using System.Globalization;
 
 namespace WeDo.Controllers
 {
@@ -13,11 +15,14 @@ namespace WeDo.Controllers
     {
         private readonly AppDbContext _context;
         private readonly EmailService _emailService;// Injeção do serviço de email
+        private readonly Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> _localizer; // Tradução das mensagens (RF-013)
 
-        public UsuariosController(AppDbContext context, EmailService emailService)
+        public UsuariosController(AppDbContext context, EmailService emailService,
+            Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> localizer)
         {
             _emailService = emailService;
             _context = context;
+            _localizer = localizer;
         }
 
         // --- INÍCIO DA ADIÇÃO: SISTEMA DE LOGIN E CADASTRO ---
@@ -71,6 +76,9 @@ namespace WeDo.Controllers
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity));
+
+                // Aplica o idioma preferido do usuário já a partir do login.
+                DefinirCookieDeCultura(usuario.Idioma);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -331,6 +339,25 @@ namespace WeDo.Controllers
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        // Converte a preferência de idioma do usuário no código de cultura correspondente.
+        private static string MapearCultura(Idioma idioma) => idioma switch
+        {
+            Idioma.InglesUS => "en-US",
+            Idioma.EspanholES => "es-ES",
+            _ => "pt-BR"
+        };
+
+        // Grava o cookie de cultura para que o RequestLocalizationMiddleware aplique o idioma
+        // escolhido em todas as próximas requisições.
+        private void DefinirCookieDeCultura(Idioma idioma)
+        {
+            var cultura = MapearCultura(idioma);
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cultura)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true });
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Perfil()
@@ -365,20 +392,20 @@ namespace WeDo.Controllers
 
             if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(email))
             {
-                ViewBag.Error = "Nome e e-mail são obrigatórios.";
+                ViewBag.Error = _localizer["Nome e e-mail são obrigatórios."].Value;
                 return View(usuario);
             }
 
             if (!new System.ComponentModel.DataAnnotations.EmailAddressAttribute().IsValid(email))
             {
-                ViewBag.Error = "Informe um e-mail em formato válido.";
+                ViewBag.Error = _localizer["Informe um e-mail em formato válido."].Value;
                 return View(usuario);
             }
 
             // Bloqueia troca de e-mail para um já cadastrado por outro usuário
             if (_context.Usuarios.Any(u => u.Email == email && u.Id != usuario.Id))
             {
-                ViewBag.Error = "Este e-mail já está em uso por outra conta.";
+                ViewBag.Error = _localizer["Este e-mail já está em uso por outra conta."].Value;
                 return View(usuario);
             }
 
@@ -395,7 +422,7 @@ namespace WeDo.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            ViewBag.Success = "Perfil atualizado com sucesso!";
+            ViewBag.Success = _localizer["Perfil atualizado com sucesso!"].Value;
             return View(usuario);
         }
 
@@ -426,7 +453,14 @@ namespace WeDo.Controllers
             _context.Update(usuario);
             await _context.SaveChangesAsync();
 
-            ViewBag.Success = "Configurações salvas com sucesso!";
+            // Persiste o idioma escolhido em um cookie de cultura (vale para as próximas requisições)
+            // e aplica a cultura já nesta resposta, para a página recarregar traduzida na hora.
+            DefinirCookieDeCultura(idioma);
+            var culturaAtual = new CultureInfo(MapearCultura(idioma));
+            CultureInfo.CurrentCulture = culturaAtual;
+            CultureInfo.CurrentUICulture = culturaAtual;
+
+            ViewBag.Success = _localizer["Configurações salvas com sucesso!"].Value;
             return View(usuario);
         }
     }

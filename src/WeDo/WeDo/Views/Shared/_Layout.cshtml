@@ -2,6 +2,7 @@
 @using System.Security.Claims
 @using WeDo.Models
 @inject AppDbContext DbContext
+@inject IViewLocalizer Localizer
 
 @{
     // Aplica o tema preferido do usuário logado (RF-013).
@@ -58,31 +59,31 @@
                 <li class="nav-item">
                     <a asp-controller="Home" asp-action="Index" class="nav-link active">
                         <i class="bi bi-house-door fs-5 me-3"></i>
-                        <span class="sidebar-text">DashBoard</span>
+                        <span class="sidebar-text">@Localizer["DashBoard"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a asp-controller="Metas" asp-action="Index" class="nav-link">
                         <i class="bi bi-list-check fs-5 me-3"></i>
-                        <span class="sidebar-text">Metas</span>
+                        <span class="sidebar-text">@Localizer["Metas"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a asp-controller="AtividadesDiarias" asp-action="Registrar" class="nav-link">
                         <i class="bi bi-pencil-square fs-5 me-3"></i>
-                        <span class="sidebar-text">Registrar Atividade</span>
+                        <span class="sidebar-text">@Localizer["Registrar Atividade"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a href="#" class="nav-link">
                         <i class="bi bi-graph-up fs-5 me-3"></i>
-                        <span class="sidebar-text">Mural</span>
+                        <span class="sidebar-text">@Localizer["Mural"]</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
                     <a href="#" class="nav-link">
                         <i class="bi bi-clock-history fs-5 me-3"></i>
-                        <span class="sidebar-text">Histórico</span>
+                        <span class="sidebar-text">@Localizer["Histórico"]</span>
                     </a>
                 </li>
             </ul>
@@ -106,12 +107,12 @@
                     <i class="bi bi-bell"></i>
                     <a asp-controller="Usuarios" asp-action="Configuracoes"
                        class="topbar-link @(emConfiguracoes ? "active" : "")"
-                       title="Configurações Gerais" aria-label="Configurações Gerais">
+                       title="@Localizer["Configurações Gerais"]" aria-label="@Localizer["Configurações Gerais"]">
                         <i class="bi bi-gear"></i>
                     </a>
                     <a asp-controller="Usuarios" asp-action="Perfil"
                        class="topbar-link @(emPerfil ? "active" : "")"
-                       title="Configurações de Perfil" aria-label="Configurações de Perfil">
+                       title="@Localizer["Configurações de Perfil"]" aria-label="@Localizer["Configurações de Perfil"]">
                         <i class="bi bi-person-circle"></i>
                     </a>
                 </div>

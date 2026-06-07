@@ -1,11 +1,31 @@
 using WeDo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
+using Microsoft.AspNetCore.Localization; // Suporte a múltiplos idiomas (RF-013)
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+// Localização (i18n): arquivos .resx ficam na pasta "Resources" espelhando o caminho das views.
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
+
+// Culturas suportadas pela aplicação. O idioma efetivo é definido por um cookie de cultura,
+// que é gravado conforme a preferência salva pelo usuário em Configurações Gerais.
+var supportedCultures = new[]
+{
+    new CultureInfo("pt-BR"),
+    new CultureInfo("en-US"),
+    new CultureInfo("es-ES")
+};
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("pt-BR");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 // adicionando o contexto do banco de dados SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -34,6 +54,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Aplica a cultura da requisição (lendo o cookie de cultura) antes do roteamento/MVC.
+app.UseRequestLocalization(app.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value);
+
 app.UseRouting();
 
 // --- ADICIONADO: Ativação da Autenticação ---

@@ -184,6 +184,22 @@ body {
     color: var(--wedo-text);
 }
 
+/* Links de navegação da topbar (engrenagem/perfil): herdam a cor dos ícones e
+   ganham destaque verde quando a página correspondente está aberta (estado ativo). */
+.topbar-icons .topbar-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+}
+
+    .topbar-icons .topbar-link:hover i {
+        color: var(--wedo-green);
+    }
+
+    .topbar-icons .topbar-link.active i {
+        color: var(--wedo-green);
+    }
+
 /* Área central habilitada para rolagem (Scroll) independente do body */
 .content-area {
     flex-grow: 1;

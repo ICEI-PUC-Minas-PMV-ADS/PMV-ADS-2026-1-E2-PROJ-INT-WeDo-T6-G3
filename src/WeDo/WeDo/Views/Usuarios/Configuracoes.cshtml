@@ -20,18 +20,24 @@
 
         @if (ViewBag.Success != null)
         {
-            <div class="alert alert-success" role="alert">@ViewBag.Success</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @ViewBag.Success
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @ViewBag.Error
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         }
 
         <form asp-action="Configuracoes" method="post">
             @Html.AntiForgeryToken()
 
             <div class="config-section">
-                <h2>Idioma</h2>
+                <h2><i class="bi bi-translate me-2"></i>Idioma</h2>
                 <p class="description">Selecione o idioma de exibição do sistema.</p>
                 <select id="idioma" name="idioma" class="form-select" style="max-width: 320px;">
                     @foreach (var op in idiomas)
@@ -46,10 +52,14 @@
                         }
                     }
                 </select>
+                <small class="text-muted d-block mt-2">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Sua preferência é salva na conta. A tradução completa da interface está em desenvolvimento.
+                </small>
             </div>
 
             <div class="config-section">
-                <h2>Tema</h2>
+                <h2><i class="bi bi-palette me-2"></i>Tema</h2>
                 <p class="description">Escolha entre o tema claro ou escuro para a interface.</p>
                 <div class="d-flex gap-4 flex-wrap">
                     <div class="form-check">
@@ -68,7 +78,7 @@
             </div>
 
             <div class="config-section">
-                <h2>Notificações</h2>
+                <h2><i class="bi bi-bell me-2"></i>Notificações</h2>
                 <p class="description">Defina como você quer ser avisado sobre suas metas e conquistas.</p>
 
                 <div class="form-check form-switch mb-2">
@@ -92,7 +102,9 @@
 
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a asp-controller="Home" asp-action="Index" class="btn btn-wedo-outline">Cancelar</a>
-                <button type="submit" class="btn btn-wedo">Salvar configurações</button>
+                <button type="submit" class="btn btn-wedo">
+                    <i class="bi bi-check-circle me-1"></i>Salvar configurações
+                </button>
             </div>
         </form>
     </div>

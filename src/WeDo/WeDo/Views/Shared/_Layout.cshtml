@@ -90,6 +90,13 @@
 
         <div class="main-container shadow-sm">
 
+            @{
+                // Identifica a página atual para destacar o ícone correspondente na topbar (estado ativo).
+                var acaoAtual = ViewContext.RouteData.Values["action"]?.ToString();
+                var controllerAtual = ViewContext.RouteData.Values["controller"]?.ToString();
+                var emConfiguracoes = controllerAtual == "Usuarios" && acaoAtual == "Configuracoes";
+                var emPerfil = controllerAtual == "Usuarios" && acaoAtual == "Perfil";
+            }
             <header class="topbar">
                 <button id="toggleSidebar" class="btn btn-light border-0" style="background: transparent;">
                     <i class="bi bi-list fs-2" style="color: var(--wedo-text);"></i>
@@ -97,8 +104,16 @@
 
                 <div class="topbar-icons">
                     <i class="bi bi-bell"></i>
-                    <i class="bi bi-gear"></i>
-                    <i class="bi bi-person-circle"></i>
+                    <a asp-controller="Usuarios" asp-action="Configuracoes"
+                       class="topbar-link @(emConfiguracoes ? "active" : "")"
+                       title="Configurações Gerais" aria-label="Configurações Gerais">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                    <a asp-controller="Usuarios" asp-action="Perfil"
+                       class="topbar-link @(emPerfil ? "active" : "")"
+                       title="Configurações de Perfil" aria-label="Configurações de Perfil">
+                        <i class="bi bi-person-circle"></i>
+                    </a>
                 </div>
             </header>
 

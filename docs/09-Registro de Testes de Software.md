@@ -21,7 +21,7 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 
 | **Caso de Teste** 	| **CT09 – Configurações Gerais** 	|
 |:---:	|:---:	|
-| Requisito Associado | RF-001 - Cadastrar usuários informando nome, e-mail e senha. |
+| Requisito Associado | RF-013 - Personalizar as preferências da aplicação (idioma, tema claro/escuro e notificações). |
 | Registro de evidência | https://drive.google.com/file/d/1NN5UtOkJGDUJwYG9vIZl-mv1IM0zYWEF/view?usp=sharing |
 
 | **Caso de Teste** 	| **CT10 – Edição de Perfil** 	|

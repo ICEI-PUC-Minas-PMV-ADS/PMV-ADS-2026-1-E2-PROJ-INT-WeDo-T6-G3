@@ -118,6 +118,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-010| Gerenciar categorias para controle das metas.| MÉDIA |
 |RF-011| Registrar conquistas no mural quando metas forem concluídas.| MÉDIA |
 |RF-012| Anexar imagens como comprovação de progresso das metas.| MÉDIA |
+|RF-013| Personalizar as preferências da aplicação (idioma, tema claro/escuro e notificações).| MÉDIA |
 
 ### Requisitos não Funcionais
 

@@ -5,6 +5,8 @@ using WeDo.Services;
 using Microsoft.AspNetCore.Authentication; // ADICIONADO
 using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
 using System.Security.Claims; // ADICIONADO
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace WeDo.Controllers
 {

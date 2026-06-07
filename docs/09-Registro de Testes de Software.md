@@ -7,7 +7,7 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 | **Caso de Teste** 	| **CT01 – Cadastrar Usuário** 	|
 |:---:	|:---:	|
 |	Requisito Associado 	| RF-001 - Cadastrar usuários informando nome, e-mail e senha. |
-|Registro de evidência |(https://youtu.be/-ZjEEg0M2m0)) |
+|Registro de evidência |https://youtu.be/-ZjEEg0M2m0 |
 
 | **Caso de Teste** 	| **CT02 – Trocar Senha** 	|
 |:---:	|:---:	|

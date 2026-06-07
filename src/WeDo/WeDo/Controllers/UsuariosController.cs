@@ -44,7 +44,7 @@ namespace WeDo.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(novoUsuario);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); 
                 ViewBag.Success = "Cadastro realizado com sucesso! Agora entre com sua conta.";
                 return View("Login");
             }

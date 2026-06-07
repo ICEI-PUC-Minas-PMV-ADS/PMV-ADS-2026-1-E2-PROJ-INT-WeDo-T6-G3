@@ -4,9 +4,8 @@
 @inject AppDbContext DbContext
 
 @{
-    // Aplica o tema preferido do usuário logado (RF-013).
-    // Falha silenciosamente para não derrubar o layout se o banco estiver indisponível.
     string bodyClass = "";
+    int notificacoesNaoLidas = 0;
 
     if (User?.Identity?.IsAuthenticated == true)
     {
@@ -23,6 +22,10 @@
 
                 if (temaUsuario == Tema.Escuro)
                     bodyClass = "tema-escuro";
+
+                // Conta notificações não lidas para o sininho
+                notificacoesNaoLidas = await DbContext.Notificacoes
+                    .CountAsync(n => n.IdUsuario == idUsuario && !n.Lida);
             }
         }
         catch
@@ -30,6 +33,9 @@
             // Mantém tema claro como fallback
         }
     }
+
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
 }
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,6 +48,30 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WeDo.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        .sininho-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sininho-badge {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            background-color: #ff6b6b;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body class="@bodyClass">
@@ -56,31 +86,36 @@
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a asp-controller="Home" asp-action="Index" class="nav-link active">
+                    <a asp-controller="Home" asp-action="Index"
+                       class="nav-link @(controller == "Home" ? "active" : "")">
                         <i class="bi bi-house-door fs-5 me-3"></i>
                         <span class="sidebar-text">DashBoard</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
-                    <a asp-controller="Metas" asp-action="Index" class="nav-link">
+                    <a asp-controller="Metas" asp-action="Index"
+                       class="nav-link @(controller == "Metas" ? "active" : "")">
                         <i class="bi bi-list-check fs-5 me-3"></i>
                         <span class="sidebar-text">Metas</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
-                    <a asp-controller="AtividadesDiarias" asp-action="Registrar" class="nav-link">
+                    <a asp-controller="AtividadesDiarias" asp-action="Registrar"
+                       class="nav-link @(controller == "AtividadesDiarias" ? "active" : "")">
                         <i class="bi bi-pencil-square fs-5 me-3"></i>
                         <span class="sidebar-text">Registrar Atividade</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
-                    <a href="#" class="nav-link">
+                    <a href="#"
+                       class="nav-link @(controller == "Mural" ? "active" : "")">
                         <i class="bi bi-graph-up fs-5 me-3"></i>
                         <span class="sidebar-text">Mural</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
-                    <a href="#" class="nav-link">
+                    <a asp-controller="Historico" asp-action="Index"
+                       class="nav-link @(controller == "Historico" ? "active" : "")">
                         <i class="bi bi-clock-history fs-5 me-3"></i>
                         <span class="sidebar-text">Histórico</span>
                     </a>
@@ -96,9 +131,25 @@
                 </button>
 
                 <div class="topbar-icons">
-                    <i class="bi bi-bell"></i>
-                    <i class="bi bi-gear"></i>
-                    <i class="bi bi-person-circle"></i>
+                    <!-- Sininho com bolinha vermelha se tiver notificações não lidas -->
+                    <a asp-controller="Notificacaos" asp-action="Index"
+                       style="color: var(--wedo-text); text-decoration: none;">
+                        <span class="sininho-wrapper">
+                            <i class="bi bi-bell"></i>
+                            @if (notificacoesNaoLidas > 0)
+                            {
+                                <span class="sininho-badge">@(notificacoesNaoLidas > 9 ? "9+" : notificacoesNaoLidas.ToString())</span>
+                            }
+                        </span>
+                    </a>
+                    <a asp-controller="Usuarios" asp-action="Configuracoes"
+                       style="color: var(--wedo-text); text-decoration: none;">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                    <a asp-controller="Usuarios" asp-action="Perfil"
+                       style="color: var(--wedo-text); text-decoration: none;">
+                        <i class="bi bi-person-circle"></i>
+                    </a>
                 </div>
             </header>
 
@@ -115,8 +166,8 @@
 
     <script>
         document.getElementById('toggleSidebar').addEventListener('click', function() {
-        var sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('collapsed');
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
         });
     </script>
 

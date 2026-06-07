@@ -1,47 +1,151 @@
-﻿@model IEnumerable<WeDo.Models.Notificacao>
+﻿@model List<WeDo.Models.Notificacao>
+@using WeDo.Models
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Notificações";
+    var naoLidas = Model.Where(n => !n.Lida).ToList();
+    var lidas = Model.Where(n => n.Lida).ToList();
 }
 
-<h1>Index</h1>
+<link rel="stylesheet" href="~/css/notificacoes.css" asp-append-version="true" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Mensagem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataEnvio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lida)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mensagem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEnvio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lida)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid p-0">
+
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="dashboard-title">
+            Notificações <i class="bi bi-bell fs-4 ms-2"></i>
+            @if (naoLidas.Any())
+            {
+                <span class="badge-nao-lidas">@naoLidas.Count</span>
+            }
+        </h2>
+
+        <div class="d-flex gap-2">
+            @if (naoLidas.Any())
+            {
+                <form method="post" asp-action="MarcarTodasLidas">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-wedo-outline btn btn-sm rounded-pill">
+                        <i class="bi bi-check2-all me-1"></i> Marcar todas como lidas
+                    </button>
+                </form>
+            }
+            @if (lidas.Any())
+            {
+                <form method="post" asp-action="ExcluirLidas">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-notif-excluir btn btn-sm rounded-pill">
+                        <i class="bi bi-trash me-1"></i> Excluir lidas
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="notif-vazia">
+            <i class="bi bi-bell-slash fs-1 mb-3 text-muted"></i>
+            <p class="font-serif fst-italic text-muted">Nenhuma notificação por enquanto.</p>
+        </div>
+    }
+    else
+    {
+        <!-- Não lidas -->
+        @if (naoLidas.Any())
+        {
+            <p class="secao-label"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem; vertical-align:middle;"></i> Novas</p>
+            <div class="d-flex flex-column gap-2 mb-4">
+                @foreach (var notif in naoLidas)
+                {
+                    <div class="notif-card notif-nao-lida">
+                        <div class="notif-icone">
+                            @if (notif.Tipo == TipoNotificacao.MetaConcluida)
+                            {
+                                <i class="bi bi-trophy-fill text-success"></i>
+                            }
+                            else if (notif.Tipo == TipoNotificacao.PrazoProximo)
+                            {
+                                <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                            }
+                            else if (notif.Tipo == TipoNotificacao.AtividadePendente)
+                            {
+                                <i class="bi bi-clock-fill text-danger"></i>
+                            }
+                            else if (notif.Tipo == TipoNotificacao.MetaRegistrada)
+                            {
+                                <i class="bi bi-plus-circle-fill text-primary"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-bell-fill" style="color: var(--wedo-green)"></i>
+                            }
+                        </div>
+                        <div class="notif-corpo">
+                            <p class="notif-mensagem">@notif.Mensagem</p>
+                            <span class="notif-data">@notif.DataEnvio.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                        <div class="notif-acoes">
+                            <form method="post" asp-action="MarcarLida" asp-route-id="@notif.Id" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-notif-acao" title="Marcar como lida">
+                                    <i class="bi bi-check2"></i>
+                                </button>
+                            </form>
+                            <form method="post" asp-action="Excluir" asp-route-id="@notif.Id" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-notif-acao btn-notif-excluir-icon" title="Excluir">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Lidas -->
+        @if (lidas.Any())
+        {
+            <p class="secao-label text-muted"><i class="bi bi-check2-all me-1"></i> Lidas</p>
+            <div class="d-flex flex-column gap-2">
+                @foreach (var notif in lidas)
+                {
+                    <div class="notif-card notif-lida">
+                        <div class="notif-icone">
+                            @if (notif.Tipo == TipoNotificacao.MetaConcluida)
+                            {
+                                <i class="bi bi-trophy text-muted"></i>
+                            }
+                            else if (notif.Tipo == TipoNotificacao.PrazoProximo)
+                            {
+                                <i class="bi bi-exclamation-triangle text-muted"></i>
+                            }
+                            else if (notif.Tipo == TipoNotificacao.AtividadePendente)
+                            {
+                                <i class="bi bi-clock text-muted"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-bell text-muted"></i>
+                            }
+                        </div>
+                        <div class="notif-corpo">
+                            <p class="notif-mensagem text-muted">@notif.Mensagem</p>
+                            <span class="notif-data">@notif.DataEnvio.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                        <div class="notif-acoes">
+                            <form method="post" asp-action="Excluir" asp-route-id="@notif.Id" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-notif-acao btn-notif-excluir-icon" title="Excluir">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>

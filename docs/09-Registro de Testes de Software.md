@@ -22,12 +22,12 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 | **Caso de Teste** 	| **CT09 – Configurações Gerais** 	|
 |:---:	|:---:	|
 | Requisito Associado | RF-013 - Personalizar as preferências da aplicação (idioma, tema claro/escuro e notificações). |
-| Registro de evidência | https://drive.google.com/file/d/1NN5UtOkJGDUJwYG9vIZl-mv1IM0zYWEF/view?usp=sharing |
+| Registro de evidência | https://drive.google.com/file/d/1Q4kx8ltGV8xWZWYNK42LCuIZ0rmllrQX/view?usp=sharing |
 
 | **Caso de Teste** 	| **CT10 – Edição de Perfil** 	|
 |:---:	|:---:	|
 | Requisito Associado | RF-004 - Editar informações do perfil do usuário. |
-| Registro de evidência | https://drive.google.com/file/d/1RADj1Tu2Jd6YZZ3dAVuVb-mQ_tRKKhpQ/view?usp=drive_link |
+| Registro de evidência | https://drive.google.com/file/d/1siNKr52B7pJkeTcD9v7Y_vT56nddyBDG/view?usp=sharing |
 
 ## Relatório de testes de software
 

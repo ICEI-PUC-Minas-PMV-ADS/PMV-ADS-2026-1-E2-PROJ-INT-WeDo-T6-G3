@@ -34,11 +34,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Registrando o serviço de email para injeção de dependência
 builder.Services.AddScoped<WeDo.Services.EmailService>();
 
+// Registrando o serviço de notificações automáticas
+builder.Services.AddScoped<WeDo.Services.NotificacaoService>();
+
+// Session para controlar geração de notificações automáticas
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(8);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // --- ADICIONADO: Configuração do sistema de Cookies ---
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Usuarios/Login"; // Rota para onde o usuário vai se não estiver logado
+        options.LoginPath = "/Usuarios/Login";
         options.AccessDeniedPath = "/Usuarios/Login";
     });
 // -------------------------------------------------------
@@ -49,7 +61,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -61,10 +72,13 @@ app.UseRequestLocalization(app.Services.GetRequiredService<Microsoft.Extensions.
 app.UseRouting();
 
 // --- ADICIONADO: Ativação da Autenticação ---
-app.UseAuthentication(); // O sistema reconhece quem é o usuário
+app.UseAuthentication();
 // --------------------------------------------
 
 app.UseAuthorization();
+
+// Session deve vir após Authentication e Authorization
+app.UseSession();
 
 app.MapStaticAssets();
 

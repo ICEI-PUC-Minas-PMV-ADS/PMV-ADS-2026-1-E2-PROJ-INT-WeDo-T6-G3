@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using WeDo.Models;
+using WeDo.Services;
 
 namespace WeDo.Controllers
 {
@@ -11,10 +12,12 @@ namespace WeDo.Controllers
     public class MetasController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly NotificacaoService _notificacaoService;
 
-        public MetasController(AppDbContext context)
+        public MetasController(AppDbContext context, NotificacaoService notificacaoService)
         {
             _context = context;
+            _notificacaoService = notificacaoService;
         }
 
         private int ObterIdUsuarioLogado()
@@ -41,6 +44,10 @@ namespace WeDo.Controllers
             {
                 _context.Add(meta);
                 await _context.SaveChangesAsync();
+
+                // Notifica que uma nova meta foi registrada
+                await _notificacaoService.NotificarMetaRegistrada(meta.IdUsuarioMeta, meta.Nome);
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -103,8 +110,17 @@ namespace WeDo.Controllers
             {
                 try
                 {
+                    // ADICIONADO: Verifica o estado anterior da meta para evitar spam de notificações
+                    var metaNoBanco = await _context.Metas
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(m => m.Id == id);
+
                     _context.Update(meta);
                     await _context.SaveChangesAsync();
+
+                    // Notifica se a meta foi concluída AGORA (evita enviar toda vez que editar a meta já concluída)
+                    if (meta.Condicao == CondicaoMeta.Concluida && (metaNoBanco == null || metaNoBanco.Condicao != CondicaoMeta.Concluida))
+                        await _notificacaoService.NotificarMetaConcluida(meta.IdUsuarioMeta, meta.Nome);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

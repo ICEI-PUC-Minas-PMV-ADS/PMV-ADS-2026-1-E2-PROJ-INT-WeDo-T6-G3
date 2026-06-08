@@ -16,33 +16,32 @@ namespace WeDo.Controllers
             _context = context;
         }
 
-        // Recupera o ID do usuário logado
         private int? ObterIdUsuarioLogado()
         {
             var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (int.TryParse(idClaim, out var id)) return id;
-            return null;
+            return int.TryParse(idClaim, out var id) ? id : null;
         }
 
         // GET: /Notificacaos
-        // Gera notificações automáticas e exibe todas do usuário
         public async Task<IActionResult> Index()
         {
             var idUsuario = ObterIdUsuarioLogado();
             if (idUsuario == null) return RedirectToAction("Login", "Usuarios");
 
+            // Gera as notificações em tempo real
             await GerarNotificacoesAutomaticas(idUsuario.Value);
 
+            // Filtragem: Não traz para a tela notificações que foram esvaziadas (excluídas)
             var notificacoes = await _context.Notificacoes
-                .Where(n => n.IdUsuario == idUsuario)
+                .AsNoTracking()
+                .Where(n => n.IdUsuario == idUsuario && n.Mensagem != "")
                 .OrderByDescending(n => n.DataEnvio)
                 .ToListAsync();
 
             return View(notificacoes);
         }
 
-        // POST: /Notificacaos/MarcarLida/5
-        // Marca uma notificação como lida
+        // POST: Marca como lida
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarcarLida(int id)
@@ -54,88 +53,91 @@ namespace WeDo.Controllers
             if (notificacao != null)
             {
                 notificacao.Lida = true;
-                _context.Update(notificacao);
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: /Notificacaos/MarcarTodasLidas
+        // POST: Marca todas como lidas
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarcarTodasLidas()
         {
             var idUsuario = ObterIdUsuarioLogado();
-            var naoLidas = await _context.Notificacoes
-                .Where(n => n.IdUsuario == idUsuario && !n.Lida)
-                .ToListAsync();
 
-            foreach (var n in naoLidas)
-                n.Lida = true;
+            await _context.Notificacoes
+                .Where(n => n.IdUsuario == idUsuario && !n.Lida && n.Mensagem != "")
+                .ExecuteUpdateAsync(s => s.SetProperty(n => n.Lida, true));
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: /Notificacaos/Excluir/5
+        // POST: Exclui uma notificação específica
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Excluir(int id)
         {
             var idUsuario = ObterIdUsuarioLogado();
-            var notificacao = await _context.Notificacoes
-                .FirstOrDefaultAsync(n => n.Id == id && n.IdUsuario == idUsuario);
 
-            if (notificacao != null)
-            {
-                _context.Notificacoes.Remove(notificacao);
-                await _context.SaveChangesAsync();
-            }
+            // Em vez de apagar do banco, nós limpamos a mensagem. 
+            // O registro continua lá (pro gerador não duplicar), mas some da tela do usuário.
+            await _context.Notificacoes
+                .Where(n => n.Id == id && n.IdUsuario == idUsuario)
+                .ExecuteUpdateAsync(s => s.SetProperty(n => n.Mensagem, ""));
 
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: /Notificacaos/ExcluirLidas
+        // POST: Exclui todas as lidas
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExcluirLidas()
         {
             var idUsuario = ObterIdUsuarioLogado();
-            var lidas = await _context.Notificacoes
-                .Where(n => n.IdUsuario == idUsuario && n.Lida)
-                .ToListAsync();
+            if (idUsuario == null) return RedirectToAction("Login", "Usuarios");
 
-            _context.Notificacoes.RemoveRange(lidas);
-            await _context.SaveChangesAsync();
+            // Esvazia as mensagens de todas as notificações lidas
+            await _context.Notificacoes
+                .Where(n => n.IdUsuario == idUsuario && n.Lida)
+                .ExecuteUpdateAsync(s => s.SetProperty(n => n.Mensagem, ""));
+
             return RedirectToAction(nameof(Index));
         }
 
         // =====================================================
-        // GERAÇÃO AUTOMÁTICA DE NOTIFICAÇÕES
+        // GERAÇÃO AUTOMÁTICA DE NOTIFICAÇÕES (IMEDIATA E SEGURA)
         // =====================================================
         private async Task GerarNotificacoesAutomaticas(int idUsuario)
         {
             var hoje = DateTime.Today;
+
+            // Busca as notificações existentes (incluindo as que foram limpas)
+            var notificacoesExistentes = await _context.Notificacoes
+                .AsNoTracking()
+                .Where(n => n.IdUsuario == idUsuario)
+                .ToListAsync();
 
             var metas = await _context.Metas
                 .Include(m => m.AtividadesDiarias)
                 .Where(m => m.IdUsuarioMeta == idUsuario)
                 .ToListAsync();
 
+            var novasNotificacoes = new List<Notificacao>();
+
             foreach (var meta in metas)
             {
-                // 1. Meta concluída — notifica uma vez
+                // 1. Meta concluída (Geral do sistema)
                 if (meta.Condicao == CondicaoMeta.Concluida)
                 {
-                    var jaExiste = await _context.Notificacoes.AnyAsync(n =>
-                        n.IdUsuario == idUsuario &&
+                    // Se já existir qualquer registro para essa meta (com texto ou vazio), não recria
+                    var jaExiste = notificacoesExistentes.Any(n =>
                         n.Tipo == TipoNotificacao.MetaConcluida &&
-                        n.Mensagem.Contains(meta.Nome));
+                        (n.Mensagem.Contains(meta.Nome) || n.Mensagem == ""));
 
                     if (!jaExiste)
                     {
-                        _context.Notificacoes.Add(new Notificacao
+                        novasNotificacoes.Add(new Notificacao
                         {
                             IdUsuario = idUsuario,
                             Mensagem = $"Parabéns! Você concluiu a meta: {meta.Nome} 🎉",
@@ -145,14 +147,12 @@ namespace WeDo.Controllers
                     }
                 }
 
-                // 2. Prazo próximo (5 dias ou menos) — notifica uma vez por meta
+                // 2. Prazo próximo
                 var diasRestantes = (meta.DataFinal - hoje).Days;
                 if (diasRestantes >= 0 && diasRestantes <= 5 && meta.Condicao != CondicaoMeta.Concluida)
                 {
-                    var jaExiste = await _context.Notificacoes.AnyAsync(n =>
-                        n.IdUsuario == idUsuario &&
+                    var jaExiste = notificacoesExistentes.Any(n =>
                         n.Tipo == TipoNotificacao.PrazoProximo &&
-                        n.Mensagem.Contains(meta.Nome) &&
                         n.DataEnvio.Date == hoje);
 
                     if (!jaExiste)
@@ -161,7 +161,7 @@ namespace WeDo.Controllers
                             ? $"⚠️ Hoje é o último dia para concluir: {meta.Nome}!"
                             : $"⚠️ A meta \"{meta.Nome}\" vence em {diasRestantes} dia(s)!";
 
-                        _context.Notificacoes.Add(new Notificacao
+                        novasNotificacoes.Add(new Notificacao
                         {
                             IdUsuario = idUsuario,
                             Mensagem = msg,
@@ -171,7 +171,7 @@ namespace WeDo.Controllers
                     }
                 }
 
-                // 3. Atividades do dia pendentes
+                // 3. Atividade pendente
                 var diasSemana = new Dictionary<DayOfWeek, bool>
                 {
                     { DayOfWeek.Sunday, meta.Domingo },
@@ -190,19 +190,17 @@ namespace WeDo.Controllers
                 if (metaAtiva && diasSemana.TryGetValue(hoje.DayOfWeek, out var ativaHoje) && ativaHoje)
                 {
                     var atividadeHoje = meta.AtividadesDiarias?
-                        .Any(a => a.Data.Date == hoje && a.Status != StatusAtividade.Pendente);
+                        .Any(a => a.Data.Date == hoje && a.Status != StatusAtividade.Pendente && a.Status.ToString().ToLower() != "pendente");
 
                     if (atividadeHoje == false || atividadeHoje == null)
                     {
-                        var jaExiste = await _context.Notificacoes.AnyAsync(n =>
-                            n.IdUsuario == idUsuario &&
+                        var jaExiste = notificacoesExistentes.Any(n =>
                             n.Tipo == TipoNotificacao.AtividadePendente &&
-                            n.Mensagem.Contains(meta.Nome) &&
                             n.DataEnvio.Date == hoje);
 
                         if (!jaExiste)
                         {
-                            _context.Notificacoes.Add(new Notificacao
+                            novasNotificacoes.Add(new Notificacao
                             {
                                 IdUsuario = idUsuario,
                                 Mensagem = $"📋 Você ainda não registrou a atividade de hoje: {meta.Nome}",
@@ -212,9 +210,43 @@ namespace WeDo.Controllers
                         }
                     }
                 }
+
+                // 4. REGRA: ATIVIDADE DA DASHBOARD CONCLUÍDA HOJE
+                if (meta.AtividadesDiarias != null)
+                {
+                    var concluidaHoje = meta.AtividadesDiarias.Any(a =>
+                        a.Data.Date == hoje &&
+                        (a.Status == StatusAtividade.Concluida ||
+                         a.Status.ToString().Equals("Concluida", StringComparison.OrdinalIgnoreCase) ||
+                         a.Status.ToString().Equals("Concluido", StringComparison.OrdinalIgnoreCase)));
+
+                    if (concluidaHoje)
+                    {
+                        // Se já existir uma notificação criada HOJE para essa regra, ele não duplica (mesmo que esteja vazia)
+                        var jaMencionouHoje = notificacoesExistentes.Any(n =>
+                            n.DataEnvio.Date == hoje &&
+                            n.Tipo == TipoNotificacao.MetaConcluida &&
+                            (n.Mensagem.Contains(meta.Nome) || n.Mensagem == ""));
+
+                        if (!jaMencionouHoje)
+                        {
+                            novasNotificacoes.Add(new Notificacao
+                            {
+                                IdUsuario = idUsuario,
+                                Mensagem = $"🎉 Muito bem! Você concluiu a atividade de hoje: {meta.Nome}",
+                                Tipo = TipoNotificacao.MetaConcluida,
+                                DataEnvio = DateTime.Now
+                            });
+                        }
+                    }
+                }
             }
 
-            await _context.SaveChangesAsync();
+            if (novasNotificacoes.Any())
+            {
+                await _context.Notificacoes.AddRangeAsync(novasNotificacoes);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

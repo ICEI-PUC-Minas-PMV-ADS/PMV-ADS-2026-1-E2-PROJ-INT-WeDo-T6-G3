@@ -19,6 +19,11 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 | Requisito Associado |RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário.  |
 | Registro de evidência |https://youtu.be/F2VoGSLjl3A |
 
+| **Caso de Teste** 	| **CT07 –   Visualizar Histórico de Metas** 	|
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-009 - Visualizar painel de evolução. |
+|Registro de evidência | https://youtu.be/xh7ax80UpLs |
+
 | **Caso de Teste** 	| **CT09 – Configurações Gerais** 	|
 |:---:	|:---:	|
 | Requisito Associado | RF-013 - Personalizar as preferências da aplicação (idioma, tema claro/escuro e notificações). |

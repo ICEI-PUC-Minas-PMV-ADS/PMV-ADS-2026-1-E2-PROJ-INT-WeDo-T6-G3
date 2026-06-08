@@ -24,6 +24,11 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 |	Requisito Associado 	| RF-009 - Visualizar painel de evolução. |
 |Registro de evidência | https://youtu.be/xh7ax80UpLs |
 
+| **Caso de Teste** 	| **CT08 - Painel de Notificações** 	|
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-009 - Visualizar painel de resumos das metas de usúario. |
+|Registro de evidência | https://youtu.be/HElhA61ftFY |
+
 | **Caso de Teste** 	| **CT09 – Configurações Gerais** 	|
 |:---:	|:---:	|
 | Requisito Associado | RF-013 - Personalizar as preferências da aplicação (idioma, tema claro/escuro e notificações). |

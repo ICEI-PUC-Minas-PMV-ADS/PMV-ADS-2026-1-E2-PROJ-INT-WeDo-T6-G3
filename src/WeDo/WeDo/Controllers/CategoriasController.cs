@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WeDo.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.AspNetCore.Authorization;
+using WeDo.Models;
 
 namespace WeDo.Controllers
 {
+    [Authorize] // Bloqueia TODAS as ações de categorias de uma só vez
     public class CategoriasController : Controller
     {
         private readonly AppDbContext _context;
@@ -14,7 +16,6 @@ namespace WeDo.Controllers
             _context = context;
         }
 
-        
         public async Task<IActionResult> Index()
         {
             var categorias = await _context.Categorias.ToListAsync();
@@ -39,9 +40,6 @@ namespace WeDo.Controllers
             return View(categoria);
         }
 
-       
-
-        
         public async Task<IActionResult> Editar(int? id)
         {
             if (id == null) return NotFound();
@@ -67,17 +65,14 @@ namespace WeDo.Controllers
             return View(categoria);
         }
 
-      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Excluir(int id)
         {
-           
             bool possuiMetas = await _context.Metas.AnyAsync(m => m.IdCategoriaMeta == id);
 
             if (possuiMetas)
             {
-               
                 TempData["Erro"] = "Não é possível excluir esta categoria pois existem metas vinculadas a ela. Exclua as metas primeiro.";
                 return RedirectToAction(nameof(Index));
             }
@@ -92,7 +87,5 @@ namespace WeDo.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-      
     }
 }

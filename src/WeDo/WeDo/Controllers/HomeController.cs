@@ -77,6 +77,7 @@ namespace WeDo.Controllers
         }
 
         // Processa o formulário da Dashboard e persiste as atualizações de status no banco de dados.
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Atualizar(List<DashboardViewModel> model)
         {

@@ -272,3 +272,61 @@ body.tema-escuro .badge-condicao.condicao-iniciada {
         display: none;
     }
 }
+/* --- Estilo dos Botões da Lista Lateral --- */
+.task-list-btn {
+    width: 100%;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+    .task-list-btn:hover {
+        background-color: #f4f7f6;
+        border-color: #ccc;
+    }
+
+    .task-list-btn.active {
+        background-color: #c8e6c9;
+        border-color: #81c784;
+        color: #147A3B;
+        font-weight: bold;
+    }
+
+.task-completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+    .task-completed.active {
+        color: #147A3B;
+    }
+
+/* --- Bolinhas de Status ao lado do texto --- */
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.dot-concluida {
+    background-color: #147A3B;
+}
+
+.dot-parcial {
+    background-color: #f6c278;
+}
+
+.dot-pendente {
+    background-color: #ff6b6b;
+}

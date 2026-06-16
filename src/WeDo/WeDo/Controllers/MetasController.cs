@@ -45,7 +45,6 @@ namespace WeDo.Controllers
                 _context.Add(meta);
                 await _context.SaveChangesAsync();
 
-                // Notifica que uma nova meta foi registrada
                 await _notificacaoService.NotificarMetaRegistrada(meta.IdUsuarioMeta, meta.Nome);
 
                 return RedirectToAction(nameof(Index));
@@ -110,7 +109,6 @@ namespace WeDo.Controllers
             {
                 try
                 {
-                    // ADICIONADO: Verifica o estado anterior da meta para evitar spam de notificações
                     var metaNoBanco = await _context.Metas
                         .AsNoTracking()
                         .FirstOrDefaultAsync(m => m.Id == id);
@@ -118,7 +116,6 @@ namespace WeDo.Controllers
                     _context.Update(meta);
                     await _context.SaveChangesAsync();
 
-                    // Notifica se a meta foi concluída AGORA (evita enviar toda vez que editar a meta já concluída)
                     if (meta.Condicao == CondicaoMeta.Concluida && (metaNoBanco == null || metaNoBanco.Condicao != CondicaoMeta.Concluida))
                         await _notificacaoService.NotificarMetaConcluida(meta.IdUsuarioMeta, meta.Nome);
                 }
@@ -145,6 +142,31 @@ namespace WeDo.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]                                                                           // Define verbo HTTP POST para a requisição
+        [ValidateAntiForgeryToken]                                                           // Previne ataques de falsificação de solicitação entre sites (CSRF)
+        public async Task<IActionResult> ConcluirMeta(int id)                                // Ação responsável por atualizar o status da meta para concluída
+        {
+            var meta = await _context.Metas.FindAsync(id);                                     // Busca a entidade Meta correspondente no banco de dados
+
+            if (meta == null || meta.IdUsuarioMeta != ObterIdUsuarioLogado())                // Valida a existência da meta e a autorização do usuário logado
+            {
+                return NotFound();                                                           // Retorna código 404 caso a validação falhe
+            }
+
+            if (meta.Condicao == CondicaoMeta.Concluida)                                     // Verifica se a meta já se encontra finalizada
+            {
+                return RedirectToAction(nameof(Index));                                      // Interrompe a execução e retorna à listagem principal
+            }
+
+            meta.Condicao = CondicaoMeta.Concluida;                                          // Atualiza o enumerador de condição da meta
+            _context.Update(meta);                                                           // Prepara o contexto do Entity Framework para a modificação
+            await _context.SaveChangesAsync();                                               // Persiste as alterações no banco de dados
+
+            await _notificacaoService.NotificarMetaConcluida(meta.IdUsuarioMeta, meta.Nome); // Dispara serviço de notificação ao usuário
+
+            return RedirectToAction(nameof(Index));                                          // Redireciona para a view Index após o término da operação
         }
     }
 }

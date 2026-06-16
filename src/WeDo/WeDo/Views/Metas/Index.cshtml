@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<WeDo.Models.Meta>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <div class="container mt-4">
     <div class="row">
-        
+
+        <!-- Painel Lateral: Filtros e Navegação de Metas -->
         <div class="col-md-4 border-end">
-            
+
             <h3 class="mb-2" style="font-family: 'Georgia', serif; font-style: italic; color: #333;">Suas metas</h3>
-            
+
             <div class="mb-3">
                 <form asp-action="Index" method="get" class="d-flex gap-2">
                     <select name="categoriaId" class="form-select form-select-sm" asp-items="ViewBag.Categorias" onchange="this.form.submit()">
@@ -23,13 +25,13 @@
                     <i class="bi bi-plus-circle"></i> + Nova Meta
                 </a>
             </div>
-            
+
             <div class="d-flex flex-column"
                  id="v-pills-tab"
                  role="tablist"
                  aria-orientation="vertical"
                  style="max-height: 500px; overflow-y: auto; overflow-x: hidden; padding-right: 5px;">
-                
+
                 @{
                     var isFirst = true;
                 }
@@ -42,11 +44,11 @@
                             type="button"
                             role="tab"
                             style="border-radius: 12px; color: #333; background-color: #fff; min-width: 100%;">
-                        
+
                         <div class="d-flex align-items-center">
-                            <span class="me-2 fs-4">🔘</span>
+                            <span class="me-2 fs-4">@(item.Condicao == WeDo.Models.CondicaoMeta.Concluida ? "✅" : "🔘")</span>
                             <div>
-                                <strong class="d-block">@item.Nome</strong>
+                                <strong class="d-block" style="@(item.Condicao == WeDo.Models.CondicaoMeta.Concluida ? "text-decoration: line-through; color: #888;" : "")">@item.Nome</strong>
                                 <small class="text-muted">@item.Categoria?.Nome</small>
                             </div>
                         </div>
@@ -55,85 +57,130 @@
                     isFirst = false;
                 }
             </div>
-        </div> <div class="col-md-8">
-        <div class="tab-content" id="v-pills-tabContent">
-            @{
-                var isFirstPanel = true;
-            }
-            @foreach (var item in Model)
-            {
-                <div class="tab-pane fade @(isFirstPanel ? "show active" : "")"
-                     id="panel-@item.Id"
-                     role="tabpanel"
-                     aria-labelledby="tab-@item.Id">
-                        
-                    <div class="p-4 bg-light shadow-sm" style="border-radius: 15px; border: 1px solid #e3e3e3;">
-                            
-                        <div class="mb-4">
-                            <h2 style="font-family: 'Georgia', serif; font-style: italic; color: #222;">@item.Nome</h2>
-                            <p class="text-muted" style="font-family: 'Georgia', serif; font-style: italic; font-size: 1.1rem;">
-                                @(string.IsNullOrEmpty(item.Descricao) ? "Sem descrição cadastrada para esta meta." : item.Descricao)
-                            </p>
-                        </div>
+        </div>
 
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <div class="p-3 bg-white h-100" style="border: 1px solid #ccc; border-radius: 15px;">
-                                    <h5 style="font-family: 'Georgia', serif; font-style: italic;" class="text-primary">Ações</h5>
-                                    <div class="mt-2 d-flex gap-2 flex-wrap">
-                                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning rounded-pill px-3">Editar Meta</a>
-                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info rounded-pill px-3">Ver Detalhes</a>
-                                    </div>
-                                </div>
+        <!-- Painel Principal: Detalhamento e Ações da Meta Selecionada -->
+        <div class="col-md-8">
+            <div class="tab-content" id="v-pills-tabContent">
+                @{
+                    var isFirstPanel = true;
+                }
+                @foreach (var item in Model)
+                {
+                    <div class="tab-pane fade @(isFirstPanel ? "show active" : "")"
+                         id="panel-@item.Id"
+                         role="tabpanel"
+                         aria-labelledby="tab-@item.Id">
+
+                        <div class="p-4 bg-light shadow-sm" style="border-radius: 15px; border: 1px solid #e3e3e3;">
+
+                            <div class="mb-4">
+                                <h2 style="font-family: 'Georgia', serif; font-style: italic; color: #222;">@item.Nome</h2>
+                                <p class="text-muted" style="font-family: 'Georgia', serif; font-style: italic; font-size: 1.1rem;">
+                                    @(string.IsNullOrEmpty(item.Descricao) ? "Sem descrição cadastrada para esta meta." : item.Descricao)
+                                </p>
                             </div>
-                                
-                            <div class="col-md-6">
-                                <div class="p-3 bg-white h-100" style="border: 1px solid #ccc; border-radius: 15px;">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span style="font-family: 'Georgia', serif; font-style: italic;">Início 🔹</span>
-                                        <strong class="text-secondary">@item.DataInicial.ToShortDateString()</strong>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span style="font-family: 'Georgia', serif; font-style: italic;">Fim 🟢</span>
-                                        <strong class="text-success">@item.DataFinal.ToShortDateString()</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="p-3 bg-white mb-4" style="border: 1px solid #ccc; border-radius: 15px;">
-                            <div class="row row-cols-4 g-2 text-center" style="font-family: 'Georgia', serif; font-style: italic; color: #777; font-size: 0.9rem;">
-                                @{
-                                    string[] meses = { "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez" };
-                                    int mesInicio = item.DataInicial.Month;
-                                    int mesFim = item.DataFinal.Month;
-
-                                    for (int i = 1; i <= 12; i++)
-                                    {
-                                        string classeDestaque = "";
-                                        string sufixo = "";
-                                        if (i == mesInicio) { classeDestaque = "bg-info text-dark fw-bold border-info"; sufixo = " 🔹"; }
-                                        else if (i == mesFim) { classeDestaque = "bg-success text-white fw-bold border-success"; sufixo = " 🟢"; }
-                                            
-                                        <div class="col">
-                                            <div class="p-2 border rounded-pill @classeDestaque">@meses[i - 1]@sufixo</div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-white h-100" style="border: 1px solid #ccc; border-radius: 15px;">
+                                        <h5 style="font-family: 'Georgia', serif; font-style: italic;" class="text-primary">Ações</h5>
+                                        <div class="mt-2 d-flex gap-2 flex-wrap">
+                                            <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning rounded-pill px-3">Editar Meta</a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info rounded-pill px-3">Ver Detalhes</a>
                                         </div>
-                                    }
-                                }
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-white h-100" style="border: 1px solid #ccc; border-radius: 15px;">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span style="font-family: 'Georgia', serif; font-style: italic;">Início 🔹</span>
+                                            <strong class="text-secondary">@item.DataInicial.ToShortDateString()</strong>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span style="font-family: 'Georgia', serif; font-style: italic;">Fim 🟢</span>
+                                            <strong class="text-success">@item.DataFinal.ToShortDateString()</strong>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="d-flex justify-content-between align-items-center p-3" style="background-color: #e8f5e9; border-radius: 20px; border: 1px solid #c8e6c9;">
-                            <span style="font-family: 'Georgia', serif; font-style: italic; font-weight: bold; color: #2e7d32;">Status da Meta</span>
-                            <span class="badge bg-success px-3 py-2 rounded-pill">Ativa 🥳</span>
-                        </div>
+                            <div class="p-3 bg-white mb-4" style="border: 1px solid #ccc; border-radius: 15px;">
+                                <div class="row row-cols-4 g-2 text-center" style="font-family: 'Georgia', serif; font-style: italic; color: #777; font-size: 0.9rem;">
+                                    @{
+                                        string[] meses = { "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez" };
+                                        int mesInicio = item.DataInicial.Month;
+                                        int mesFim = item.DataFinal.Month;
 
+                                        for (int i = 1; i <= 12; i++)
+                                        {
+                                            string classeDestaque = "";
+                                            string sufixo = "";
+                                            if (i == mesInicio) { classeDestaque = "bg-info text-dark fw-bold border-info"; sufixo = " 🔹"; }
+                                            else if (i == mesFim) { classeDestaque = "bg-success text-white fw-bold border-success"; sufixo = " 🟢"; }
+
+                                            <div class="col">
+                                                <div class="p-2 border rounded-pill @classeDestaque">@meses[i - 1]@sufixo</div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Controle de Condição e Submissão de Conclusão da Meta -->
+                            <div class="d-flex justify-content-between align-items-center p-3" style="background-color: #e8f5e9; border-radius: 20px; border: 1px solid #c8e6c9;">
+                                <span style="font-family: 'Georgia', serif; font-style: italic; font-weight: bold; color: #2e7d32;">Status da Meta</span>
+
+                                <div class="d-flex align-items-center gap-3">
+                                    @if (item.Condicao == WeDo.Models.CondicaoMeta.Concluida)
+                                    {
+                                        <span class="badge px-3 py-2 rounded-pill" style="background-color: #147A3B; font-size: 0.9rem;">Meta Concluída 🏆</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge px-3 py-2 rounded-pill text-dark" style="background-color: #c8e6c9; border: 1px solid #81c784;">Em Andamento 🏃‍♂️</span>
+                                        <form asp-action="ConcluirMeta" method="post" class="m-0 p-0" id="formConcluirMeta-@item.Id">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="button" class="btn btn-sm btn-success rounded-pill px-4 fw-bold shadow-sm" onclick="confirmarConclusao('@item.Id')">
+                                                <i class="bi bi-check-circle-fill"></i> Concluir Meta
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                isFirstPanel = false;
-            }
+                    isFirstPanel = false;
+                }
+            </div>
         </div>
     </div>
 </div>
-</div> 
-
+<script>
+    function confirmarConclusao(metaId) {
+    Swal.fire({
+    title: 'Concluir Meta?',
+    text: "Ela será enviada para o seu Mural de Conquistas!",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#147A3B', // O verde oficial do WeDo
+    cancelButtonColor: '#aaa',     // Cinza elegante para o cancelar
+    confirmButtonText: 'Sim, concluir!',
+    cancelButtonText: 'Cancelar',
+    background: '#ffffff',
+    borderRadius: '20px',          // Bordas arredondadas do seu design
+    customClass: {
+    title: 'font-serif italic',
+    popup: 'rounded-4'
+    }
+    }).then((result) => {
+    if (result.isConfirmed) {
+    // Se o usuário clicar em sim, submete o formulário correspondente àquela meta
+    document.getElementById('formConcluirMeta-' + metaId).submit();
+    }
+    });
+    }
+</script>

@@ -75,6 +75,21 @@
                 justify-content: center;
                 pointer-events: none;
             }
+
+            /* Correção da cor dos links no menu lateral para ficarem pretos por padrão e verdes quando ativos */
+            .sidebar .nav-link {
+                color: #333 !important;
+            }
+
+                .sidebar .nav-link.active {
+                    background-color: #c8e6c9 !important; /* Verde claro */
+                    color: #147A3B !important; /* Verde escuro para o texto ativo */
+                    font-weight: bold;
+                }
+
+                .sidebar .nav-link.text-danger {
+                    color: #dc3545 !important; /* Mantém o botão Sair vermelho */
+                }
     </style>
 </head>
 <body class="@bodyClass">
@@ -112,7 +127,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a href="#"
+                        <a asp-controller="Mural" asp-action="Index"
                            class="nav-link @(controller == "Mural" ? "active" : "")">
                             <i class="bi bi-graph-up fs-5 me-3"></i>
                             <span class="sidebar-text">@Localizer["Mural"]</span>
@@ -193,6 +208,5 @@
         }
     </script>
 
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+    @await RenderSectionAsync("Scripts", required: false)</body>
 </html>

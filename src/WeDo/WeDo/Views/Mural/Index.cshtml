@@ -1,0 +1,267 @@
+﻿@model IEnumerable<WeDo.Models.Meta>
+@{
+    ViewData["Title"] = "Mural de Conquistas";
+}
+
+<style>
+    /* Estilos centralizados para agilidade na entrega */
+    .mural-container {
+        display: flex;
+        gap: 20px;
+        background-color: #f4f7f6;
+        padding: 20px;
+        border-radius: 12px;
+        min-height: 70vh;
+    }
+
+    .mural-sidebar {
+        flex: 1;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+        .mural-sidebar h4 {
+            font-family: serif;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+    .filtro-badge {
+        display: inline-block;
+        background-color: #e0e0e0;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+    .conquista-item {
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+        .conquista-item:hover {
+            background-color: #e8f5e9;
+        }
+
+        .conquista-item.active {
+            background-color: #c8e6c9;
+            font-weight: bold;
+            color: #147A3B;
+        }
+
+    .mural-content {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .detalhe-card {
+        background: #e0e0e0;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        display: none; /* Escondido por padrão, o JS vai mostrar */
+    }
+
+        .detalhe-card.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+    .detalhe-titulo {
+        font-size: 1.5em;
+        font-style: italic;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .info-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+
+    .meses-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+    }
+
+    .mes-badge {
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 5px;
+        text-align: center;
+        font-style: italic;
+        color: #777;
+        position: relative;
+    }
+
+    .pino-verde {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        color: #147A3B;
+        font-size: 1.2em;
+    }
+
+    .pino-azul {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        color: #00bcd4;
+        font-size: 1.2em;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="mural-container">
+    <div class="mural-sidebar">
+        <h4>Mural de Conquistas</h4>
+        <div class="filtro-badge">Filtrar &#9662; nenhum</div>
+
+        <div id="lista-conquistas">
+            @if (!Model.Any())
+            {
+                <p class="text-muted mt-3">Você ainda não possui metas concluídas. Continue focado!</p>
+            }
+            else
+            {
+                int index = 0;
+                foreach (var meta in Model)
+                {
+                    <div class="conquista-item @(index == 0 ? "active" : "")" data-target="meta-@meta.Id" onclick="selecionarMeta(this, 'meta-@meta.Id')">
+                        <i class="bi bi-check2-square text-success fs-5"></i>
+                        <span>@meta.Nome</span>
+                    </div>
+                    index++;
+                }
+            }
+        </div>
+    </div>
+
+    <div class="mural-content" id="conteudo-conquistas">
+        @if (Model.Any())
+        {
+            int index = 0;
+            foreach (var meta in Model)
+            {
+                <div id="meta-@meta.Id" class="detalhe-card @(index == 0 ? "active" : "")">
+
+                    <div style="background: #cfd8dc; padding: 10px 20px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">
+                        <span style="font-style: italic; font-size: 1.1em;">@meta.Nome</span>
+                    </div>
+
+                    <div style="background: #cfd8dc; padding: 20px; border-radius: 12px;">
+                        <h3 class="detalhe-titulo">@(string.IsNullOrEmpty(meta.Descricao) ? meta.Nome : meta.Descricao)</h3>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <span style="font-style: italic;">Obrigações:</span>
+                            <ul class="mt-2 text-muted" style="list-style-type: none; padding-left: 0;">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Meta atingida com sucesso</li>
+                            </ul>
+                        </div>
+                        <div class="info-box" style="display: flex; flex-direction: column; justify-content: center; gap: 15px;">
+                            <div>
+                                <span style="font-style: italic;">Inicio <i class="bi bi-geo-alt-fill text-info fs-5"></i> @meta.DataInicial.ToString("dd/MM")</span>
+                            </div>
+                            <div>
+                                <span style="font-style: italic;">Fim <i class="bi bi-geo-alt-fill text-success fs-5"></i> @meta.DataFinal.ToString("dd/MM")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meses-grid">
+                        <div class="mes-badge">jan <i class="bi bi-geo-alt-fill pino-azul"></i></div>
+                        <div class="mes-badge">fev</div>
+                        <div class="mes-badge">mar <i class="bi bi-geo-alt-fill pino-verde"></i></div>
+                        <div class="mes-badge">abr</div>
+                        <div class="mes-badge">mai</div>
+                        <div class="mes-badge">jun</div>
+                        <div class="mes-badge">jul</div>
+                        <div class="mes-badge">ago</div>
+                        <div class="mes-badge">set</div>
+                        <div class="mes-badge">out</div>
+                        <div class="mes-badge">nov</div>
+                        <div class="mes-badge">dez</div>
+                    </div>
+                </div>
+                index++;
+            }
+        }
+        else
+        {
+            <div class="detalhe-card active" style="text-align: center; background: transparent; box-shadow: none;">
+                <i class="bi bi-trophy text-secondary" style="font-size: 4rem;"></i>
+                <h4 class="mt-3 text-secondary">Seu Mural aguarda grandes conquistas!</h4>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    // Script isolado para gerenciar as trocas de abas sem recarregar a página
+    function selecionarMeta(elementoClicado, targetId) {
+
+        // 1. Remove a classe 'active' de todos os itens do menu lateral
+        var itensMenu = document.querySelectorAll('.conquista-item');
+        itensMenu.forEach(function(item) {
+            item.classList.remove('active');
+        });
+
+        // 2. Adiciona a classe 'active' apenas no item clicado
+        elementoClicado.classList.add('active');
+
+        // 3. Esconde todos os cards de detalhes na área de conteúdo
+        var cards = document.querySelectorAll('.detalhe-card');
+        cards.forEach(function(card) {
+            card.classList.remove('active');
+        });
+
+        // 4. Mostra o card de detalhe correspondente ao ID clicado
+        var cardAtivo = document.getElementById(targetId);
+        if(cardAtivo) {
+            cardAtivo.classList.add('active');
+        }
+    }
+</script>

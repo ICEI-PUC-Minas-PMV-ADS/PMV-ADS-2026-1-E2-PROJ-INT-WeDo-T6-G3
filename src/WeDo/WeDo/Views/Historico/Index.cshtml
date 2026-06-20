@@ -127,6 +127,7 @@
                     <div class="tab-pane fade @isActivePane" id="historico-pane-@i" role="tabpanel" tabindex="0">
                         <div class="task-details-panel shadow-sm">
 
+                            <!-- Título + Badge -->
                             <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap gap-2">
                                 <h3 class="task-details-title mb-0">@meta.Nome</h3>
                                 <span class="badge-condicao condicao-@meta.Condicao.ToString().ToLower()">
@@ -139,6 +140,7 @@
                                 <p class="task-details-desc">@meta.Descricao</p>
                             }
 
+                            <!-- Datas -->
                             <div class="meta-datas mb-3">
                                 <span>
                                     <i class="bi bi-calendar-event me-1"></i>
@@ -150,36 +152,41 @@
                                 </span>
                             </div>
 
-                            <div class="cal-legenda mb-2">
-                                <span class="legenda-item"><span class="legenda-dot inicio"></span> Início</span>
-                                <span class="legenda-item ms-2"><span class="legenda-dot fim"></span> Prazo</span>
-                                <span class="legenda-item ms-2"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> Concluída</span>
-                                <span class="legenda-item ms-2"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> Parcial</span>
-                                <span class="legenda-item ms-2"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> Pendente</span>
-                                @if (!temAtividades)
-                                {
-                                    <span class="ms-2 text-muted fst-italic" style="font-size:0.8rem;">Nenhuma atividade registrada ainda</span>
-                                }
+                            <!-- Navegação do calendário + legenda integrada -->
+                            <div class="calendario-nav-wrapper mb-2">
+                                <div class="calendario-nav">
+                                    <a asp-action="Index"
+                                       asp-route-mes="@Model.MesAnterior"
+                                       asp-route-ano="@Model.AnoMesAnterior"
+                                       asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                                       class="btn-nav-mes">&#8249;</a>
+
+                                    <h4 class="mes-titulo">
+                                        @System.Globalization.CultureInfo.GetCultureInfo("pt-BR").TextInfo.ToTitleCase(Model.NomeMes)
+                                    </h4>
+
+                                    <a asp-action="Index"
+                                       asp-route-mes="@Model.MesSeguinte"
+                                       asp-route-ano="@Model.AnoMesSeguinte"
+                                       asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                                       class="btn-nav-mes">&#8250;</a>
+                                </div>
+
+                                <!-- Legenda alinhada à direita, na mesma linha do mês -->
+                                <div class="cal-legenda">
+                                    <span class="legenda-item"><span class="legenda-dot inicio"></span> Início</span>
+                                    <span class="legenda-item"><span class="legenda-dot fim"></span> Prazo</span>
+                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> Concluída</span>
+                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> Parcial</span>
+                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> Pendente</span>
+                                    @if (!temAtividades)
+                                    {
+                                        <span class="text-muted fst-italic" style="font-size:0.75rem;">Sem atividades neste mês</span>
+                                    }
+                                </div>
                             </div>
 
-                            <div class="calendario-nav mb-2">
-                                <a asp-action="Index"
-                                   asp-route-mes="@Model.MesAnterior"
-                                   asp-route-ano="@Model.AnoMesAnterior"
-                                   asp-route-categoriaId="@Model.CategoriaFiltradaId"
-                                   class="btn-nav-mes">&#8249;</a>
-
-                                <h4 class="mes-titulo">
-                                    @System.Globalization.CultureInfo.GetCultureInfo("pt-BR").TextInfo.ToTitleCase(Model.NomeMes)
-                                </h4>
-
-                                <a asp-action="Index"
-                                   asp-route-mes="@Model.MesSeguinte"
-                                   asp-route-ano="@Model.AnoMesSeguinte"
-                                   asp-route-categoriaId="@Model.CategoriaFiltradaId"
-                                   class="btn-nav-mes">&#8250;</a>
-                            </div>
-
+                            <!-- Grade do Calendário -->
                             <div class="calendario-grid">
 
                                 @foreach (var ds in diasSemana)

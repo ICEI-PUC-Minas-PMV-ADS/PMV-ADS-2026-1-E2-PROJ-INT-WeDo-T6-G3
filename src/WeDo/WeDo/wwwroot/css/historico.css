@@ -1,9 +1,11 @@
-/* ==========================================================================
-   HISTÓRICO — historico.css
-   ========================================================================== */
+/* HISTÓRICO*/
 
 .historico-wrapper {
     min-height: calc(100vh - 160px);
+}
+
+.dashboard-title {
+    font-style: italic;
 }
 
 .secao-label {
@@ -12,39 +14,78 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--wedo-green);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     margin-top: 0.5rem;
 }
 
-.badge-condicao {
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 4px 12px;
+.task-list-btn {
+    border-radius: 14px !important;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+    .task-list-btn:hover {
+        transform: translateX(2px);
+        box-shadow: 0 2px 8px rgba(20, 122, 59, 0.08);
+    }
+
+.task-details-panel {
+    background-color: #f7f9f8;
     border-radius: 20px;
+    padding: 28px 32px;
+    border: 1px solid var(--wedo-border);
+}
+
+body.tema-escuro .task-details-panel {
+    background-color: #1f2422;
+}
+
+.task-details-title {
+    font-style: italic;
+    font-size: 1.7rem;
+}
+
+.badge-condicao {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 999px;
     text-transform: capitalize;
     white-space: nowrap;
+    letter-spacing: 0.02em;
 }
 
 .condicao-concluida {
-    background-color: #e8f5e9;
+    background-color: #d9f2e3;
     color: #147A3B;
-    border: 1px solid #6cc88a;
 }
 
 .condicao-emandamento {
-    background-color: #fff8e6;
+    background-color: #fdf1d6;
     color: #9a6200;
-    border: 1px solid #f6c278;
 }
 
 .condicao-iniciada {
-    background-color: #fdecea;
+    background-color: #fde0de;
     color: #b71c1c;
-    border: 1px solid #ff6b6b;
+}
+
+body.tema-escuro .badge-condicao.condicao-concluida {
+    background-color: #1e3828;
+    color: #6cc88a;
+}
+
+body.tema-escuro .badge-condicao.condicao-emandamento {
+    background-color: #3a2e10;
+    color: #f6c278;
+}
+
+body.tema-escuro .badge-condicao.condicao-iniciada {
+    background-color: #3a1010;
+    color: #ff6b6b;
 }
 
 .meta-datas {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: var(--wedo-muted);
     font-style: italic;
 }
@@ -53,20 +94,25 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--wedo-muted);
-    gap: 0.25rem;
+    gap: 6px;
 }
 
 .legenda-item {
     display: flex;
     align-items: center;
     gap: 4px;
+    background-color: var(--wedo-card-bg);
+    border: 1px solid var(--wedo-border);
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
 }
 
 .legenda-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
 }
@@ -79,6 +125,13 @@
         background-color: #ff6b6b;
     }
 
+/* Wrapper que empilha navegação e legenda */
+.calendario-nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .calendario-nav {
     display: flex;
     align-items: center;
@@ -87,7 +140,7 @@
 
 .mes-titulo {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
     font-style: italic;
     color: var(--wedo-text);
@@ -96,55 +149,68 @@
 }
 
 .btn-nav-mes {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--wedo-green);
     text-decoration: none;
-    padding: 2px 10px;
-    border-radius: 8px;
-    transition: background-color 0.2s;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--wedo-card-bg);
+    border: 1px solid var(--wedo-border);
+    transition: all 0.2s;
     line-height: 1;
 }
 
     .btn-nav-mes:hover {
-        background-color: var(--wedo-green-light);
-        color: var(--wedo-green-dark);
+        background-color: var(--wedo-green);
+        color: #fff;
+        border-color: var(--wedo-green);
     }
 
 .calendario-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    margin-top: 0.5rem;
+    gap: 6px;
+    margin-top: 0.75rem;
 }
 
 .cal-header {
     text-align: center;
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--wedo-muted);
     padding: 4px 0;
+    letter-spacing: 0.05em;
 }
 
 .cal-celula {
-    min-height: 52px;
-    border-radius: 8px;
-    padding: 4px 6px;
+    min-height: 56px;
+    border-radius: 12px;
+    padding: 6px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--wedo-green-light);
+    background-color: var(--wedo-card-bg);
     border: 1px solid var(--wedo-border);
-    transition: background-color 0.15s;
+    transition: all 0.15s;
 }
+
+    .cal-celula:hover {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
 
     .cal-celula.vazia {
         background: transparent;
         border: none;
+        box-shadow: none;
     }
 
     .cal-celula.cal-hoje {
         border: 2px solid var(--wedo-green);
-        background-color: #d4eddd;
+        background-color: var(--wedo-green-light);
     }
 
     .cal-celula.cal-inicio {
@@ -174,7 +240,8 @@
         }
 
 .cal-num {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--wedo-text);
     align-self: flex-start;
     line-height: 1;
@@ -182,14 +249,15 @@
 
 .cal-label-dia {
     font-size: 0.6rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     margin-top: 1px;
+    letter-spacing: 0.04em;
 }
 
 .cal-marcador {
     margin-top: auto;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
     .cal-marcador.marcador-concluida {
@@ -208,9 +276,8 @@
     color: #d4eddd;
 }
 
-/* Dark mode */
 body.tema-escuro .cal-celula {
-    background-color: var(--wedo-green-light);
+    background-color: #25292a;
     border-color: var(--wedo-border);
 }
 
@@ -229,31 +296,24 @@ body.tema-escuro .cal-celula {
         border-color: #6b1010;
     }
 
-body.tema-escuro .cal-num {
-    color: var(--wedo-text);
+body.tema-escuro .btn-nav-mes {
+    background-color: #25292a;
+    border-color: var(--wedo-border);
 }
 
-body.tema-escuro .badge-condicao.condicao-concluida {
-    background-color: #1e3828;
-    color: #6cc88a;
-    border-color: #2d5c3a;
+body.tema-escuro .legenda-item {
+    background-color: #25292a;
 }
 
-body.tema-escuro .badge-condicao.condicao-emandamento {
-    background-color: #3a2e10;
-    color: #f6c278;
-    border-color: #6b5010;
-}
-
-body.tema-escuro .badge-condicao.condicao-iniciada {
-    background-color: #3a1010;
-    color: #ff6b6b;
-    border-color: #6b1010;
-}
 
 @media (max-width: 768px) {
     .historico-wrapper {
         flex-direction: column;
+    }
+
+    .task-details-panel {
+        padding: 18px;
+        border-radius: 14px;
     }
 
     .mes-titulo {
@@ -261,7 +321,8 @@ body.tema-escuro .badge-condicao.condicao-iniciada {
     }
 
     .cal-celula {
-        min-height: 38px;
+        min-height: 40px;
+        border-radius: 8px;
     }
 
     .cal-num {
@@ -270,5 +331,11 @@ body.tema-escuro .badge-condicao.condicao-iniciada {
 
     .cal-label-dia {
         display: none;
+    }
+
+    .btn-nav-mes {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
     }
 }

@@ -9,6 +9,10 @@ namespace WeDo.Models.ViewModels
         public int AnoAtual { get; set; }
         public List<Categoria> Categorias { get; set; } = new();
         public int? CategoriaFiltradaId { get; set; }
+        public int? MetaSelecionadaId { get; set; }
+
+        public Meta? MetaSelecionada =>
+            Metas.FirstOrDefault(m => m.Id == MetaSelecionadaId) ?? Metas.FirstOrDefault();
 
         public int MesAnterior => MesAtual == 1 ? 12 : MesAtual - 1;
         public int AnoMesAnterior => MesAtual == 1 ? AnoAtual - 1 : AnoAtual;

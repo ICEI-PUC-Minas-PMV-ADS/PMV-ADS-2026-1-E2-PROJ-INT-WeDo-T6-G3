@@ -1,4 +1,4 @@
-/* HISTÓRICO*/
+/*  HISTÓRICO */
 
 .historico-wrapper {
     min-height: calc(100vh - 160px);
@@ -10,22 +10,53 @@
 
 .secao-label {
     font-size: 0.78rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: var(--wedo-green);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     margin-top: 0.5rem;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--wedo-green-light);
+}
+
+.secao-metas {
+    padding-left: 2px;
 }
 
 .task-list-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
     border-radius: 14px !important;
-    transition: transform 0.15s, box-shadow 0.15s;
+    padding: 10px 16px;
+    color: var(--wedo-text);
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    transition: all 0.15s;
 }
 
     .task-list-btn:hover {
+        background-color: var(--wedo-green-light);
         transform: translateX(2px);
         box-shadow: 0 2px 8px rgba(20, 122, 59, 0.08);
+        color: var(--wedo-text);
+    }
+
+    .task-list-btn.active {
+        background-color: var(--wedo-active-menu) !important;
+        color: #000 !important;
+        font-weight: 600;
+        border-color: var(--wedo-green);
+    }
+.task-list-btn-vazia {
+    opacity: 0.75;
+}
+
+    .task-list-btn-vazia.active {
+        opacity: 1;
     }
 
 .task-details-panel {
@@ -125,7 +156,6 @@ body.tema-escuro .badge-condicao.condicao-iniciada {
         background-color: #ff6b6b;
     }
 
-/* Wrapper que empilha navegação e legenda */
 .calendario-nav-wrapper {
     display: flex;
     flex-direction: column;
@@ -305,7 +335,6 @@ body.tema-escuro .legenda-item {
     background-color: #25292a;
 }
 
-
 @media (max-width: 768px) {
     .historico-wrapper {
         flex-direction: column;
@@ -338,62 +367,4 @@ body.tema-escuro .legenda-item {
         height: 32px;
         font-size: 1.2rem;
     }
-}
-/* --- Estilo dos Botões da Lista Lateral --- */
-.task-list-btn {
-    width: 100%;
-    text-align: left;
-    background-color: #fff;
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 500;
-    color: #333;
-    transition: all 0.2s ease-in-out;
-}
-
-    .task-list-btn:hover {
-        background-color: #f4f7f6;
-        border-color: #ccc;
-    }
-
-    .task-list-btn.active {
-        background-color: #c8e6c9;
-        border-color: #81c784;
-        color: #147A3B;
-        font-weight: bold;
-    }
-
-.task-completed {
-    text-decoration: line-through;
-    color: #888;
-}
-
-    .task-completed.active {
-        color: #147A3B;
-    }
-
-/* --- Bolinhas de Status ao lado do texto --- */
-.status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.dot-concluida {
-    background-color: #147A3B;
-}
-
-.dot-parcial {
-    background-color: #f6c278;
-}
-
-.dot-pendente {
-    background-color: #ff6b6b;
 }

@@ -24,7 +24,8 @@ namespace WeDo.Controllers
             return null;
         }
 
-        public async Task<IActionResult> Index(int? mes, int? ano, int? categoriaId)
+        // GET: /Historico
+        public async Task<IActionResult> Index(int? mes, int? ano, int? categoriaId, int? metaId)
         {
             var idUsuario = ObterIdUsuarioLogado();
             if (idUsuario == null) return RedirectToAction("Login", "Usuarios");
@@ -42,6 +43,11 @@ namespace WeDo.Controllers
                 queryMetas = queryMetas.Where(m => m.IdCategoriaMeta == categoriaId);
 
             var metas = await queryMetas.ToListAsync();
+
+            int? metaSelecionadaId = metaId;
+            if (metaSelecionadaId == null || !metas.Any(m => m.Id == metaSelecionadaId))
+                metaSelecionadaId = metas.FirstOrDefault()?.Id;
+
             var categorias = await _context.Categorias.ToListAsync();
 
             var viewModel = new HistoricoViewModel
@@ -50,7 +56,8 @@ namespace WeDo.Controllers
                 MesAtual = mesAtual,
                 AnoAtual = anoAtual,
                 Categorias = categorias,
-                CategoriaFiltradaId = categoriaId
+                CategoriaFiltradaId = categoriaId,
+                MetaSelecionadaId = metaSelecionadaId
             };
 
             return View(viewModel);

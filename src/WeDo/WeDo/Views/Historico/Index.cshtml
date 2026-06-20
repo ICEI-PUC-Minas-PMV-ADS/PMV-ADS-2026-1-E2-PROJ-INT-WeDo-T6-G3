@@ -6,6 +6,25 @@
     var diasSemana = new[] { "SM", "SE", "TE", "QU", "QU", "SÁ", "DO" };
     var metasComAtividade = Model.Metas.Where(m => m.AtividadesDiarias != null && m.AtividadesDiarias.Any()).ToList();
     var metasSemAtividade = Model.Metas.Where(m => m.AtividadesDiarias == null || !m.AtividadesDiarias.Any()).ToList();
+    var meta = Model.MetaSelecionada;
+
+    // Variáveis do calendário calculadas aqui no topo (fora de qualquer bloco condicional)
+    // para evitar problemas de sintaxe Razor com "@{" aninhado.
+    var atividadesDoDia = meta?.AtividadesDiarias?
+        .Where(a => a.Data.Month == Model.MesAtual && a.Data.Year == Model.AnoAtual)
+        .GroupBy(a => a.Data.Day)
+        .ToDictionary(
+            g => g.Key,
+            g => g.Min(a => a.Status ?? StatusAtividade.Pendente)
+        ) ?? new Dictionary<int, StatusAtividade>();
+
+    int? diaInicio = (meta != null && meta.DataInicial.Month == Model.MesAtual && meta.DataInicial.Year == Model.AnoAtual)
+        ? meta.DataInicial.Day : (int?)null;
+
+    int? diaFim = (meta != null && meta.DataFinal.Month == Model.MesAtual && meta.DataFinal.Year == Model.AnoAtual)
+        ? meta.DataFinal.Day : (int?)null;
+
+    var temAtividades = atividadesDoDia.Any();
 }
 
 <link rel="stylesheet" href="~/css/historico.css" asp-append-version="true" />
@@ -18,9 +37,9 @@
 
             <h2 class="dashboard-title">Histórico <i class="bi bi-clock-history fs-4 ms-2"></i></h2>
 
+            <!-- Filtro por Categoria -->
             <form method="get" asp-action="Index" id="formFiltro" class="mb-3">
-                <input type="hidden" name="mes" value="@Model.MesAtual" />
-                <input type="hidden" name="ano" value="@Model.AnoAtual" />
+                <input type="hidden" name="metaId" value="@Model.MetaSelecionadaId" />
                 <div class="d-flex align-items-center gap-2">
                     <span class="font-serif fs-6 text-muted">Filtrar:</span>
                     <select name="categoriaId"
@@ -49,220 +68,193 @@
             }
             else
             {
+                <!-- SEÇÃO: Com registros -->
                 @if (metasComAtividade.Any())
                 {
                     <p class="secao-label"><i class="bi bi-check2-circle me-1"></i> Com registros</p>
-                    <div class="nav flex-column nav-pills mb-3" id="historico-pills-com" role="tablist" aria-orientation="vertical">
+                    <div class="d-flex flex-column gap-2 mb-4 secao-metas">
                         @foreach (var m in metasComAtividade)
                         {
-                            var idx = Model.Metas.IndexOf(m);
+                            var isAtiva = m.Id == Model.MetaSelecionadaId;
                             var statusDotClass = m.Condicao == CondicaoMeta.Concluida ? "dot-concluida" :
                                                  m.Condicao == CondicaoMeta.EmAndamento ? "dot-parcial" : "dot-pendente";
                             var completedClass = m.Condicao == CondicaoMeta.Concluida ? "task-completed" : "";
-                            var isFirst = idx == 0 ? "active" : "";
 
-                            <button class="task-list-btn @isFirst @completedClass"
-                                    id="historico-tab-@idx"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#historico-pane-@idx"
-                                    type="button"
-                                    role="tab">
+                            <a asp-action="Index"
+                               asp-route-metaId="@m.Id"
+                               asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                               class="task-list-btn text-decoration-none @(isAtiva ? "active" : "") @completedClass">
                                 <span class="status-dot @statusDotClass"></span>
                                 @m.Nome
-                            </button>
+                            </a>
                         }
                     </div>
                 }
 
+                <!-- SEÇÃO: Sem registros -->
                 @if (metasSemAtividade.Any())
                 {
                     <p class="secao-label text-muted"><i class="bi bi-circle me-1"></i> Sem registros ainda</p>
-                    <div class="nav flex-column nav-pills" id="historico-pills-sem" role="tablist" aria-orientation="vertical">
+                    <div class="d-flex flex-column gap-2 secao-metas">
                         @foreach (var m in metasSemAtividade)
                         {
-                            var idx = Model.Metas.IndexOf(m);
+                            var isAtiva = m.Id == Model.MetaSelecionadaId;
                             var statusDotClass = m.Condicao == CondicaoMeta.Concluida ? "dot-concluida" :
                                                  m.Condicao == CondicaoMeta.EmAndamento ? "dot-parcial" : "dot-pendente";
-                            var isFirst = idx == 0 && !metasComAtividade.Any() ? "active" : "";
 
-                            <button class="task-list-btn @isFirst"
-                                    id="historico-tab-@idx"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#historico-pane-@idx"
-                                    type="button"
-                                    role="tab">
+                            <a asp-action="Index"
+                               asp-route-metaId="@m.Id"
+                               asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                               class="task-list-btn task-list-btn-vazia text-decoration-none @(isAtiva ? "active" : "")">
                                 <span class="status-dot @statusDotClass"></span>
                                 @m.Nome
-                            </button>
+                            </a>
                         }
                     </div>
                 }
             }
         </div>
 
-        <!-- COLUNA DIREITA — Calendário + Detalhe da Meta -->
+        <!-- COLUNA DIREITA — Calendário da meta selecionada -->
         <div class="col-md-8 mt-4 mt-md-0">
-            <div class="tab-content" id="historico-pillsContent">
 
-                @for (int i = 0; i < Model.Metas.Count; i++)
-                {
-                    var meta = Model.Metas[i];
-                    var isActivePane = i == 0 ? "show active" : "";
+            @if (meta == null)
+            {
+                <div class="task-details-panel shadow-sm d-flex align-items-center justify-content-center" style="min-height:400px;">
+                    <p class="font-serif fst-italic text-muted">Nenhuma meta encontrada.</p>
+                </div>
+            }
+            else
+            {
+                <div class="task-details-panel shadow-sm">
 
-                    var atividadesDoDia = meta.AtividadesDiarias?
-                        .Where(a => a.Data.Month == Model.MesAtual && a.Data.Year == Model.AnoAtual)
-                        .GroupBy(a => a.Data.Day)
-                        .ToDictionary(
-                            g => g.Key,
-                            g => g.Min(a => a.Status ?? StatusAtividade.Pendente)
-                        ) ?? new Dictionary<int, StatusAtividade>();
+                    <!-- Título + Badge -->
+                    <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap gap-2">
+                        <h3 class="task-details-title mb-0">@meta.Nome</h3>
+                        <span class="badge-condicao condicao-@meta.Condicao.ToString().ToLower()">
+                            @meta.Condicao.ToString()
+                        </span>
+                    </div>
 
-                    var diaInicio = (meta.DataInicial.Month == Model.MesAtual && meta.DataInicial.Year == Model.AnoAtual)
-                        ? (int?)meta.DataInicial.Day : null;
-                    var diaFim = (meta.DataFinal.Month == Model.MesAtual && meta.DataFinal.Year == Model.AnoAtual)
-                        ? (int?)meta.DataFinal.Day : null;
+                    @if (!string.IsNullOrEmpty(meta.Descricao))
+                    {
+                        <p class="task-details-desc">@meta.Descricao</p>
+                    }
 
-                    var temAtividades = atividadesDoDia.Any();
+                    <!-- Datas -->
+                    <div class="meta-datas mb-3">
+                        <span>
+                            <i class="bi bi-calendar-event me-1"></i>
+                            Início: <strong>@meta.DataInicial.ToString("dd/MM/yyyy")</strong>
+                        </span>
+                        <span class="ms-3">
+                            <i class="bi bi-calendar-check me-1"></i>
+                            Prazo: <strong>@meta.DataFinal.ToString("dd/MM/yyyy")</strong>
+                        </span>
+                    </div>
 
-                    <div class="tab-pane fade @isActivePane" id="historico-pane-@i" role="tabpanel" tabindex="0">
-                        <div class="task-details-panel shadow-sm">
+                    <!-- Navegação do calendário + legenda integrada -->
+                    <div class="calendario-nav-wrapper mb-2">
+                        <div class="calendario-nav">
+                            <a asp-action="Index"
+                               asp-route-mes="@Model.MesAnterior"
+                               asp-route-ano="@Model.AnoMesAnterior"
+                               asp-route-metaId="@Model.MetaSelecionadaId"
+                               asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                               class="btn-nav-mes">&#8249;</a>
 
-                            <!-- Título + Badge -->
-                            <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap gap-2">
-                                <h3 class="task-details-title mb-0">@meta.Nome</h3>
-                                <span class="badge-condicao condicao-@meta.Condicao.ToString().ToLower()">
-                                    @meta.Condicao.ToString()
-                                </span>
-                            </div>
+                            <h4 class="mes-titulo">
+                                @System.Globalization.CultureInfo.GetCultureInfo("pt-BR").TextInfo.ToTitleCase(Model.NomeMes)
+                            </h4>
 
-                            @if (!string.IsNullOrEmpty(meta.Descricao))
+                            <a asp-action="Index"
+                               asp-route-mes="@Model.MesSeguinte"
+                               asp-route-ano="@Model.AnoMesSeguinte"
+                               asp-route-metaId="@Model.MetaSelecionadaId"
+                               asp-route-categoriaId="@Model.CategoriaFiltradaId"
+                               class="btn-nav-mes">&#8250;</a>
+                        </div>
+
+                        <div class="cal-legenda">
+                            <span class="legenda-item"><span class="legenda-dot inicio"></span> Início</span>
+                            <span class="legenda-item"><span class="legenda-dot fim"></span> Prazo</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> Concluída</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> Parcial</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> Pendente</span>
+                            @if (!temAtividades)
                             {
-                                <p class="task-details-desc">@meta.Descricao</p>
+                                <span class="text-muted fst-italic" style="font-size:0.75rem;">Sem atividades neste mês</span>
                             }
-
-                            <!-- Datas -->
-                            <div class="meta-datas mb-3">
-                                <span>
-                                    <i class="bi bi-calendar-event me-1"></i>
-                                    Início: <strong>@meta.DataInicial.ToString("dd/MM/yyyy")</strong>
-                                </span>
-                                <span class="ms-3">
-                                    <i class="bi bi-calendar-check me-1"></i>
-                                    Prazo: <strong>@meta.DataFinal.ToString("dd/MM/yyyy")</strong>
-                                </span>
-                            </div>
-
-                            <!-- Navegação do calendário + legenda integrada -->
-                            <div class="calendario-nav-wrapper mb-2">
-                                <div class="calendario-nav">
-                                    <a asp-action="Index"
-                                       asp-route-mes="@Model.MesAnterior"
-                                       asp-route-ano="@Model.AnoMesAnterior"
-                                       asp-route-categoriaId="@Model.CategoriaFiltradaId"
-                                       class="btn-nav-mes">&#8249;</a>
-
-                                    <h4 class="mes-titulo">
-                                        @System.Globalization.CultureInfo.GetCultureInfo("pt-BR").TextInfo.ToTitleCase(Model.NomeMes)
-                                    </h4>
-
-                                    <a asp-action="Index"
-                                       asp-route-mes="@Model.MesSeguinte"
-                                       asp-route-ano="@Model.AnoMesSeguinte"
-                                       asp-route-categoriaId="@Model.CategoriaFiltradaId"
-                                       class="btn-nav-mes">&#8250;</a>
-                                </div>
-
-                                <!-- Legenda alinhada à direita, na mesma linha do mês -->
-                                <div class="cal-legenda">
-                                    <span class="legenda-item"><span class="legenda-dot inicio"></span> Início</span>
-                                    <span class="legenda-item"><span class="legenda-dot fim"></span> Prazo</span>
-                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> Concluída</span>
-                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> Parcial</span>
-                                    <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> Pendente</span>
-                                    @if (!temAtividades)
-                                    {
-                                        <span class="text-muted fst-italic" style="font-size:0.75rem;">Sem atividades neste mês</span>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- Grade do Calendário -->
-                            <div class="calendario-grid">
-
-                                @foreach (var ds in diasSemana)
-                                {
-                                    <div class="cal-header">@ds</div>
-                                }
-
-                                @for (int e = 0; e < Model.PrimeiroDiaSemana; e++)
-                                {
-                                    <div class="cal-celula vazia"></div>
-                                }
-
-                                @for (int d = 1; d <= Model.TotalDiasMes; d++)
-                                {
-                                    var isHoje = d == DateTime.Today.Day
-                                             && Model.MesAtual == DateTime.Today.Month
-                                             && Model.AnoAtual == DateTime.Today.Year;
-                                    var isInicio = diaInicio.HasValue && diaInicio.Value == d;
-                                    var isFim = diaFim.HasValue && diaFim.Value == d;
-
-                                    var extraClass = isHoje ? "cal-hoje" : "";
-                                    if (isInicio) { extraClass += " cal-inicio"; }
-                                    if (isFim) { extraClass += " cal-fim"; }
-
-                                    var marcadorClass = "";
-                                    var temAtividadeNoDia = atividadesDoDia.ContainsKey(d);
-                                    if (temAtividadeNoDia)
-                                    {
-                                        var statusDia = atividadesDoDia[d];
-                                        if (statusDia == StatusAtividade.Concluida)
-                                            marcadorClass = "marcador-concluida";
-                                        else if (statusDia == StatusAtividade.ParcialmenteConcluida)
-                                            marcadorClass = "marcador-parcial";
-                                        else
-                                            marcadorClass = "marcador-pendente";
-                                    }
-
-                                    <div class="cal-celula @extraClass">
-                                        <span class="cal-num">@d</span>
-                                        @if (isInicio)
-                                        {
-                                            <span class="cal-label-dia">início</span>
-                                        }
-                                        else if (isFim)
-                                        {
-                                            <span class="cal-label-dia">prazo</span>
-                                        }
-                                        @if (temAtividadeNoDia)
-                                        {
-                                            <span class="cal-marcador @marcadorClass">
-                                                <i class="bi bi-geo-alt-fill"></i>
-                                            </span>
-                                        }
-                                    </div>
-                                }
-                            </div>
-
-                            @if (meta.Categoria != null)
-                            {
-                                <div class="task-meta-info">
-                                    Categoria: @meta.Categoria.Nome
-                                </div>
-                            }
-
                         </div>
                     </div>
-                }
 
-                @if (!Model.Metas.Any())
-                {
-                    <div class="task-details-panel shadow-sm d-flex align-items-center justify-content-center" style="min-height:400px;">
-                        <p class="font-serif fst-italic text-muted">Nenhuma meta encontrada.</p>
+                    <!-- Grade do Calendário -->
+                    <div class="calendario-grid">
+
+                        @foreach (var ds in diasSemana)
+                        {
+                            <div class="cal-header">@ds</div>
+                        }
+
+                        @for (int e = 0; e < Model.PrimeiroDiaSemana; e++)
+                        {
+                            <div class="cal-celula vazia"></div>
+                        }
+
+                        @for (int d = 1; d <= Model.TotalDiasMes; d++)
+                        {
+                            var isHoje = d == DateTime.Today.Day
+                                     && Model.MesAtual == DateTime.Today.Month
+                                     && Model.AnoAtual == DateTime.Today.Year;
+                            var isInicio = diaInicio.HasValue && diaInicio.Value == d;
+                            var isFim = diaFim.HasValue && diaFim.Value == d;
+
+                            var extraClass = isHoje ? "cal-hoje" : "";
+                            if (isInicio) { extraClass += " cal-inicio"; }
+                            if (isFim) { extraClass += " cal-fim"; }
+
+                            var marcadorClass = "";
+                            var temAtividadeNoDia = atividadesDoDia.ContainsKey(d);
+                            if (temAtividadeNoDia)
+                            {
+                                var statusDia = atividadesDoDia[d];
+                                if (statusDia == StatusAtividade.Concluida)
+                                    marcadorClass = "marcador-concluida";
+                                else if (statusDia == StatusAtividade.ParcialmenteConcluida)
+                                    marcadorClass = "marcador-parcial";
+                                else
+                                    marcadorClass = "marcador-pendente";
+                            }
+
+                            <div class="cal-celula @extraClass">
+                                <span class="cal-num">@d</span>
+                                @if (isInicio)
+                                {
+                                    <span class="cal-label-dia">início</span>
+                                }
+                                else if (isFim)
+                                {
+                                    <span class="cal-label-dia">prazo</span>
+                                }
+                                @if (temAtividadeNoDia)
+                                {
+                                    <span class="cal-marcador @marcadorClass">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                    </span>
+                                }
+                            </div>
+                        }
                     </div>
-                }
 
-            </div>
+                    @if (meta.Categoria != null)
+                    {
+                        <div class="task-meta-info">
+                            Categoria: @meta.Categoria.Nome
+                        </div>
+                    }
+
+                </div>
+            }
         </div>
     </div>
 </div>

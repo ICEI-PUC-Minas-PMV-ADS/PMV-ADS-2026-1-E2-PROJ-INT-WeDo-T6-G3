@@ -2,7 +2,7 @@
 
 Esta pasta contém o código-fonte da aplicação **WeDo**, desenvolvida como parte do projeto de Desenvolvimento de uma Aplicação Interativa do 2° semestre de Análise e Desenvolvimento de Sistemas.
 
-## 🛠 Stack Tecnológica
+## Stack Tecnológica
 
 Diferente das versões iniciais, a aplicação foi implementada utilizando as seguintes tecnologias:
 
@@ -13,7 +13,7 @@ Diferente das versões iniciais, a aplicação foi implementada utilizando as se
 *   **Estilização:** CSS3 e Bootstrap 5
 *   **Recursos Adicionais:** Localização (i18n) para Português, Inglês e Espanhol.
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 *   **/Controllers**: Contém a lógica de controle da aplicação (Usuários, Metas, Notificações, etc.).
 *   **/Models**: Define as entidades do sistema (Usuario, Meta, Categoria, Notificacao) e o Contexto do Banco de Dados (`AppDbContext`).
@@ -22,7 +22,7 @@ Diferente das versões iniciais, a aplicação foi implementada utilizando as se
 *   **/Resources**: Arquivos de tradução (`.resx`) para suporte a múltiplos idiomas.
 *   **/wwwroot**: Arquivos estáticos como CSS, JavaScript e bibliotecas (jQuery, Bootstrap).
 
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 
 ### Pré-requisitos
 *   Visual Studio 2022 (com a carga de trabalho "Desenvolvimento Web e ASP.NET") ou VS Code com o C# Dev Kit.
@@ -39,7 +39,7 @@ Diferente das versões iniciais, a aplicação foi implementada utilizando as se
 4.  Pressione `F5` ou clique no botão de execução para iniciar a aplicação.
 5.  O navegador abrirá automaticamente na tela de Login.
 
-## 📝 Histórico de Versões
+## Histórico de Versões
 
 ### [1.0.0] - 20/06/2026
 #### Adicionado

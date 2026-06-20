@@ -107,10 +107,12 @@ namespace WeDo.Controllers
 
         // --- Gerenciamento Padrão de Usuários (CRUD) ---
 
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Usuarios.ToListAsync());
+            // Redireciona qualquer acesso direto à lista ou clique em "Voltar" para o Dashboard (Home)
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -295,6 +297,7 @@ namespace WeDo.Controllers
         [HttpGet]
         public IActionResult RefazerSenha(string token)
         {
+            // Se o token estiver vazio (usuário cancelou ou errou o link), volta para o Dashboard (Home)
             if (string.IsNullOrEmpty(token)) return RedirectToAction("Index", "Home");
 
             var usuario = _context.Usuarios.FirstOrDefault(u => u.TokenRecuperacao == token && u.DataExpiracaoToken > DateTime.Now);

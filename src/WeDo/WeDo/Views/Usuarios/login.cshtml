@@ -217,9 +217,12 @@
                 .coluna-cadastro-wedo {
                     border-bottom: 3px solid #c4c4c4;
                 }
+            }
 
-        .coluna-cadastro-wedo, .coluna-login-wedo {
-            padding: 30px 20px;
+            .coluna-cadastro-wedo, .coluna-login-wedo {
+                padding: 30px 20px;
+            }
+
             /* Remove o olhinho de mostrar senha que o navegador coloca automaticamente */
             input[type="password"]::-ms-reveal,
             input[type="password"]::-ms-clear {
@@ -230,8 +233,9 @@
                 display: none !important;
                 visibility: hidden !important;
             }
-    </text>
-</style>
+    </style>
+</head>
+<body>
 
     <div class="fundo-pagina-wedo">
         <div class="moldura-externa-wedo">
@@ -256,9 +260,9 @@
                             <input type="email" name="CadEmail" asp-for="CadEmail" placeholder="email:" required class="input-wedo" />
                         </div>
 
-                    <div class="grupo-campo-wedo">
-                        <input type="password" name="CadSenha" asp-for="CadSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />-security: disc;" />
-                    </div>
+                        <div class="grupo-campo-wedo">
+                            <input type="password" name="CadSenha" asp-for="CadSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />
+                        </div>
 
                         <button type="submit" class="btn-verde-wedo">Cadastrar</button>
 
@@ -278,9 +282,9 @@
                             <input type="email" name="LoginEmail" asp-for="LoginEmail" placeholder="email:" required class="input-wedo" />
                         </div>
 
-                    <div class="grupo-campo-wedo">
-                        <input type="password" name="LoginSenha" asp-for="LoginSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />
-                    </div>
+                        <div class="grupo-campo-wedo">
+                            <input type="password" name="LoginSenha" asp-for="LoginSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />
+                        </div>
 
                         <div class="link-esqueci-wedo">
                             <a asp-controller="Usuarios" asp-action="EsqueciSenha">Esqueci minha senha</a>

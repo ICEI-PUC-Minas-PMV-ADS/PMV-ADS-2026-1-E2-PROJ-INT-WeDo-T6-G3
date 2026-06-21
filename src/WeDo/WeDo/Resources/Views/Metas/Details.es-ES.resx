@@ -58,28 +58,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DashBoard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Detalhes da Meta:" xml:space="preserve">
+    <value>Detalles de la meta:</value>
   </data>
-  <data name="Metas" xml:space="preserve">
-    <value>Goals</value>
+  <data name="Editar Meta" xml:space="preserve">
+    <value>Editar meta</value>
   </data>
-  <data name="Registrar Atividade" xml:space="preserve">
-    <value>Log Activity</value>
+  <data name="Voltar" xml:space="preserve">
+    <value>Volver</value>
   </data>
-  <data name="Mural" xml:space="preserve">
-    <value>Wall</value>
+  <data name="Categoria:" xml:space="preserve">
+    <value>Categoría:</value>
   </data>
-  <data name="Histórico" xml:space="preserve">
-    <value>History</value>
+  <data name="Sem Categoria" xml:space="preserve">
+    <value>Sin categoría</value>
   </data>
-  <data name="Configurações Gerais" xml:space="preserve">
-    <value>General Settings</value>
+  <data name="Condição:" xml:space="preserve">
+    <value>Condición:</value>
   </data>
-  <data name="Configurações de Perfil" xml:space="preserve">
-    <value>Profile Settings</value>
+  <data name="Início:" xml:space="preserve">
+    <value>Inicio:</value>
   </data>
-  <data name="Sair" xml:space="preserve">
-    <value>Log out</value>
+  <data name="Término:" xml:space="preserve">
+    <value>Término:</value>
+  </data>
+  <data name="Descrição:" xml:space="preserve">
+    <value>Descripción:</value>
+  </data>
+  <data name="Histórico de Atividades Diárias" xml:space="preserve">
+    <value>Historial de actividades diarias</value>
+  </data>
+  <data name="+ Registrar Novo Progresso" xml:space="preserve">
+    <value>+ Registrar nuevo progreso</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Título da Atividade" xml:space="preserve">
+    <value>Título de la actividad</value>
+  </data>
+  <data name="Descrição/Relato" xml:space="preserve">
+    <value>Descripción/Relato</value>
+  </data>
+  <data name="Evidência (Foto)" xml:space="preserve">
+    <value>Evidencia (Foto)</value>
+  </data>
+  <data name="Ver Foto" xml:space="preserve">
+    <value>Ver foto</value>
+  </data>
+  <data name="Sem foto" xml:space="preserve">
+    <value>Sin foto</value>
+  </data>
+  <data name="Nenhuma atividade registrada para esta meta até o momento." xml:space="preserve">
+    <value>Ninguna actividad registrada para esta meta hasta el momento.</value>
   </data>
 </root>

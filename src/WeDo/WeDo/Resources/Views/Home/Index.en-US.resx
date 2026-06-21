@@ -58,28 +58,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DashBoard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Início" xml:space="preserve">
+    <value>Home</value>
   </data>
-  <data name="Metas" xml:space="preserve">
-    <value>Goals</value>
+  <data name="O que fazer hoje?" xml:space="preserve">
+    <value>What to do today?</value>
   </data>
-  <data name="Registrar Atividade" xml:space="preserve">
-    <value>Log Activity</value>
+  <data name="Status de Hoje:" xml:space="preserve">
+    <value>Today's Status:</value>
   </data>
-  <data name="Mural" xml:space="preserve">
-    <value>Wall</value>
+  <data name="Concluído" xml:space="preserve">
+    <value>Completed</value>
   </data>
-  <data name="Histórico" xml:space="preserve">
-    <value>History</value>
+  <data name="Parcialmente concluído" xml:space="preserve">
+    <value>Partially completed</value>
   </data>
-  <data name="Configurações Gerais" xml:space="preserve">
-    <value>General Settings</value>
+  <data name="Pendente" xml:space="preserve">
+    <value>Pending</value>
   </data>
-  <data name="Configurações de Perfil" xml:space="preserve">
-    <value>Profile Settings</value>
+  <data name="Meta:" xml:space="preserve">
+    <value>Goal:</value>
   </data>
-  <data name="Sair" xml:space="preserve">
-    <value>Log out</value>
+  <data name="Confirmar Tudo" xml:space="preserve">
+    <value>Confirm All</value>
   </data>
 </root>

@@ -353,11 +353,41 @@ body.tema-escuro {
     --wedo-bg: #1a1d1b;
     --wedo-card-bg: #25292a;
     --wedo-border: #3a3f3c;
-    --wedo-text: #e8eae9;
-    --wedo-muted: #a0a8a4;
+    --wedo-text: #f5f7f6; /* Texto principal quase branco para máxima legibilidade no tema escuro */
+    --wedo-muted: #c2c9c5; /* Texto secundário mais claro que o padrão para boa visibilidade */
     --wedo-green-light: #2d4a38;
     --wedo-active-menu: #1e3828;
 }
+
+    /* Garante que todo o texto padrão e os títulos fiquem claros no tema escuro,
+       mesmo quando o elemento não usa explicitamente a variável de cor. */
+    body.tema-escuro,
+    body.tema-escuro p,
+    body.tema-escuro span,
+    body.tema-escuro li,
+    body.tema-escuro label,
+    body.tema-escuro small,
+    body.tema-escuro strong,
+    body.tema-escuro td,
+    body.tema-escuro th,
+    body.tema-escuro h1,
+    body.tema-escuro h2,
+    body.tema-escuro h3,
+    body.tema-escuro h4,
+    body.tema-escuro h5,
+    body.tema-escuro h6 {
+        color: var(--wedo-text);
+    }
+
+    /* Neutraliza utilitários do Bootstrap que forçam texto escuro/cinza no tema escuro */
+    body.tema-escuro .text-dark,
+    body.tema-escuro .text-body {
+        color: var(--wedo-text) !important;
+    }
+
+    body.tema-escuro .text-secondary {
+        color: var(--wedo-muted) !important;
+    }
 
     /* Ajustes específicos de contraste para inputs no tema escuro */
     body.tema-escuro .form-control,
@@ -400,6 +430,42 @@ body.tema-escuro {
         color: var(--wedo-text);
         border-color: var(--wedo-green);
         box-shadow: 0 0 0 0.2rem rgba(20, 122, 59, 0.35);
+    }
+
+    /* Neutraliza as classes utilitárias do Bootstrap que forçam fundo claro,
+       para que painéis e cards acompanhem a paleta escura. */
+    body.tema-escuro .bg-light,
+    body.tema-escuro .bg-white {
+        background-color: var(--wedo-card-bg) !important;
+        color: var(--wedo-text);
+    }
+
+    body.tema-escuro .badge.bg-light.text-dark {
+        color: var(--wedo-text) !important;
+        border-color: var(--wedo-border) !important;
+    }
+
+    /* Cards/painéis no tema escuro: garante texto legível dentro de áreas claras */
+    body.tema-escuro .card,
+    body.tema-escuro .list-group-item {
+        background-color: var(--wedo-card-bg);
+        color: var(--wedo-text);
+        border-color: var(--wedo-border);
+    }
+
+    /* Tabelas do Bootstrap acompanham a paleta escura (inclui cabeçalhos .table-light) */
+    body.tema-escuro .table {
+        --bs-table-bg: transparent;
+        --bs-table-color: var(--wedo-text);
+        color: var(--wedo-text);
+        border-color: var(--wedo-border);
+    }
+
+    body.tema-escuro .table-light {
+        --bs-table-bg: var(--wedo-green-light);
+        --bs-table-color: var(--wedo-text);
+        --bs-table-border-color: var(--wedo-border);
+        color: var(--wedo-text);
     }
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;

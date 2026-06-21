@@ -1,82 +1,83 @@
 ﻿@model WeDo.Models.Meta
+@inject IViewLocalizer Localizer
 
 <div class="container mt-4">
-    <h2>Nova Meta</h2>
-    <p class="text-muted">Defina um novo objetivo para o seu cronograma.</p>
+    <h2>@Localizer["Nova Meta"]</h2>
+    <p class="text-muted">@Localizer["Defina um novo objetivo para o seu cronograma."]</p>
     <hr />
 
     <form asp-action="Criar" method="post">
         <div class="mb-3">
-            <label class="form-label">Título da Meta</label>
-            <input asp-for="Nome" class="form-control" placeholder="Ex: Emagrecer 5kg" />
+            <label class="form-label">@Localizer["Título da Meta"]</label>
+            <input asp-for="Nome" class="form-control" placeholder="@Localizer["Ex: Emagrecer 5kg"]" />
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Descrição / Detalhes</label>
+            <label class="form-label">@Localizer["Descrição / Detalhes"]</label>
             <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Categoria</label>
+            <label class="form-label">@Localizer["Categoria"]</label>
             <div class="input-group">
                 <select asp-for="IdCategoriaMeta" class="form-select" asp-items="ViewBag.IdCategoriaMeta">
-                    <option value="">-- Selecione uma Categoria --</option>
+                    <option value="">@Localizer["-- Selecione uma Categoria --"]</option>
                 </select>
 
                 @* Botão que força a navegação via JavaScript se o link falhar *@
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/Categorias/Criar'">
-                    + Nova
+                    @Localizer["+ Nova"]
                 </button>
             </div>
             <span asp-validation-for="IdCategoriaMeta" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label>Data Inicial</label>
+            <label>@Localizer["Data Inicial"]</label>
             <input asp-for="DataInicial" class="form-control" type="date" />
         </div>
 
         <div class="form-group mb-3">
-            <label>Previsão de Término</label>
+            <label>@Localizer["Previsão de Término"]</label>
             <input asp-for="DataFinal" class="form-control" type="date" />
         </div>
 
         <!-- INÍCIO DA NOVA SEÇÃO DE DIAS DA SEMANA -->
         <div class="form-check form-switch mb-3 mt-4">
             <input class="form-check-input" type="checkbox" id="chkAtividadeDiaria" onchange="toggleDiasSemana()" style="cursor: pointer;">
-            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">Registrar atividade recorrente?</label>
+            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">@Localizer["Registrar atividade recorrente?"]</label>
         </div>
 
-        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: none; background-color: #f8f9fa;">
-            <label class="form-label fw-bold mb-3">Quais dias da semana?</label>
+        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: none; background-color: var(--wedo-card-bg);">
+            <label class="form-label fw-bold mb-3">@Localizer["Quais dias da semana?"]</label>
             <div class="d-flex flex-wrap gap-4">
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Domingo" />
-                    <label class="form-check-label" asp-for="Domingo">Dom</label>
+                    <label class="form-check-label" asp-for="Domingo">@Localizer["Dom"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Segunda" />
-                    <label class="form-check-label" asp-for="Segunda">Seg</label>
+                    <label class="form-check-label" asp-for="Segunda">@Localizer["Seg"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Terca" />
-                    <label class="form-check-label" asp-for="Terca">Ter</label>
+                    <label class="form-check-label" asp-for="Terca">@Localizer["Ter"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Quarta" />
-                    <label class="form-check-label" asp-for="Quarta">Qua</label>
+                    <label class="form-check-label" asp-for="Quarta">@Localizer["Qua"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Quinta" />
-                    <label class="form-check-label" asp-for="Quinta">Qui</label>
+                    <label class="form-check-label" asp-for="Quinta">@Localizer["Qui"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Sexta" />
-                    <label class="form-check-label" asp-for="Sexta">Sex</label>
+                    <label class="form-check-label" asp-for="Sexta">@Localizer["Sex"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Sabado" />
-                    <label class="form-check-label" asp-for="Sabado">Sáb</label>
+                    <label class="form-check-label" asp-for="Sabado">@Localizer["Sáb"]</label>
                 </div>
             </div>
         </div>
@@ -85,8 +86,8 @@
         <input type="hidden" asp-for="IdUsuarioMeta" value="1" />
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">Salvar Meta</button>
-            <a asp-controller="Metas" asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
+            <button type="submit" class="btn btn-success">@Localizer["Salvar Meta"]</button>
+            <a asp-controller="Metas" asp-action="Index" class="btn btn-outline-secondary">@Localizer["Voltar"]</a>
         </div>
     </form>
 </div>

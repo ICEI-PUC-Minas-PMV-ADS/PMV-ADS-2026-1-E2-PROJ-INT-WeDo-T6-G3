@@ -1,7 +1,8 @@
 ﻿@model WeDo.Models.Categoria
+@inject IViewLocalizer Localizer
 
 <div class="container mt-4">
-    <h2>Editar Categoria</h2>
+    <h2>@Localizer["Editar Categoria"]</h2>
     <hr />
 
     <form asp-action="Editar" method="post">
@@ -9,14 +10,14 @@
         <input type="hidden" asp-for="Id" />
 
         <div class="mb-3">
-            <label class="form-label">Nome da Categoria</label>
+            <label class="form-label">@Localizer["Nome da Categoria"]</label>
             <input asp-for="Nome" class="form-control" required />
             <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">Salvar Alterações</button>
-            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">@Localizer["Salvar Alterações"]</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">@Localizer["Cancelar"]</a>
         </div>
     </form>
 </div>

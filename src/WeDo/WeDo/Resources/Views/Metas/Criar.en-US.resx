@@ -58,28 +58,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DashBoard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Nova Meta" xml:space="preserve">
+    <value>New Goal</value>
   </data>
-  <data name="Metas" xml:space="preserve">
-    <value>Goals</value>
+  <data name="Defina um novo objetivo para o seu cronograma." xml:space="preserve">
+    <value>Set a new objective for your schedule.</value>
   </data>
-  <data name="Registrar Atividade" xml:space="preserve">
-    <value>Log Activity</value>
+  <data name="Título da Meta" xml:space="preserve">
+    <value>Goal Title</value>
   </data>
-  <data name="Mural" xml:space="preserve">
-    <value>Wall</value>
+  <data name="Ex: Emagrecer 5kg" xml:space="preserve">
+    <value>e.g. Lose 5kg</value>
   </data>
-  <data name="Histórico" xml:space="preserve">
-    <value>History</value>
+  <data name="Descrição / Detalhes" xml:space="preserve">
+    <value>Description / Details</value>
   </data>
-  <data name="Configurações Gerais" xml:space="preserve">
-    <value>General Settings</value>
+  <data name="Categoria" xml:space="preserve">
+    <value>Category</value>
   </data>
-  <data name="Configurações de Perfil" xml:space="preserve">
-    <value>Profile Settings</value>
+  <data name="-- Selecione uma Categoria --" xml:space="preserve">
+    <value>-- Select a Category --</value>
   </data>
-  <data name="Sair" xml:space="preserve">
-    <value>Log out</value>
+  <data name="+ Nova" xml:space="preserve">
+    <value>+ New</value>
+  </data>
+  <data name="Data Inicial" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Previsão de Término" xml:space="preserve">
+    <value>Expected End</value>
+  </data>
+  <data name="Registrar atividade recorrente?" xml:space="preserve">
+    <value>Register recurring activity?</value>
+  </data>
+  <data name="Quais dias da semana?" xml:space="preserve">
+    <value>Which days of the week?</value>
+  </data>
+  <data name="Dom" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="Seg" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="Ter" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="Qua" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="Qui" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="Sáb" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="Salvar Meta" xml:space="preserve">
+    <value>Save Goal</value>
+  </data>
+  <data name="Voltar" xml:space="preserve">
+    <value>Back</value>
   </data>
 </root>

@@ -58,28 +58,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DashBoard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Detalhes da Meta:" xml:space="preserve">
+    <value>Goal Details:</value>
   </data>
-  <data name="Metas" xml:space="preserve">
-    <value>Goals</value>
+  <data name="Editar Meta" xml:space="preserve">
+    <value>Edit Goal</value>
   </data>
-  <data name="Registrar Atividade" xml:space="preserve">
-    <value>Log Activity</value>
+  <data name="Voltar" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="Mural" xml:space="preserve">
-    <value>Wall</value>
+  <data name="Categoria:" xml:space="preserve">
+    <value>Category:</value>
   </data>
-  <data name="Histórico" xml:space="preserve">
-    <value>History</value>
+  <data name="Sem Categoria" xml:space="preserve">
+    <value>No Category</value>
   </data>
-  <data name="Configurações Gerais" xml:space="preserve">
-    <value>General Settings</value>
+  <data name="Condição:" xml:space="preserve">
+    <value>Status:</value>
   </data>
-  <data name="Configurações de Perfil" xml:space="preserve">
-    <value>Profile Settings</value>
+  <data name="Início:" xml:space="preserve">
+    <value>Start:</value>
   </data>
-  <data name="Sair" xml:space="preserve">
-    <value>Log out</value>
+  <data name="Término:" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="Descrição:" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="Histórico de Atividades Diárias" xml:space="preserve">
+    <value>Daily Activities History</value>
+  </data>
+  <data name="+ Registrar Novo Progresso" xml:space="preserve">
+    <value>+ Register New Progress</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Título da Atividade" xml:space="preserve">
+    <value>Activity Title</value>
+  </data>
+  <data name="Descrição/Relato" xml:space="preserve">
+    <value>Description/Report</value>
+  </data>
+  <data name="Evidência (Foto)" xml:space="preserve">
+    <value>Evidence (Photo)</value>
+  </data>
+  <data name="Ver Foto" xml:space="preserve">
+    <value>View Photo</value>
+  </data>
+  <data name="Sem foto" xml:space="preserve">
+    <value>No photo</value>
+  </data>
+  <data name="Nenhuma atividade registrada para esta meta até o momento." xml:space="preserve">
+    <value>No activity registered for this goal yet.</value>
   </data>
 </root>

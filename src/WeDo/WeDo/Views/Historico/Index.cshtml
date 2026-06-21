@@ -1,8 +1,9 @@
 @model WeDo.Models.ViewModels.HistoricoViewModel
 @using WeDo.Models
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Histórico";
+    ViewData["Title"] = Localizer["Histórico"].Value;
     var diasSemana = new[] { "SM", "SE", "TE", "QU", "QU", "SÁ", "DO" };
     var metasComAtividade = Model.Metas.Where(m => m.AtividadesDiarias != null && m.AtividadesDiarias.Any()).ToList();
     var metasSemAtividade = Model.Metas.Where(m => m.AtividadesDiarias == null || !m.AtividadesDiarias.Any()).ToList();
@@ -35,17 +36,17 @@
         <!-- COLUNA ESQUERDA — Lista de Metas -->
         <div class="col-md-4 pe-md-4 historico-lista-col">
 
-            <h2 class="dashboard-title">Histórico <i class="bi bi-clock-history fs-4 ms-2"></i></h2>
+            <h2 class="dashboard-title">@Localizer["Histórico"] <i class="bi bi-clock-history fs-4 ms-2"></i></h2>
 
             <!-- Filtro por Categoria -->
             <form method="get" asp-action="Index" id="formFiltro" class="mb-3">
                 <input type="hidden" name="metaId" value="@Model.MetaSelecionadaId" />
                 <div class="d-flex align-items-center gap-2">
-                    <span class="font-serif fs-6 text-muted">Filtrar:</span>
+                    <span class="font-serif fs-6 text-muted">@Localizer["Filtrar:"]</span>
                     <select name="categoriaId"
                             onchange="document.getElementById('formFiltro').submit()"
                             class="form-select wedo-select">
-                        <option value="">nenhum</option>
+                        <option value="">@Localizer["nenhum"]</option>
                         @foreach (var cat in Model.Categorias)
                         {
                             var isSelected = Model.CategoriaFiltradaId == cat.Id;
@@ -64,14 +65,14 @@
 
             @if (!Model.Metas.Any())
             {
-                <p class="font-serif fst-italic text-muted mt-4">Nenhuma meta encontrada.</p>
+                <p class="font-serif fst-italic text-muted mt-4">@Localizer["Nenhuma meta encontrada."]</p>
             }
             else
             {
                 <!-- SEÇÃO: Com registros -->
                 @if (metasComAtividade.Any())
                 {
-                    <p class="secao-label"><i class="bi bi-check2-circle me-1"></i> Com registros</p>
+                    <p class="secao-label"><i class="bi bi-check2-circle me-1"></i> @Localizer["Com registros"]</p>
                     <div class="d-flex flex-column gap-2 mb-4 secao-metas">
                         @foreach (var m in metasComAtividade)
                         {
@@ -94,7 +95,7 @@
                 <!-- SEÇÃO: Sem registros -->
                 @if (metasSemAtividade.Any())
                 {
-                    <p class="secao-label text-muted"><i class="bi bi-circle me-1"></i> Sem registros ainda</p>
+                    <p class="secao-label text-muted"><i class="bi bi-circle me-1"></i> @Localizer["Sem registros ainda"]</p>
                     <div class="d-flex flex-column gap-2 secao-metas">
                         @foreach (var m in metasSemAtividade)
                         {
@@ -121,7 +122,7 @@
             @if (meta == null)
             {
                 <div class="task-details-panel shadow-sm d-flex align-items-center justify-content-center" style="min-height:400px;">
-                    <p class="font-serif fst-italic text-muted">Nenhuma meta encontrada.</p>
+                    <p class="font-serif fst-italic text-muted">@Localizer["Nenhuma meta encontrada."]</p>
                 </div>
             }
             else
@@ -145,11 +146,11 @@
                     <div class="meta-datas mb-3">
                         <span>
                             <i class="bi bi-calendar-event me-1"></i>
-                            Início: <strong>@meta.DataInicial.ToString("dd/MM/yyyy")</strong>
+                            @Localizer["Início:"] <strong>@meta.DataInicial.ToString("dd/MM/yyyy")</strong>
                         </span>
                         <span class="ms-3">
                             <i class="bi bi-calendar-check me-1"></i>
-                            Prazo: <strong>@meta.DataFinal.ToString("dd/MM/yyyy")</strong>
+                            @Localizer["Prazo:"] <strong>@meta.DataFinal.ToString("dd/MM/yyyy")</strong>
                         </span>
                     </div>
 
@@ -164,7 +165,7 @@
                                class="btn-nav-mes">&#8249;</a>
 
                             <h4 class="mes-titulo">
-                                @System.Globalization.CultureInfo.GetCultureInfo("pt-BR").TextInfo.ToTitleCase(Model.NomeMes)
+                                @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(new DateTime(Model.AnoAtual, Model.MesAtual, 1).ToString("MMMM", System.Globalization.CultureInfo.CurrentCulture))
                             </h4>
 
                             <a asp-action="Index"
@@ -176,14 +177,14 @@
                         </div>
 
                         <div class="cal-legenda">
-                            <span class="legenda-item"><span class="legenda-dot inicio"></span> Início</span>
-                            <span class="legenda-item"><span class="legenda-dot fim"></span> Prazo</span>
-                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> Concluída</span>
-                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> Parcial</span>
-                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> Pendente</span>
+                            <span class="legenda-item"><span class="legenda-dot inicio"></span> @Localizer["Início"]</span>
+                            <span class="legenda-item"><span class="legenda-dot fim"></span> @Localizer["Prazo"]</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#147A3B"></i> @Localizer["Concluída"]</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#f6c278"></i> @Localizer["Parcial"]</span>
+                            <span class="legenda-item"><i class="bi bi-geo-alt-fill" style="color:#ff6b6b"></i> @Localizer["Pendente"]</span>
                             @if (!temAtividades)
                             {
-                                <span class="text-muted fst-italic" style="font-size:0.75rem;">Sem atividades neste mês</span>
+                                <span class="text-muted fst-italic" style="font-size:0.75rem;">@Localizer["Sem atividades neste mês"]</span>
                             }
                         </div>
                     </div>
@@ -230,11 +231,11 @@
                                 <span class="cal-num">@d</span>
                                 @if (isInicio)
                                 {
-                                    <span class="cal-label-dia">início</span>
+                                    <span class="cal-label-dia">@Localizer["início"]</span>
                                 }
                                 else if (isFim)
                                 {
-                                    <span class="cal-label-dia">prazo</span>
+                                    <span class="cal-label-dia">@Localizer["prazo"]</span>
                                 }
                                 @if (temAtividadeNoDia)
                                 {
@@ -249,7 +250,7 @@
                     @if (meta.Categoria != null)
                     {
                         <div class="task-meta-info">
-                            Categoria: @meta.Categoria.Nome
+                            @Localizer["Categoria:"] @meta.Categoria.Nome
                         </div>
                     }
 

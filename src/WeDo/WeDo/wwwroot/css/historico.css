@@ -51,6 +51,12 @@
         font-weight: 600;
         border-color: var(--wedo-green);
     }
+
+    /* No tema escuro o fundo ativo fica verde-escuro, então o texto preto seria
+       ilegível: usa verde claro para manter o contraste. */
+    body.tema-escuro .task-list-btn.active {
+        color: #6cc88a !important;
+    }
 .task-list-btn-vazia {
     opacity: 0.75;
 }

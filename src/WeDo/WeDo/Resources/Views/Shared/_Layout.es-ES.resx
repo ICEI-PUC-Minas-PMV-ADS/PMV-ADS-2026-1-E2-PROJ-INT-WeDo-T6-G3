@@ -79,4 +79,7 @@
   <data name="Configurações de Perfil" xml:space="preserve">
     <value>Configuración de perfil</value>
   </data>
+  <data name="Sair" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>

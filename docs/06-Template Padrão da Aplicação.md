@@ -14,4 +14,5 @@ A aplicação utiliza um modelo de layout centralizado através do arquivo `_Lay
 Como definido no projeto de interface, o layout segue o padrão estabelecido nos wireframes de alta fidelidade:
 
 ![Exemplo de Layout](img/wireframe-example.png)
+
 *(Para visualizar todos os fluxos e telas detalhadas, consulte o documento 04-Projeto de Interface)*

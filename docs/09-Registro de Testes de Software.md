@@ -1,8 +1,5 @@
 # Registro de Testes de Software
-
-<span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>, <a href="8-Plano de Testes de Software.md"> Plano de Testes de Software</a>
-
-Para cada caso de teste definido no Plano de Testes de Software, realize o registro das evidências dos testes feitos na aplicação pela equipe, que comprovem que o critério de êxito foi alcançado (ou não!!!). Para isso, utilize uma ferramenta de captura de tela que mostre cada um dos casos de teste definidos (obs.: cada caso de teste deverá possuir um vídeo do tipo _screencast_ para caracterizar uma evidência do referido caso).
+---
 
 | **Caso de Teste** 	| **CT01 – Cadastrar Usuário** 	|
 |:---:	|:---:	|
@@ -41,13 +38,30 @@ Para cada caso de teste definido no Plano de Testes de Software, realize o regis
 
 ## Relatório de testes de software
 
-Apresente e discuta detalhadamente os resultados obtidos nos testes realizados, destacando tanto os pontos fortes quanto as fragilidades identificadas na solução. Explique como os aspectos positivos contribuem para o desempenho e a usabilidade do sistema, e como os pontos fracos impactam sua eficácia.
+Este documento apresenta o relatório detalhado dos testes de software realizados na aplicação WeDo, baseando-se no plano de testes definido na Etapa 2.
 
-Descreva as principais falhas detectadas durante os testes, fornecendo exemplos concretos e evidências que sustentem essas observações. Explicite os impactos dessas falhas na experiência do usuário, na funcionalidade do sistema e nos objetivos do projeto.
+## Registro de Testes de Software
 
-Com base nessas análises, detalhe as estratégias que o grupo pretende adotar para corrigir as deficiências e aprimorar a solução nas próximas iterações. Inclua ações específicas, como ajustes no código, modificações na interface, otimizações de desempenho ou melhorias na acessibilidade e usabilidade.
+### Atendimento aos Requisitos Funcionais e Não Funcionais
+A bateria de testes confirmou que a solução atende aos objetivos propostos, com os seguintes destaques:
 
-Por fim, apresente e/ou proponha as melhorias a partir dos testes realizados, destacando os ganhos obtidos e como essas alterações contribuem para a evolução do projeto.
+*   **RF-001 e RF-002 (Cadastro e Login):** Validados com sucesso. O sistema de autenticação por cookies garante o acesso seguro e a persistência da sessão do usuário.
+*   **RF-005 e RF-006 (Gestão de Metas):** O CRUD completo (Criar, Visualizar, Editar e Excluir) funciona corretamente.
+*   **RF-009 (Painel de Evolução):** O dashboard consolida as metas ativas do dia, cumprindo seu papel de organizador diário.
+*   **RNF-001 (Responsividade):** Testado em dispositivos móveis e desktops, garantindo que a interface se adapte sem perda de funcionalidade.
 
-> **Links Úteis**:
-> - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
+### Discussão dos Resultados
+Os resultados demonstram uma solução estável e funcional. 
+*   **Pontos Fortes:** A integração entre os Controllers e as Views Razor permite um fluxo de dados rápido. O sistema de notificações automáticas é um diferencial que aumenta a utilidade da ferramenta.
+*   **Fragilidades:** Identificou-se que a validação de campos no lado do servidor (Server-side) é robusta, mas o feedback visual imediato no navegador (Client-side) pode ser aprimorado.
+
+### Falhas Detectadas e Impactos
+*   **Falha de Configuração SMTP:** A funcionalidade de recuperação de senha depende de credenciais de e-mail no `appsettings.json`. 
+    *   **Impacto:** Usuários que esquecem a senha ficam impossibilitados de recuperá-la sem intervenção do administrador.
+*   **Conflito de Datas:** Foi possível registrar uma meta com data de término anterior à data de início em um dos cenários de teste.
+    *   **Impacto:** Compromete a eficácia do acompanhamento de progresso.
+
+### Estratégias de Correção e Melhorias
+Para as próximas iterações, o grupo planeja:
+1.  **Ajustes no Código:** Implementar validações de intervalo de data diretamente nos Models.
+2.  **Interface:** Adicionar máscaras de entrada e seletores de data mais intuitivos.

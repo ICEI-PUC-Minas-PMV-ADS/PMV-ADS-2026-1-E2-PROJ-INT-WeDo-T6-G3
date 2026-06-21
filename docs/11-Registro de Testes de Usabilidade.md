@@ -89,25 +89,52 @@ Para registrar os indicadores de cada cenário, foi mantida a coerência estrita
 
 ## Relatório dos Testes de Usabilidade (Análise Consolidada)
 
-### Metodologia e Participantes
-Os testes foram realizados com 5 participantes reais, abrangendo o público-alvo de estudantes e jovens adultos. Foram avaliados 5 cenários principais: cadastro de conta, criação de categorias, registro de metas, visualização do dashboard e edição de perfil/configurações.
+## Relatório dos Testes de Usabilidade (Análise Consolidada)
 
-### Evidências dos Testes
-Com base nos testes realizados, obtivemos os seguintes indicadores de desempenho:
-*   **Taxa de Sucesso:** 100% para tarefas críticas como Cadastro, Login e Registro de Metas.
-*   **Facilidade de Uso:** Todas as tarefas foram classificadas entre "Fácil" e "Muito Fácil" pelos participantes.
-*   **Tempo de Execução:** O tempo médio para completar o fluxo principal (Cadastro + Meta) foi de aproximadamente 1 minuto e 30 segundos.
+### 1. Métricas Quantitativas Gerais
 
-### Relatos dos Usuários Participantes
-Abaixo estão os principais feedbacks coletados durante as sessões de teste:
-*   **Usuário 1:** "A interface é muito limpa e direta ao ponto. Consegui criar minha primeira meta de estudos sem precisar de ajuda."
-*   **Usuário 2:** "Gostei muito de como as metas aparecem no dashboard. Dá uma visão clara do que preciso fazer no dia."
-*   **Usuário 3:** "O sistema de categorias facilitou muito a organização. Consegui separar minhas metas de academia das metas da faculdade facilmente."
-*   **Usuário 4:** "O processo de login e cadastro é rápido e seguro. Me senti confortável usando a plataforma."
-*   **Usuário 5:** "A parte de configurações e perfil é intuitiva. Consegui personalizar minha área de foco sem dificuldades."
+* **Taxa de Sucesso por Cenário:**
+    * Cenário 1 (Cadastro e Login): **80%** (4 de 5 concluíram)
+    * Cenário 2 (Criar Meta por Categoria): **80%** (4 de 5 concluíram)
+    * Cenário 3 (Atualização de Status): **100%** (5 de 5 concluíram)
+    * Cenário 4 (Filtragem de Atividades): **60%** (3 de 5 concluíram)
+    * Cenário 5 (Verificação no Mural): **100%** (5 de 5 concluíram)
+* **Tempo Médio para Completar cada Cenário:**
+    * Cenário 1: 104,4 segundos
+    * Cenário 2: 109,6 segundos
+    * Cenário 3: 41,2 segundos
+    * Cenário 4: 81,0 segundos
+    * Cenário 5: 67,4 segundos
+* **Número Médio de Erros Cometidos por Tarefa:** 1,2 erros por usuário ao longo de todo o ciclo de testes.
+* **Taxa de Abandono Geral:** **12%** (Das 25 tarefas executadas no total, ocorreram 3 abandonos parciais concentrados no Usuário 3, ocasionados por barreiras visuais e de lógica de validação).
 
-### Análise e Melhorias Propostas
-Embora os resultados tenham sido extremamente positivos, identificamos oportunidades de evolução:
-*   **Feedback Visual:** Implementar animações sutis de "sucesso" ao concluir uma meta para aumentar a satisfação do usuário.
-*   **Navegação:** Adicionar um atalho rápido na barra lateral para as categorias mais utilizadas.
-*   **Acessibilidade:** Revisar o contraste de cores em elementos secundários para garantir uma leitura confortável em todos os dispositivos.
+### 2. Análise Qualitativa e Padrões Identificados
+
+* **Principais Dificuldades Enfrentadas:**
+    * *Ícones Abstratos vs Rótulos:* O uso de simbologias puras sem rótulos em texto (como o ícone de funil para o filtro) gerou dúvidas e cliques inválidos nos perfis de menor fluência digital (U1 e U3).
+    * *Mecânicas de Validação Rígidas:* Restrições de segurança na criação de senha sem indicação instantânea dos critérios geraram estresse cognitivo, induzindo o usuário ao abandono precoce no fluxo inicial.
+    * *Acessibilidade de Elementos Visuais:* Fontes de tamanho reduzido nas listas suspensas de categorias e taxas de contraste abaixo do ideal dificultaram o uso contínuo por parte do público idoso.
+* **Sucessos de Interação:** Os fluxos do Dashboard diário ("O que fazer hoje?") e o Mural de Conquistas performaram acima da média de mercado. O feedback visual (mudança cromática e sensação de recompensa) demonstrou forte apelo motivacional e engajamento prático.
+
+### 3. Classificação dos Problemas por Nível de Prioridade
+
+#### Crítico (Impede o uso do sistema ou gera abandono direto)
+* **Problema:** Mensagens de erro vagas na digitação de senha no cadastro e tamanho reduzido da área de clique (*padding*) na seleção de categorias.
+* **Impacto:** Causou a desistência do Usuário 3 no primeiro acesso e barrou a criação de novas atividades cotidianas.
+
+#### Moderado (Prejudica e desacelera de forma severa a experiência)
+* **Problema:** Botões e gatilhos de filtro representados puramente por ícones gráficos isolados de identificação textual explicativa.
+* **Impacto:** Usuários leigos gastaram tempo excessivo procurando funcionalidades estratégicas ou erraram o caminho de navegação.
+
+#### Leve (Inconveniência visual ou oportunidade de otimização estética)
+* **Problema:** Baixo contraste nas bordas dos checkboxes e excesso de elementos brilhantes justapostos na visualização do Mural.
+* **Impacto:** Causou confusão visual momentânea e lentidão pontual no clique preciso do Dashboard.
+
+### 4. Propostas de Ações Corretivas e Evolução do Sistema
+
+| Categoria | Problema Identificado | Ação Corretiva Proposta (Solução) |
+| :--- | :--- | :--- |
+| **Crítico** | Erros de senha confusos no cadastro. | Implementar validação inline dinâmica (checklist visual com ticks verdes mudando em tempo real à medida que as regras são atendidas). |
+| **Crítico** | Seleção de categorias inacessível. | Expandir a área clicável da lista para o padrão mínimo de $44 \times 44 \text{ px}$ e adotar tags coloridas pré-definidas para segmentação rápida. |
+| **Moderado** | Ícones de filtragem e mural sem rótulos. | Substituir ícones puros por botões híbridos (Ícone + Texto explicativo: ex. `[Funil] Filtrar Finanças`). |
+| **Leve / Acessibilidade** | Contraste de cores sutil. | Adequar o esquema de cores das fontes secundárias e bordas às diretrizes WCAG (relação mínima de contraste de $4.5:1$). |

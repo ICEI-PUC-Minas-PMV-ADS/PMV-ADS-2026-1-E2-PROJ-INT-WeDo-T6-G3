@@ -214,10 +214,16 @@
 
         .coluna-cadastro-wedo, .coluna-login-wedo {
             padding: 30px 20px;
-        }
-    }
-        }
-    }
+            /* Remove o olhinho de mostrar senha que o navegador coloca automaticamente */
+            input[type="password"]::-ms-reveal,
+            input[type="password"]::-ms-clear {
+                display: none !important;
+            }
+
+            input[type="password"]::-webkit-credentials-auto-fill-button {
+                display: none !important;
+                visibility: hidden !important;
+            }
     </text>
 </style>
 
@@ -245,7 +251,7 @@
                     </div>
 
                     <div class="grupo-campo-wedo">
-                        <input type="password" name="CadSenha" asp-for="CadSenha" placeholder="senha:" required class="input-wedo" />
+                        <input type="password" name="CadSenha" asp-for="CadSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />-security: disc;" />
                     </div>
 
                     <button type="submit" class="btn-verde-wedo">Cadastrar</button>
@@ -267,8 +273,7 @@
                     </div>
 
                     <div class="grupo-campo-wedo">
-                        <input type="password" name="LoginSenha" asp-for="LoginSenha" placeholder="senha:" required class="input-wedo" />
-                        <i class="fa-solid fa-eye-slash icone-olho-wedo"></i>
+                        <input type="password" name="LoginSenha" asp-for="LoginSenha" placeholder="senha:" required class="input-wedo" autocomplete="new-password" />
                     </div>
 
                     <div class="link-esqueci-wedo">

@@ -44,59 +44,56 @@ O esquema abaixo detalha as tabelas do sistema e seus atributos:
 
 ![Projeto de Base de Dados - WeDo](img/Projeto%20base%20de%20dados.jpeg)
 
-## ATENÇÃO!!!
-
-Os três artefatos — **Diagrama de Classes, Modelo ER e Projeto da Base de Dados** — devem ser desenvolvidos de forma sequencial e integrada, garantindo total coerência e compatibilidade entre eles. O diagrama de classes orienta a estrutura e o comportamento do software; o modelo ER traduz essa estrutura para o nível conceitual dos dados; e o projeto da base de dados materializa essas definições no formato físico (tabelas, colunas, chaves e restrições). A construção isolada ou desconexa desses elementos pode gerar inconsistências, dificultar a implementação e comprometer a qualidade do sistema.
-
 ## Tecnologias Utilizadas
 
-#  Planejamento e Arquitetura do Sistema
+# Planejamento e Arquitetura do Sistema
 
-O sistema foi projetado para gerenciar atividades, metas e notificações com foco em performance e escalabilidade.
+O sistema foi projetado para gerenciar atividades, metas e notificações com foco em performance e organização pessoal.
 
 ---
 
-##  Stack Tecnológica
+## Stack Tecnológica
 
-Abaixo, as tecnologias e ferramentas selecionadas para a implementação:
+Abaixo, as tecnologias e ferramentas reais utilizadas na implementação:
 
 ### **Backend & Lógica de Negócio**
 * **Linguagem:** C# (C-Sharp)
-* **Framework:** ASP.NET Core Web API
+* **Framework:** ASP.NET Core MVC (com Razor Views)
 * **Acesso a Dados:** Entity Framework Core (ORM)
-* **Segurança:** BCrypt (para Hash de senhas) e JWT para autenticação.
+* **Segurança:** Autenticação baseada em Cookies e criptografia de dados.
 
 ### **Frontend (Interface)**
-* **Framework:** React.js ou Blazor
-* **Estilização:** CSS3 / Tailwind CSS
-* **Comunicação:** Axios ou Fetch API (JSON/HTTP)
+* **Tecnologia:** Razor Pages (HTML dinâmico com C#)
+* **Estilização:** CSS3 / Bootstrap 5
+* **Bibliotecas:** jQuery e jQuery Validation
 
 ### **Banco de Dados**
-* **SGBD:** SQL Server ou PostgreSQL
+* **SGBD:** SQL Server (LocalDB para desenvolvimento)
 * **Modelagem:** Relacional com integridade referencial.
 
 ### **Ferramentas & Design**
-* **IDE:** Visual Studio 2022 ou VS Code
+* **IDE:** Visual Studio 2022
 * **Prototipagem:** Figma (UI/UX)
 * **Modelagem de Dados:** draw.io e Lucidchart
-* **Testes de API:** Postman
 
 ---
 
-##  Arquitetura e Fluxo de Dados
+## Arquitetura e Fluxo de Dados
 
-O projeto segue uma arquitetura multicamadas, garantindo a separação de responsabilidades:
+O projeto segue a arquitetura **MVC (Model-View-Controller)**, garantindo a separação de responsabilidades:
 
-1.  **Client (Front-end):** Interação do usuário e visualização dos resultados.
-2.  **Server (Back-end):** Processamento das requisições, validação de dados e regras de negócio.
-3.  **Database (Persistência):** Armazenamento seguro e estruturado das informações.
+1.  **Model:** Representa os dados e as regras de negócio.
+2.  **View:** Camada de apresentação que interage com o usuário (Razor).
+3.  **Controller:** Gerencia as requisições, processa os dados e retorna a View correta.
 
 ---
 
-![Image](https://github.com/user-attachments/assets/e750857a-f39c-4f70-b77e-ad2834aff58d)
+![Image](https://github.com/user-attachments/assets/e750857a-f39c-4f70-b77e-ad2834aff58d )
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foi feita.
+A plataforma foi publicada utilizando os serviços de nuvem do **Microsoft Azure**, aproveitando a integração nativa com o ecossistema .NET. A aplicação está hospedada como um *App Service*, garantindo alta disponibilidade e escalabilidade. O banco de dados SQL Server também foi migrado para o ambiente de nuvem para permitir o acesso persistente de qualquer local.
 
+O sistema pode ser acessado através do seguinte endereço:
+[https://wedo-app-puc-fzc7hgfkb6h7d2f9.canadacentral-01.azurewebsites.net/](https://wedo-app-puc-fzc7hgfkb6h7d2f9.canadacentral-01.azurewebsites.net/ )
 

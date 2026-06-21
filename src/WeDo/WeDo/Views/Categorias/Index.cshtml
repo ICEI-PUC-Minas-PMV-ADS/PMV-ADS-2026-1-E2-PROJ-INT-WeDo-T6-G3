@@ -1,24 +1,25 @@
 ﻿@model IEnumerable<WeDo.Models.Categoria>
+@inject IViewLocalizer Localizer
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h2>Gerenciar Categorias</h2>
+        <h2>@Localizer["Gerenciar Categorias"]</h2>
         @if (TempData["Erro"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Atenção!</strong> @TempData["Erro"]
+                <strong>@Localizer["Atenção!"]</strong> @TempData["Erro"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
-        <a asp-action="Criar" class="btn btn-primary"> + Nova Categoria</a>
+        <a asp-action="Criar" class="btn btn-primary"> @Localizer["+ Nova Categoria"]</a>
     </div>
     <hr />
 
     <table class="table table-hover mt-3">
         <thead class="table-light">
             <tr>
-                <th>Nome da Categoria</th>
-                <th class="text-end">Ações</th>
+                <th>@Localizer["Nome da Categoria"]</th>
+                <th class="text-end">@Localizer["Ações"]</th>
             </tr>
         </thead>
         <tbody>
@@ -27,15 +28,15 @@
                 <tr>
                     <td>@item.Nome</td>
                     <td class="text-end">
-                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarExclusaoCategoria(@item.Id)">Excluir</button>
+                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-warning">@Localizer["Editar"]</a>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarExclusaoCategoria(@item.Id)">@Localizer["Excluir"]</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-    <a asp-controller="Metas" asp-action="Criar" class="btn btn-outline-secondary">Voltar para Metas</a>
+    <a asp-controller="Metas" asp-action="Criar" class="btn btn-outline-secondary">@Localizer["Voltar para Metas"]</a>
 </div>
 
 @* Formulário Oculto para Exclusão *@
@@ -45,7 +46,7 @@
 
 <script>
     function confirmarExclusaoCategoria(id) {
-        if (confirm("Cuidado! Se você excluir esta categoria, as metas ligadas a ela podem dar erro. Deseja continuar?")) {
+        if (confirm('@Localizer["Cuidado! Se você excluir esta categoria, as metas ligadas a ela podem dar erro. Deseja continuar?"]')) {
             document.getElementById('categoriaIdExcluir').value = id;
             document.getElementById('formExcluirCat').submit();
         }

@@ -5,11 +5,13 @@
 @inject IViewLocalizer Localizer
 
 @{
-    // Aplica o tema preferido do usuário logado (RF-013).
-    // Falha silenciosamente para não derrubar o layout se o banco estiver indisponível.
     string bodyClass = "";
+    int notificacoesNaoLidas = 0;
 
-    if (User?.Identity?.IsAuthenticated == true)
+    // Verifica se o usuário tem sessão ativa (está logado)
+    bool mostrarMenu = User?.Identity?.IsAuthenticated == true;
+
+    if (mostrarMenu)
     {
         try
         {
@@ -24,6 +26,10 @@
 
                 if (temaUsuario == Tema.Escuro)
                     bodyClass = "tema-escuro";
+
+                // Conta notificações não lidas para o sininho
+                notificacoesNaoLidas = await DbContext.Notificacoes
+                    .CountAsync(n => n.IdUsuario == idUsuario && !n.Lida);
             }
         }
         catch
@@ -31,6 +37,9 @@
             // Mantém tema claro como fallback
         }
     }
+
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
 }
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,80 +52,139 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WeDo.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
 
+    <style>
+            .sininho-wrapper {
+                position: relative;
+                display: inline-block;
+            }
+
+            .sininho-badge {
+                position: absolute;
+                top: -4px;
+                right: -6px;
+                background-color: #ff6b6b;
+                color: #fff;
+                font-size: 0.6rem;
+                font-weight: 700;
+                border-radius: 50%;
+                width: 16px;
+                height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            }
+
+            /* Correção da cor dos links no menu lateral para ficarem pretos por padrão e verdes quando ativos */
+            .sidebar .nav-link {
+                color: #333 !important;
+            }
+
+                .sidebar .nav-link.active {
+                    background-color: #c8e6c9 !important; /* Verde claro */
+                    color: #147A3B !important; /* Verde escuro para o texto ativo */
+                    font-weight: bold;
+                }
+
+                .sidebar .nav-link.text-danger {
+                    color: #dc3545 !important; /* Mantém o botão Sair vermelho */
+                }
+    </style>
+</head>
 <body class="@bodyClass">
 
     <div class="wrapper">
 
-        <nav id="sidebar" class="sidebar shadow-sm">
-            <div class="d-flex align-items-center mb-5 px-3" style="height: 40px;">
-                <i class="bi bi-leaf-fill text-success fs-1 me-2"></i>
-                <span class="fs-3 fw-bold logo-text font-serif">WeDo</span>
-            </div>
-
-            <ul class="nav flex-column mb-auto">
-                <li class="nav-item">
-                    <a asp-controller="Home" asp-action="Index" class="nav-link active">
-                        <i class="bi bi-house-door fs-5 me-3"></i>
-                        <span class="sidebar-text">@Localizer["DashBoard"]</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a asp-controller="Metas" asp-action="Index" class="nav-link">
-                        <i class="bi bi-list-check fs-5 me-3"></i>
-                        <span class="sidebar-text">@Localizer["Metas"]</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a asp-controller="AtividadesDiarias" asp-action="Registrar" class="nav-link">
-                        <i class="bi bi-pencil-square fs-5 me-3"></i>
-                        <span class="sidebar-text">@Localizer["Registrar Atividade"]</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a href="#" class="nav-link">
-                        <i class="bi bi-graph-up fs-5 me-3"></i>
-                        <span class="sidebar-text">@Localizer["Mural"]</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a href="#" class="nav-link">
-                        <i class="bi bi-clock-history fs-5 me-3"></i>
-                        <span class="sidebar-text">@Localizer["Histórico"]</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="main-container shadow-sm">
-
-            @{
-                // Identifica a página atual para destacar o ícone correspondente na topbar (estado ativo).
-                var acaoAtual = ViewContext.RouteData.Values["action"]?.ToString();
-                var controllerAtual = ViewContext.RouteData.Values["controller"]?.ToString();
-                var emConfiguracoes = controllerAtual == "Usuarios" && acaoAtual == "Configuracoes";
-                var emPerfil = controllerAtual == "Usuarios" && acaoAtual == "Perfil";
-            }
-            <header class="topbar">
-                <button id="toggleSidebar" class="btn btn-light border-0" style="background: transparent;">
-                    <i class="bi bi-list fs-2" style="color: var(--wedo-text);"></i>
-                </button>
-
-                <div class="topbar-icons">
-                    <i class="bi bi-bell"></i>
-                    <a asp-controller="Usuarios" asp-action="Configuracoes"
-                       class="topbar-link @(emConfiguracoes ? "active" : "")"
-                       title="@Localizer["Configurações Gerais"]" aria-label="@Localizer["Configurações Gerais"]">
-                        <i class="bi bi-gear"></i>
-                    </a>
-                    <a asp-controller="Usuarios" asp-action="Perfil"
-                       class="topbar-link @(emPerfil ? "active" : "")"
-                       title="@Localizer["Configurações de Perfil"]" aria-label="@Localizer["Configurações de Perfil"]">
-                        <i class="bi bi-person-circle"></i>
-                    </a>
+        @if (mostrarMenu)
+        {
+            <nav id="sidebar" class="sidebar shadow-sm">
+                <div class="d-flex align-items-center mb-5 px-3" style="height: 40px;">
+                    <i class="bi bi-leaf-fill text-success fs-1 me-2"></i>
+                    <span class="fs-3 fw-bold logo-text font-serif">WeDo</span>
                 </div>
-            </header>
+
+                <ul class="nav flex-column mb-auto">
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index"
+                           class="nav-link @(controller == "Home" ? "active" : "")">
+                            <i class="bi bi-house-door fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["DashBoard"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a asp-controller="Metas" asp-action="Index"
+                           class="nav-link @(controller == "Metas" ? "active" : "")">
+                            <i class="bi bi-list-check fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["Metas"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a asp-controller="AtividadesDiarias" asp-action="Registrar"
+                           class="nav-link @(controller == "AtividadesDiarias" ? "active" : "")">
+                            <i class="bi bi-pencil-square fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["Registrar Atividade"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a asp-controller="Mural" asp-action="Index"
+                           class="nav-link @(controller == "Mural" ? "active" : "")">
+                            <i class="bi bi-graph-up fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["Mural"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a asp-controller="Historico" asp-action="Index"
+                           class="nav-link @(controller == "Historico" ? "active" : "")">
+                            <i class="bi bi-clock-history fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["Histórico"]</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item mt-4">
+                        <hr class="text-secondary mx-3">
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Usuarios" asp-action="Sair" class="nav-link text-danger">
+                            <i class="bi bi-box-arrow-left fs-5 me-3"></i>
+                            <span class="sidebar-text">@Localizer["Sair"]</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+
+        <div class="main-container shadow-sm" style="@(!mostrarMenu ? "margin-left: 0 !important; width: 100% !important;" : "")">
+
+            @if (mostrarMenu)
+            {
+                <header class="topbar">
+                    <button id="toggleSidebar" class="btn btn-light border-0" style="background: transparent;">
+                        <i class="bi bi-list fs-2" style="color: var(--wedo-text);"></i>
+                    </button>
+
+                    <div class="topbar-icons">
+                        <a asp-controller="Notificacaos" asp-action="Index"
+                           style="color: var(--wedo-text); text-decoration: none;">
+                            <span class="sininho-wrapper">
+                                <i class="bi bi-bell"></i>
+                                @if (notificacoesNaoLidas > 0)
+                                {
+                                    <span class="sininho-badge">@(notificacoesNaoLidas > 9 ? "9+" : notificacoesNaoLidas.ToString())</span>
+                                }
+                            </span>
+                        </a>
+                        <a asp-controller="Usuarios" asp-action="Configuracoes"
+                           style="color: var(--wedo-text); text-decoration: none;">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <a asp-controller="Usuarios" asp-action="Perfil"
+                           style="color: var(--wedo-text); text-decoration: none;">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                    </div>
+                </header>
+            }
 
             <main class="content-area">
                 @RenderBody()
@@ -130,12 +198,15 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
-        document.getElementById('toggleSidebar').addEventListener('click', function() {
+        // O script do botão do menu só roda se o botão realmente existir na tela
+        var toggleBtn = document.getElementById('toggleSidebar');
+        if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
         var sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('collapsed');
+        if (sidebar) sidebar.classList.toggle('collapsed');
         });
+        }
     </script>
 
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+    @await RenderSectionAsync("Scripts", required: false)</body>
 </html>

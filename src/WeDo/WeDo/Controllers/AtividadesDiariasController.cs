@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeDo.Models;
 
 namespace WeDo.Controllers
 {
+    [Authorize] // Bloqueia o registro de atividades para usuários não logados
     public class AtividadesDiariasController : Controller
     {
         private readonly AppDbContext _context;
@@ -14,10 +16,8 @@ namespace WeDo.Controllers
             _context = context;
         }
 
-       
         public IActionResult Registrar()
         {
-            
             ViewBag.IdMeta = new SelectList(_context.Metas, "Id", "Nome");
             return View();
         }
@@ -31,7 +31,6 @@ namespace WeDo.Controllers
                 _context.Add(atividade);
                 await _context.SaveChangesAsync();
 
-                
                 return RedirectToAction("Index", "Metas");
             }
 

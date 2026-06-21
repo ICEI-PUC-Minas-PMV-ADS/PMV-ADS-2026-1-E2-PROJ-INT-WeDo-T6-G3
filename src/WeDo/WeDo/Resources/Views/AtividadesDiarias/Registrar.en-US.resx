@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Registrar nova Atividade" xml:space="preserve">
+    <value>Register new Activity</value>
+  </data>
+  <data name="Registre o progresso dos seus objetivos aqui de forma simples." xml:space="preserve">
+    <value>Track the progress of your goals here in a simple way.</value>
+  </data>
+  <data name="Selecione a Meta Relacionada" xml:space="preserve">
+    <value>Select the Related Goal</value>
+  </data>
+  <data name="-- Qual objetivo você avançou? --" xml:space="preserve">
+    <value>-- Which goal did you advance? --</value>
+  </data>
+  <data name="O que você fez hoje? (Título)" xml:space="preserve">
+    <value>What did you do today? (Title)</value>
+  </data>
+  <data name="Ex: Treino de pernas concluído" xml:space="preserve">
+    <value>e.g. Leg workout completed</value>
+  </data>
+  <data name="Relato / Motivação" xml:space="preserve">
+    <value>Report / Motivation</value>
+  </data>
+  <data name="Escreva aqui como foi o desempenho ou sua motivação para hoje..." xml:space="preserve">
+    <value>Write here how your performance was or your motivation for today...</value>
+  </data>
+  <data name="Data do Registro" xml:space="preserve">
+    <value>Record Date</value>
+  </data>
+  <data name="Link da Foto de Comprovação" xml:space="preserve">
+    <value>Proof Photo Link</value>
+  </data>
+  <data name="URL da imagem (opcional)" xml:space="preserve">
+    <value>Image URL (optional)</value>
+  </data>
+  <data name="Registrar Atividade" xml:space="preserve">
+    <value>Register Activity</value>
+  </data>
+</root>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Editar Meta" xml:space="preserve">
+    <value>Edit Goal</value>
+  </data>
+  <data name="Altere as informações do seu objetivo." xml:space="preserve">
+    <value>Change your objective's information.</value>
+  </data>
+  <data name="Título da Meta" xml:space="preserve">
+    <value>Goal Title</value>
+  </data>
+  <data name="Descrição / Detalhes" xml:space="preserve">
+    <value>Description / Details</value>
+  </data>
+  <data name="Categoria" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="-- Selecione uma Categoria --" xml:space="preserve">
+    <value>-- Select a Category --</value>
+  </data>
+  <data name="Data Inicial" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Previsão de Término" xml:space="preserve">
+    <value>Expected End</value>
+  </data>
+  <data name="Registrar atividade recorrente?" xml:space="preserve">
+    <value>Register recurring activity?</value>
+  </data>
+  <data name="Quais dias da semana?" xml:space="preserve">
+    <value>Which days of the week?</value>
+  </data>
+  <data name="Dom" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="Seg" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="Ter" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="Qua" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="Qui" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="Sáb" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="Salvar Alterações" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Excluir Meta" xml:space="preserve">
+    <value>Delete Goal</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Tem certeza que deseja apagar esta meta permanentemente?" xml:space="preserve">
+    <value>Are you sure you want to permanently delete this goal?</value>
+  </data>
+</root>

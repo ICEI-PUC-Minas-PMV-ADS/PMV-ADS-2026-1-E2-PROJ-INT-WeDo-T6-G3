@@ -25,13 +25,10 @@ O WeDo é uma proposta de software desenvolvida para ajudar estudantes e jovens 
 ## Instruções de Instalação, Execução e Acesso
 
 **Acesso rápido (produção)**
-* URL da aplicação: https://seu-dominio.com/caminho
-* Status: online / instável / em manutenção (atualize conforme o caso)
-* Ambiente: produção / homologação
+* URL da aplicação: https://wedo-app-puc-fzc7hgfkb6h7d2f9.canadacentral-01.azurewebsites.net/
+* Status: online 
+* Ambiente: produção 
 
-**Usuário(s) de teste (se houver):**
-* Login: usuario_teste
-* Senha: senha_teste
 
 # Documentação
 

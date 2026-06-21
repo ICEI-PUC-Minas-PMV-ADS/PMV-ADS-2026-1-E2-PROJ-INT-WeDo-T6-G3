@@ -1,0 +1,187 @@
+﻿/* ==========================================================================
+   NOTIFICAÇÕES — notificacoes.css
+   ========================================================================== */
+
+/* =========================================
+   CABEÇALHO
+   ========================================= */
+.badge-nao-lidas {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.secao-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wedo-green);
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   CARDS DE NOTIFICAÇÃO
+   ========================================= */
+.notif-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--wedo-border);
+    transition: box-shadow 0.2s;
+}
+
+    .notif-card:hover {
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+/* Não lida — fundo levemente verde */
+.notif-nao-lida {
+    background-color: var(--wedo-green-light);
+    border-left: 4px solid var(--wedo-green);
+}
+
+/* Lida — fundo neutro */
+.notif-lida {
+    background-color: var(--wedo-card-bg);
+    opacity: 0.75;
+}
+
+/* Ícone lateral */
+.notif-icone {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+}
+
+/* Corpo da notificação */
+.notif-corpo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.notif-mensagem {
+    font-size: 0.95rem;
+    color: var(--wedo-text);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.notif-data {
+    font-size: 0.75rem;
+    color: var(--wedo-muted);
+    font-style: italic;
+}
+
+/* Ações (marcar lida / excluir) */
+.notif-acoes {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.btn-notif-acao {
+    background: transparent;
+    border: 1px solid var(--wedo-border);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--wedo-muted);
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+    .btn-notif-acao:hover {
+        background-color: var(--wedo-green-light);
+        color: var(--wedo-green);
+        border-color: var(--wedo-green);
+    }
+
+.btn-notif-excluir-icon:hover {
+    background-color: #fdecea;
+    color: #b71c1c;
+    border-color: #ff6b6b;
+}
+
+/* Botão excluir lidas no cabeçalho */
+.btn-notif-excluir {
+    background-color: transparent;
+    color: #b71c1c;
+    border: 1px solid #ff6b6b;
+    font-weight: 600;
+}
+
+    .btn-notif-excluir:hover {
+        background-color: #fdecea;
+        color: #b71c1c;
+    }
+
+/* Estado vazio */
+.notif-vazia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: var(--wedo-muted);
+}
+
+/* =========================================
+   DARK MODE
+   ========================================= */
+body.tema-escuro .notif-nao-lida {
+    background-color: var(--wedo-green-light);
+    border-left-color: var(--wedo-green);
+}
+
+body.tema-escuro .notif-lida {
+    background-color: var(--wedo-card-bg);
+}
+
+body.tema-escuro .notif-mensagem {
+    color: var(--wedo-text);
+}
+
+body.tema-escuro .btn-notif-acao {
+    border-color: var(--wedo-border);
+    color: var(--wedo-muted);
+}
+
+    body.tema-escuro .btn-notif-acao:hover {
+        background-color: var(--wedo-green-light);
+        color: #6cc88a;
+        border-color: #6cc88a;
+    }
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+@media (max-width: 576px) {
+    .notif-card {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .notif-acoes {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

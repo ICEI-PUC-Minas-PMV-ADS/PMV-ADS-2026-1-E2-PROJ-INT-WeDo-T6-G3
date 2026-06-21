@@ -150,6 +150,9 @@ namespace WeDo.Migrations
                     b.Property<DateTime>("DataEnvio")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Lida")
                         .HasColumnType("bit");
 
@@ -157,7 +160,12 @@ namespace WeDo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Notificacoes");
                 });
@@ -240,6 +248,17 @@ namespace WeDo.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("WeDo.Models.Notificacao", b =>
+                {
+                    b.HasOne("WeDo.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });

@@ -1,8 +1,9 @@
 ﻿@model WeDo.Models.Meta
+@inject IViewLocalizer Localizer
 
 <div class="container mt-4">
-    <h2>Editar Meta</h2>
-    <p class="text-muted">Altere as informações do seu objetivo.</p>
+    <h2>@Localizer["Editar Meta"]</h2>
+    <p class="text-muted">@Localizer["Altere as informações do seu objetivo."]</p>
     <hr />
 
     <form asp-action="Editar" method="post">
@@ -10,29 +11,29 @@
         <input type="hidden" asp-for="IdUsuarioMeta" />
 
         <div class="mb-3">
-            <label class="form-label">Título da Meta</label>
+            <label class="form-label">@Localizer["Título da Meta"]</label>
             <input asp-for="Nome" class="form-control" />
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Descrição / Detalhes</label>
+            <label class="form-label">@Localizer["Descrição / Detalhes"]</label>
             <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Categoria</label>
+            <label class="form-label">@Localizer["Categoria"]</label>
             <select asp-for="IdCategoriaMeta" class="form-select" asp-items="ViewBag.IdCategoriaMeta">
-                <option value="">-- Selecione uma Categoria --</option>
+                <option value="">@Localizer["-- Selecione uma Categoria --"]</option>
             </select>
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label class="form-label">Data Inicial</label>
+                <label class="form-label">@Localizer["Data Inicial"]</label>
                 <input asp-for="DataInicial" class="form-control" type="date" />
             </div>
             <div class="col-md-6 mb-3">
-                <label class="form-label">Previsão de Término</label>
+                <label class="form-label">@Localizer["Previsão de Término"]</label>
                 <input asp-for="DataFinal" class="form-control" type="date" />
             </div>
         </div>
@@ -43,50 +44,50 @@
 
         <div class="form-check form-switch mb-3 mt-4">
             <input class="form-check-input" type="checkbox" id="chkAtividadeDiaria" onchange="toggleDiasSemana()" style="cursor: pointer;" @(temRecorrencia ? "checked" : "")>
-            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">Registrar atividade recorrente?</label>
+            <label class="form-check-label fw-bold" for="chkAtividadeDiaria" style="cursor: pointer;">@Localizer["Registrar atividade recorrente?"]</label>
         </div>
 
-        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: @(temRecorrencia ? "block" : "none"); background-color: #f8f9fa;">
-            <label class="form-label fw-bold mb-3">Quais dias da semana?</label>
+        <div id="divDiasSemana" class="card p-3 mb-4 border-primary" style="display: @(temRecorrencia ? "block" : "none"); background-color: var(--wedo-card-bg);">
+            <label class="form-label fw-bold mb-3">@Localizer["Quais dias da semana?"]</label>
             <div class="d-flex flex-wrap gap-4">
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Domingo" />
-                    <label class="form-check-label" asp-for="Domingo">Dom</label>
+                    <label class="form-check-label" asp-for="Domingo">@Localizer["Dom"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Segunda" />
-                    <label class="form-check-label" asp-for="Segunda">Seg</label>
+                    <label class="form-check-label" asp-for="Segunda">@Localizer["Seg"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Terca" />
-                    <label class="form-check-label" asp-for="Terca">Ter</label>
+                    <label class="form-check-label" asp-for="Terca">@Localizer["Ter"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Quarta" />
-                    <label class="form-check-label" asp-for="Quarta">Qua</label>
+                    <label class="form-check-label" asp-for="Quarta">@Localizer["Qua"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Quinta" />
-                    <label class="form-check-label" asp-for="Quinta">Qui</label>
+                    <label class="form-check-label" asp-for="Quinta">@Localizer["Qui"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Sexta" />
-                    <label class="form-check-label" asp-for="Sexta">Sex</label>
+                    <label class="form-check-label" asp-for="Sexta">@Localizer["Sex"]</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" asp-for="Sabado" />
-                    <label class="form-check-label" asp-for="Sabado">Sáb</label>
+                    <label class="form-check-label" asp-for="Sabado">@Localizer["Sáb"]</label>
                 </div>
             </div>
         </div>
         <div class="mt-4 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Salvar Alterações"]</button>
 
             <button type="button" class="btn btn-danger" onclick="confirmarExclusao()">
-                Excluir Meta
+                @Localizer["Excluir Meta"]
             </button>
 
-            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            <a asp-action="Index" class="btn btn-outline-secondary">@Localizer["Cancelar"]</a>
         </div>
     </form>
 
@@ -97,7 +98,7 @@
 
 <script>
     function confirmarExclusao() {
-        if (confirm("Tem certeza que deseja apagar esta meta permanentemente?")) {
+        if (confirm('@Localizer["Tem certeza que deseja apagar esta meta permanentemente?"]')) {
             document.getElementById('formExcluir').submit();
         }
     }

@@ -1,29 +1,30 @@
 message: Please cite this software using these metadata.
-title:
+title: WeDo
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
+  - family-names: Rodrigues Castelo
+    given-names: Carla
+  - family-names: Parreiras Andrade
+    given-names: Diego
+  - family-names: Maia da Conceição
+    given-names: Evellyn
+  - family-names: Timoteo dos Santos
+    given-names: Caio
+  - family-names: Paulo Ângelo de Oliveira
+    given-names: João
+  - family-names: Perreira Mendonza
+    given-names: Nicolas
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
-  - name-suffix: Professor
-    affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Jeunon de Alencar
+    given-names: Bernardo
 keywords:
-  - 
-  - 
-repository-code: 
+  - Produtividade
+  - Gestão de Tempo
+  - Organização
+  - Metas Pessoais
+  - Foco
+  - Task Management
+  - Goal Tracking
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/PMV-ADS-2026-1-E2-PROJ-INT-WeDo-T6-G3
 version: 1.0.0
-date-released: 2023-10-31
+date-released: 2026-06-07

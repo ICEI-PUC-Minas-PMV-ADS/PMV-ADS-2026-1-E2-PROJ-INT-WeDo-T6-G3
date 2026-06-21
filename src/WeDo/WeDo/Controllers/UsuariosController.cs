@@ -2,42 +2,43 @@
 using Microsoft.EntityFrameworkCore;
 using WeDo.Models;
 using WeDo.Services;
-using Microsoft.AspNetCore.Authentication; // ADICIONADO
-using Microsoft.AspNetCore.Authentication.Cookies; // ADICIONADO
-using System.Security.Claims; // ADICIONADO
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeDo.Controllers
 {
+    [Authorize] // Bloqueia todas as ações deste Controller por padrão
     public class UsuariosController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly EmailService _emailService;// Injeção do serviço de email
-        private readonly Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> _localizer; // Tradução das mensagens (RF-013)
+        private readonly EmailService _emailService;
+        private readonly Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> _localizer;
 
-        public UsuariosController(AppDbContext context, EmailService emailService,
-            Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> localizer)
+        public UsuariosController(AppDbContext context, EmailService emailService, Microsoft.Extensions.Localization.IStringLocalizer<UsuariosController> localizer)
         {
             _emailService = emailService;
             _context = context;
             _localizer = localizer;
         }
 
-        // =====================================================================
-        // --- INÍCIO DA SUA ADIÇÃO: SISTEMA DE LOGIN E CADASTRO ---
-        // =====================================================================
+        // --- Autenticação e Cadastro ---
 
+        [AllowAnonymous] // Passe livre: permite acesso sem estar logado
         [HttpGet]
         public IActionResult Login()
         {
-
             return View(new WeDo.Models.ViewModels.LoginCadastroViewModel());
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cadastrar(WeDo.Models.ViewModels.LoginCadastroViewModel model)
         {
-            // Valida se os campos específicos do cadastro foram preenchidos
             if (string.IsNullOrEmpty(model.CadNome) || string.IsNullOrEmpty(model.CadEmail) || string.IsNullOrEmpty(model.CadSenha))
             {
                 ViewBag.Error = "Preencha todos os campos do cadastro.";
@@ -50,7 +51,7 @@ namespace WeDo.Controllers
                 return View("Login", model);
             }
 
-            // Usando o construtor da sua classe Usuario mapeando os dados da Model
+            // Instancia a entidade mapeando os dados recebidos da View
             var novoUsuario = new Usuario(model.CadNome, "Membro WeDo", "", model.CadEmail, model.CadSenha);
 
             _context.Add(novoUsuario);
@@ -60,6 +61,7 @@ namespace WeDo.Controllers
             return View("Login", new WeDo.Models.ViewModels.LoginCadastroViewModel());
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Entrar(WeDo.Models.ViewModels.LoginCadastroViewModel model)
@@ -87,7 +89,6 @@ namespace WeDo.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity));
 
-                // Aplica o idioma preferido do usuário já a partir do login.
                 DefinirCookieDeCultura(usuario.Idioma);
 
                 return RedirectToAction("Index", "Home");
@@ -104,41 +105,33 @@ namespace WeDo.Controllers
             return RedirectToAction("Login");
         }
 
-        // =====================================================================
-        // --- CÓDIGO DO RESTANTE DO GRUPO (PRESERVADO INTEGRAMENTE SEM ALTERAÇÕES) ---
-        // =====================================================================
+        // --- Gerenciamento Padrão de Usuários (CRUD) ---
 
-        // GET: Usuarios
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Index()
         {
-            return View(await _context.Usuarios.ToListAsync());
+            // Redireciona qualquer acesso direto à lista ou clique em "Voltar" para o Dashboard (Home)
+            return RedirectToAction("Index", "Home");
         }
 
-        // GET: Usuarios/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            if (usuario == null) return NotFound();
 
             return View(usuario);
         }
 
-        // GET: Usuarios/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,UrlFoto,Email,Senha")] Usuario usuario)
@@ -152,31 +145,22 @@ namespace WeDo.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+            if (usuario == null) return NotFound();
+
             return View(usuario);
         }
 
-        // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,UrlFoto,Email,Senha")] Usuario usuario)
         {
-            if (id != usuario.Id)
-            {
-                return NotFound();
-            }
+            if (id != usuario.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -187,39 +171,25 @@ namespace WeDo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!UsuarioExists(usuario.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(usuario);
         }
 
-        // GET: Usuarios/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            if (usuario == null) return NotFound();
 
             return View(usuario);
         }
 
-        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -234,22 +204,26 @@ namespace WeDo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //===============Metodos de Recuperar Senha======================//
+        // --- Recuperação de Senha ---
+
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult EsqueciSenha()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EsqueciSenha(string email)
         {
-            if ( string.IsNullOrEmpty(email))
-            {   
+            if (string.IsNullOrEmpty(email))
+            {
                 ViewBag.Error = "Por favor, insira um email válido.";
                 return View();
             }
+
             var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == email);
             if (usuario == null)
             {
@@ -265,37 +239,79 @@ namespace WeDo.Controllers
             await _context.SaveChangesAsync();
 
             string linkRecuperacao = Url.Action("RefazerSenha", "Usuarios", new { token = token }, Request.Scheme);
-
             string assunto = "Instruções para Redefinir sua Senha - WeDo";
-            string mensagem = $"<h2>Olá {usuario.Nome}!</h2>" +
-                              $"<p>Você solicitou a recuperação da sua senha.</p>" +
-                              $"<p>Clique no link abaixo para criar uma nova senha. Este link é válido por apenas 1 hora.</p>" +
-                              $"<a href='{linkRecuperacao}' style='display:inline-block; padding:10px 20px; background-color:#147A3B; color:white; text-decoration:none; border-radius:5px;'>Redefinir Minha Senha</a>" +
-                              $"<p>Se você não solicitou isso, apenas ignore este e-mail.</p>";
 
-            await _emailService.EnviarEmailAsync(usuario.Email, assunto, mensagem); // Envia o email com a nova senha temporária
+            // Usando o @$"" (Interpolated verbatim string) para escrever o HTML em várias linhas sem precisar do sinal de +
+            string mensagem = $@"
+                <div style='font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 40px 0; margin: 0; width: 100%;'>
+                    <table align='center' cellpadding='0' cellspacing='0' width='600' style='background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>
+        
+                        <tr>
+                            <td style='background-color: #147A3B; padding: 30px; text-align: center;'>
+                                <h1 style='color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 1px;'>WeDo</h1>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td style='padding: 40px 30px; color: #333333;'>
+                                <h2 style='margin-top: 0; color: #147A3B; font-size: 22px;'>Olá, {usuario.Nome}!</h2>
+                                <p style='font-size: 16px; line-height: 1.6; margin-bottom: 20px;'>
+                                    Recebemos um pedido para redefinir a senha da sua conta no <strong>WeDo</strong>. Se foi você, clique no botão abaixo para escolher uma nova senha.
+                                </p>
+                
+                                <table width='100%' cellpadding='0' cellspacing='0'>
+                                    <tr>
+                                        <td align='center' style='padding: 20px 0;'>
+                                            <a href='{linkRecuperacao}' style='display: inline-block; padding: 14px 30px; background-color: #147A3B; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;'>
+                                                Redefinir Minha Senha
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                
+                                <p style='font-size: 14px; color: #777777; line-height: 1.5; margin-top: 20px;'>
+                                    <em>Atenção: Este link é válido por apenas 1 hora. Se você não solicitou essa alteração, apenas ignore este e-mail e sua senha continuará a mesma.</em>
+                                </p>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
+                                <p style='margin: 0; font-size: 12px; color: #999999;'>
+                                    Você está recebendo este e-mail porque está cadastrado no sistema WeDo.<br>
+                                    Não responda a esta mensagem.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>";
+
+            await _emailService.EnviarEmailAsync(usuario.Email, assunto, mensagem);
+
             ViewBag.Titulo = "E-mail Enviado!";
             ViewBag.Message = "O link para redefinir sua senha foi enviado para o seu e-mail!";
             return View("ConfirmacaoEnvio");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult RefazerSenha(string token)
         {
-            if (string.IsNullOrEmpty(token))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            // Se o token estiver vazio (usuário cancelou ou errou o link), volta para o Dashboard (Home)
+            if (string.IsNullOrEmpty(token)) return RedirectToAction("Index", "Home");
+
             var usuario = _context.Usuarios.FirstOrDefault(u => u.TokenRecuperacao == token && u.DataExpiracaoToken > DateTime.Now);
             if (usuario == null)
             {
                 ViewBag.Error = "Link de recuperação inválido ou expirado. Solicite um novo link.";
                 return View("ConfirmacaoEnvio");
             }
+
             ViewBag.Token = token;
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RefazerSenha(string Token, string novaSenha, string confirmarSenha)
@@ -308,7 +324,7 @@ namespace WeDo.Controllers
                 return View();
             }
 
-            var regex = new System.Text.RegularExpressions.Regex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$");
+            var regex = new System.Text.RegularExpressions.Regex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
             if (!regex.IsMatch(novaSenha))
             {
                 ViewBag.Error = "A senha deve conter pelo menos 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial.";
@@ -321,6 +337,7 @@ namespace WeDo.Controllers
                 ViewBag.Error = "Link de recuperação inválido ou expirado. Solicite um novo link.";
                 return View("ConfirmacaoEnvio");
             }
+
             usuario.Senha = novaSenha;
             usuario.TokenRecuperacao = null;
             usuario.DataExpiracaoToken = null;
@@ -338,7 +355,7 @@ namespace WeDo.Controllers
             return _context.Usuarios.Any(e => e.Id == id);
         }
 
-        //=================== Configurações de Perfil (RF-004) ===================//
+        // --- Configurações de Perfil (RF-004) ---
 
         // Recupera o usuário autenticado a partir do claim NameIdentifier definido no Login.
         private async Task<Usuario> ObterUsuarioLogadoAsync()
@@ -356,8 +373,7 @@ namespace WeDo.Controllers
             _ => "pt-BR"
         };
 
-        // Grava o cookie de cultura para que o RequestLocalizationMiddleware aplique o idioma
-        // escolhido em todas as próximas requisições.
+        // Grava o cookie de cultura para que o RequestLocalizationMiddleware aplique o idioma nas requisições.
         private void DefinirCookieDeCultura(Idioma idioma)
         {
             var cultura = MapearCultura(idioma);
@@ -367,7 +383,6 @@ namespace WeDo.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true });
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Perfil()
         {
@@ -376,7 +391,6 @@ namespace WeDo.Controllers
             return View(usuario);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Perfil(string nome, string apelido, string email, string descricao, string urlFoto)
@@ -384,15 +398,15 @@ namespace WeDo.Controllers
             var usuario = await ObterUsuarioLogadoAsync();
             if (usuario == null) return RedirectToAction("Login");
 
-            // Normaliza entradas: remove espaços extras que costumam quebrar comparações posteriores (login por email).
+            // Normaliza entradas para evitar quebra em validações ou comparações.
             nome = nome?.Trim();
             apelido = apelido?.Trim();
             email = email?.Trim();
             descricao = descricao?.Trim();
             urlFoto = urlFoto?.Trim();
 
-            // Aplica os valores ao model em memória ANTES das validações para que, em caso de erro,
-            // a view re-renderize exibindo o que o usuário acabou de digitar (não o que estava no banco).
+            // Aplica os valores ao model em memória ANTES das validações.
+            // Isso garante que, em caso de erro, a view exiba o que foi digitado e não os dados antigos.
             usuario.Nome = nome;
             usuario.Apelido = apelido;
             usuario.Email = email;
@@ -411,7 +425,7 @@ namespace WeDo.Controllers
                 return View(usuario);
             }
 
-            // Bloqueia troca de e-mail para um já cadastrado por outro usuário
+            // Bloqueia troca de e-mail para um que já pertença a outra conta
             if (_context.Usuarios.Any(u => u.Email == email && u.Id != usuario.Id))
             {
                 ViewBag.Error = _localizer["Este e-mail já está em uso por outra conta."].Value;
@@ -421,7 +435,7 @@ namespace WeDo.Controllers
             _context.Update(usuario);
             await _context.SaveChangesAsync();
 
-            // Atualiza o cookie de autenticação para refletir nome/email novos
+            // Atualiza os claims do cookie de autenticação caso o nome ou e-mail tenham mudado
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, usuario.Nome),
@@ -435,9 +449,8 @@ namespace WeDo.Controllers
             return View(usuario);
         }
 
-        //=================== Configurações Gerais (RF-013) ===================//
+        // --- Configurações Gerais (RF-013) ---
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Configuracoes()
         {
@@ -446,7 +459,6 @@ namespace WeDo.Controllers
             return View(usuario);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Configuracoes(Idioma idioma, Tema tema, bool notificacoesEmail, bool notificacoesPush)
@@ -462,8 +474,7 @@ namespace WeDo.Controllers
             _context.Update(usuario);
             await _context.SaveChangesAsync();
 
-            // Persiste o idioma escolhido em um cookie de cultura (vale para as próximas requisições)
-            // e aplica a cultura já nesta resposta, para a página recarregar traduzida na hora.
+            // Persiste o idioma escolhido e aplica a cultura imediatamente na resposta atual
             DefinirCookieDeCultura(idioma);
             var culturaAtual = new CultureInfo(MapearCultura(idioma));
             CultureInfo.CurrentCulture = culturaAtual;

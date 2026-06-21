@@ -1,68 +1,69 @@
 ﻿@model WeDo.Models.AtividadeDiaria
+@inject IViewLocalizer Localizer
 
 <div class="container mt-4" style="max-width: 900px;">
     <div class="mb-4">
-        <h2 style="font-family: 'Georgia', serif; font-style: italic; color: #222; font-weight: 500;">Registrar nova Atividade</h2>
+        <h2 style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text); font-weight: 500;">@Localizer["Registrar nova Atividade"]</h2>
         <p class="text-muted" style="font-family: 'Georgia', serif; font-style: italic; font-size: 1.05rem;">
-            Registre o progresso dos seus objetivos aqui de forma simples.
+            @Localizer["Registre o progresso dos seus objetivos aqui de forma simples."]
         </p>
     </div>
 
-    <div class="p-4 p-md-5 bg-light shadow-sm" style="border-radius: 20px; border: 1px solid #e3e3e3;">
+    <div class="p-4 p-md-5 bg-light shadow-sm" style="border-radius: 20px; border: 1px solid var(--wedo-border);">
         <form asp-action="Registrar">
-            
+
             <div class="mb-4">
-                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: #444;">
-                    Selecione a Meta Relacionada 🎯
+                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text);">
+                    @Localizer["Selecione a Meta Relacionada"] 🎯
                 </label>
-                <select asp-for="IdMeta" class="form-select p-3" asp-items="ViewBag.IdMeta" 
-                        style="border-radius: 15px; border: 1px solid #ccc; background-color: #e9ecef; font-weight: 500; color: #495057;">
-                    <option value="">-- Qual objetivo você avançou? --</option>
+                <select asp-for="IdMeta" class="form-select p-3" asp-items="ViewBag.IdMeta"
+                        style="border-radius: 15px; border: 1px solid var(--wedo-border); background-color: var(--wedo-card-bg); font-weight: 500; color: var(--wedo-text);">
+                    <option value="">@Localizer["-- Qual objetivo você avançou? --"]</option>
                 </select>
             </div>
 
             <div class="mb-4">
-                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: #444;">
-                    O que você fez hoje? (Título) ⚡
+                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text);">
+                    @Localizer["O que você fez hoje? (Título)"] ⚡
                 </label>
-                <input asp-for="Nome" class="form-control p-3" placeholder="Ex: Treino de pernas concluído" 
-                       style="border-radius: 15px; border: 1px solid #ccc; background-color: #fff;" />
+                <input asp-for="Nome" class="form-control p-3" placeholder="@Localizer["Ex: Treino de pernas concluído"]"
+                       style="border-radius: 15px; border: 1px solid var(--wedo-border); background-color: var(--wedo-card-bg);" />
             </div>
 
             <div class="mb-4">
-                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: #444;">
-                    Relato / Motivação 📝
+                <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text);">
+                    @Localizer["Relato / Motivação"] 📝
                 </label>
-                <textarea asp-for="Descricao" class="form-control p-3" rows="4" 
-                          placeholder="Escreva aqui como foi o desempenho ou sua motivação para hoje..."
-                          style="border-radius: 15px; border: 1px solid #ccc; background-color: #fff;"></textarea>
+                <textarea asp-for="Descricao" class="form-control p-3" rows="4"
+                          placeholder="@Localizer["Escreva aqui como foi o desempenho ou sua motivação para hoje..."]"
+                          style="border-radius: 15px; border: 1px solid var(--wedo-border); background-color: var(--wedo-card-bg);"></textarea>
             </div>
 
             <div class="row g-4 mb-5">
                 <div class="col-md-6">
-                    <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: #444;">
-                        Data do Registro 📅
+                    <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text);">
+                        @Localizer["Data do Registro"] 📅
                     </label>
-                    <input asp-for="Data" type="date" class="form-control p-3" value="@DateTime.Now.ToString("yyyy-MM-dd")" 
-                           style="border-radius: 15px; border: 1px solid #ccc; background-color: #e9ecef; color: #495057; font-weight: 500;" />
+                    <input asp-for="Data" type="date" class="form-control p-3" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                           style="border-radius: 15px; border: 1px solid var(--wedo-border); background-color: var(--wedo-card-bg); color: var(--wedo-text); font-weight: 500;" />
                 </div>
-                
+
                 <div class="col-md-6">
-                    <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: #444;">
-                        Link da Foto de Comprovação 🔗
+                    <label class="form-label fw-bold" style="font-family: 'Georgia', serif; font-style: italic; color: var(--wedo-text);">
+                        @Localizer["Link da Foto de Comprovação"] 🔗
                     </label>
-                    <input asp-for="UrlFoto" class="form-control p-3" placeholder="URL da imagem (opcional)" 
-                           style="border-radius: 15px; border: 1px solid #ccc; background-color: #fff;" />
+                    <input asp-for="UrlFoto" class="form-control p-3" placeholder="@Localizer["URL da imagem (opcional)"]"
+                           style="border-radius: 15px; border: 1px solid var(--wedo-border); background-color: var(--wedo-card-bg);" />
                 </div>
             </div>
 
             <div class="d-flex justify-content-end border-top pt-4">
-                <button type="submit" class="btn text-white px-5 py-3" 
+                <button type="submit" class="btn text-white px-5 py-3"
                         style="background-color: #198754; border-radius: 25px; font-weight: bold; font-size: 1.05rem; transition: all 0.2s ease-in-out; box-shadow: 0 4px 6px rgba(0,0,0,0.08);">
-                    Registrar Atividade ✨
+                    @Localizer["Registrar Atividade"] ✨
                 </button>
             </div>
-            
+
         </form>
     </div>
 </div>

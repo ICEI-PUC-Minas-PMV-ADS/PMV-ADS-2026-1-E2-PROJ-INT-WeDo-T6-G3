@@ -38,9 +38,7 @@
 
 ## Relatório de testes de software
 
-Este documento apresenta o relatório detalhado dos testes de software realizados na aplicação WeDo, baseando-se no plano de testes definido na Etapa 2.
-
-## Registro de Testes de Software
+### Registro de Testes de Software
 
 ### Atendimento aos Requisitos Funcionais e Não Funcionais
 A bateria de testes confirmou que a solução atende aos objetivos propostos, com os seguintes destaques:

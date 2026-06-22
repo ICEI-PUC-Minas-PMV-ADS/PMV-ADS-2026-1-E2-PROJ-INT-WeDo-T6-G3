@@ -12,4 +12,4 @@ APRESENTAÇÃO INICIAL - Etapa 01: https://github.com/user-attachments/assets/fc
 
 APRESENTAÇÃO FINAL - Etapa 05: https://youtu.be/4salBI4CsBk?is=xsrFkdDZ3gTgL7qo.
 
-
+Apresentação slide - https://youtu.be/lzfPs9OPhA4?is=Ns4bcwS1lc75sSQO

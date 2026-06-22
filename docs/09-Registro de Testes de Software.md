@@ -16,6 +16,11 @@
 | Requisito Associado |RF-007 - Atualizar o status das metas (em andamento, concluída ou cancelada). <br> RF-009 - Visualizar painel de evolução com resumo das metas do usuário.  |
 | Registro de evidência |https://youtu.be/F2VoGSLjl3A |
 
+| **Caso de Teste** 	| **CT06 – Mural de Conquistas** 	|
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-011 - Registrar conquista no mural quando metas são concluídas. |
+|Registro de evidência | https://youtu.be/De3jI3rPVMc |
+
 | **Caso de Teste** 	| **CT07 –   Visualizar Histórico de Metas** 	|
 |:---:	|:---:	|
 |	Requisito Associado 	| RF-009 - Visualizar painel de evolução. |
